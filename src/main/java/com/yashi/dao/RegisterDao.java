@@ -17,16 +17,15 @@ public class RegisterDao implements RegisterDaoInterface{
         Session session=sessionFactory.openSession();
         session.beginTransaction();
 
-        user.setDateCreated(new Date());
-        user.setDateUpdated(new Date());
-        user.setAdmin(false);
-        user.setActive(true);
-
-        session.save(user);
+       Integer committed = (Integer) session.save(user);
         session.getTransaction().commit();
         session.close();
 
+        if(committed>0)
         return true;
+
+        else
+            return false;
 
     }
 }

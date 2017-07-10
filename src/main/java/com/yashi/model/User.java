@@ -21,11 +21,11 @@ public class User {
     private String password;
     private String email;
     @Temporal(TemporalType.DATE)
-    private Date dateCreated;
+    private Date dateCreated = new Date();
     @Temporal(TemporalType.DATE)
-    private Date dateUpdated;
-    private boolean admin;
-    private boolean active;
+    private Date dateUpdated = new Date();
+    private boolean admin = false;
+    private boolean active = true;
     @Lob
     private byte[] photo;
 
