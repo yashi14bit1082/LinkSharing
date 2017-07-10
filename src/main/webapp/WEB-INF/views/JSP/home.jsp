@@ -65,11 +65,11 @@
 
             <tr>
                 <td>User Name:</td>
-                <td><form:input path="user" /></td>
+                <td><form:input path="username" /></td>
             </tr>
             <tr>
                 <td>Password:</td>
-                <td><form:password path="pass" /></td>
+                <td><form:password path="password" /></td>
             </tr>
 
             <tr>

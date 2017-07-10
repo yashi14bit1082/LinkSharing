@@ -22,8 +22,8 @@ public class LoginDao implements LoginDaoInterface {
         /*AnnotationConfiguration config = new AnnotationConfiguration();
         config.addAnnotatedClass(User.class);
         SessionFactory factory= config.configure().buildSessionFactory();*/
-        Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();/*lets hope an id of 1 exists!*/
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
         String queryString = "from User where username = :username AND password = :password";
         Query query = session.createQuery(queryString);
         query.setString("username", user.getUsername());
