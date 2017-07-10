@@ -36,7 +36,10 @@ public class UserController {
     @RequestMapping("/")
     public ModelAndView callHome()
     {
-        return new ModelAndView("home","userRegisterForm",new User());
+        ModelAndView modelAndView = new ModelAndView("home");
+        modelAndView.addObject("userRegisterForm",new User());
+        modelAndView.addObject("userLogin",new User());
+        return modelAndView;
     }
 
     @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
@@ -55,7 +58,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/loginUser", method = RequestMethod.POST)
-    public ModelAndView loginUser(@ModelAttribute("userLoginForm") User user,
+    public ModelAndView loginUser(@ModelAttribute("userLogin") User user,
                                      BindingResult result, ModelMap model) {
 
         String view =  loginInterface.loginUser(user);

@@ -57,7 +57,7 @@
 <br>
 
 <div align="center">
-    <%--<form:form action="loginUser" method="post" modelAttribute="userLogin">
+    <form:form action="loginUser" method="post" modelAttribute="userLogin">
         <table border="0">
             <tr>
                 <td colspan="2" align="center"><h2>User Login</h2></td>
@@ -76,8 +76,7 @@
                 <td colspan="2" align="center"><input type="submit" value="Login" /></td>
             </tr>
         </table>
-    <form:form-->--%>
+    </form:form>
 </div>
-
 </body>
 </html>

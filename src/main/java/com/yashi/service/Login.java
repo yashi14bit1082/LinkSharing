@@ -13,10 +13,10 @@ public class Login implements LoginInterface{
 
     @Override
     public String loginUser(User user) {
-        boolean fetchresult = loginDaoInterface.loginUser(user);
+        boolean fetchedLoginResult = loginDaoInterface.loginUser(user);
 
-        if(true)
-        return "xyz";
+        if(fetchedLoginResult)
+            return "xyz";
         else
             return "home";
     }
