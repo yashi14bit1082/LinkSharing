@@ -45,6 +45,7 @@
     <script>
         $(function () {
             $("#addTopic").click(function () {
+                alert("jhk");
                 $.ajax({
                     url:"addTopic",
                     type:"post",
