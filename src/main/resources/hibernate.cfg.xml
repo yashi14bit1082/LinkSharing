@@ -24,5 +24,6 @@
         <!--Annotated entity class-->
 
           <mapping class="com.yashi.model.User"/>
+        <mapping class="com.yashi.model.Topic"/>
     </session-factory>
 </hibernate-configuration>

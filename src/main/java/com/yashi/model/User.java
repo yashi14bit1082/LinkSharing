@@ -3,7 +3,10 @@ package com.yashi.model;
 import javassist.bytecode.ByteArray;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by yashi on 10-07-2017.
@@ -28,6 +31,24 @@ public class User {
     private boolean active = true;
     @Lob
     private byte[] photo;
+    @OneToMany (mappedBy = "createdBy")
+    private Collection<Topic> topic = new ArrayList<>();
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public Collection<Topic> getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Collection<Topic> topic) {
+        this.topic = topic;
+    }
 
     public Integer getId() {
         return id;

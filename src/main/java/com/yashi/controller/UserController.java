@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -41,7 +43,7 @@ public class UserController {
 
     @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
     public ModelAndView registerUser(@ModelAttribute("userRegisterForm") User user,
-                                     BindingResult result, ModelMap model,@RequestParam("photo") MultipartFile file) throws IOException {
+                                     BindingResult result, ModelMap model, @RequestParam("photo") MultipartFile file, HttpServletRequest request) throws IOException {
             if(!file.isEmpty())
             {
                 user.setPhoto(file.getBytes());
@@ -49,15 +51,15 @@ public class UserController {
                 Path path = Paths.get("C:\\Users\\hp\\Downloads\\TTN Demo Project\\LinkSharing\\src\\main\\webapp\\WEB-INF\\resources\\default_photu.jpg");
                 user.setPhoto(Files.readAllBytes(path));
             }
-           String view =  registerInterface.registerUser(user);
+           String view =  registerInterface.registerUser(user,request);
                 return new ModelAndView(view);
 
     }
 
     @RequestMapping(value = "/loginUser", method = RequestMethod.POST)
-    public ModelAndView loginUser(@RequestParam("credential") String credential,@RequestParam("password") String password) {
+    public ModelAndView loginUser(@RequestParam("credential") String credential, @RequestParam("password") String password, HttpServletRequest request) {
 
-        String view =  loginInterface.loginUser(credential,password);
+        String view =  loginInterface.loginUser(credential,password,request);
         return new ModelAndView(view);
 
     }
