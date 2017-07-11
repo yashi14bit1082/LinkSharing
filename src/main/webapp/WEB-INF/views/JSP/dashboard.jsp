@@ -45,23 +45,25 @@
     <script>
         $(function () {
             $("#addTopic").click(function () {
-                alert("jhk");
                 $.ajax({
                     url:"addTopic",
                     type:"post",
                     data:{
-                      'topicName':$("#topicName"),
-                        'visibility':$("#visibility"),
-                        'sessionUsername':"<%= session.getAttribute("username")%>"
+                      topicName:$("#topicName").val(),
+                        visibility:$("#visibility").val(),
                     },
                     success:function (result) {
                         if(result>0)
                         {
                             alert("Topic Successfully Added");
                         }
+                        else
+                        {
+                            alert("Not Successfully Added");
+                        }
                     },
                     error:function (result) {
-                        alert("Not successfully added");
+                        alert("Error");
                     }
                 });
             });
