@@ -20,4 +20,11 @@ public class Register implements RegisterInterface {
         else
             return "home";
     }
+
+    @Override
+    public boolean validateUsername(String username) {
+
+        boolean result = registerDaoInterface.validateUsernameDao(username);
+        return result;
+    }
 }

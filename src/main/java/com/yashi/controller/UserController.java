@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -38,7 +35,7 @@ public class UserController {
     {
         ModelAndView modelAndView = new ModelAndView("home");
         modelAndView.addObject("userRegisterForm",new User());
-        modelAndView.addObject("userLogin",new User());
+
         return modelAndView;
     }
 
@@ -58,11 +55,17 @@ public class UserController {
     }
 
     @RequestMapping(value = "/loginUser", method = RequestMethod.POST)
-    public ModelAndView loginUser(@ModelAttribute("userLogin") User user,
-                                     BindingResult result, ModelMap model) {
+    public ModelAndView loginUser(@RequestParam("credential") String credential,@RequestParam("password") String password) {
 
-        String view =  loginInterface.loginUser(user);
+        String view =  loginInterface.loginUser(credential,password);
         return new ModelAndView(view);
 
+    }
+
+    @RequestMapping(value = "/CheckUniqueUsername",method = RequestMethod.POST)
+    public @ResponseBody String checkUniqueness(@RequestParam("credential") String credential)
+    {
+        boolean result = registerInterface.validateUsername(credential);
+        return result+"";
     }
 }

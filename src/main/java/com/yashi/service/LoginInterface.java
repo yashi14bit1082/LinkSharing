@@ -7,7 +7,7 @@ import com.yashi.model.User;
  */
 public interface LoginInterface {
 
-    default String loginUser(User user)
+    default String loginUser(String credential,String password)
     {
        return "error";
     }

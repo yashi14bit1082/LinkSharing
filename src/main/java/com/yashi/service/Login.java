@@ -12,8 +12,8 @@ public class Login implements LoginInterface{
     LoginDaoInterface loginDaoInterface;
 
     @Override
-    public String loginUser(User user) {
-        boolean fetchedLoginResult = loginDaoInterface.loginUser(user);
+    public String loginUser(String credential,String password) {
+        boolean fetchedLoginResult = loginDaoInterface.loginUser(credential,password);
 
         if(fetchedLoginResult)
             return "xyz";

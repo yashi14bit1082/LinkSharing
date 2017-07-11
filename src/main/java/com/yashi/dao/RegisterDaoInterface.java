@@ -15,4 +15,9 @@ public interface RegisterDaoInterface {
         {
             return false;
         }
+
+        default boolean validateUsernameDao(String username)
+        {
+            return false;
+        }
 }

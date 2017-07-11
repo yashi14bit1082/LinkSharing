@@ -11,4 +11,9 @@ public interface RegisterInterface {
     {
         return "error";
     }
+
+    default boolean validateUsername(String username)
+    {
+        return false;
+    }
 }

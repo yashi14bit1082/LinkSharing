@@ -15,19 +15,38 @@ import javax.persistence.criteria.CriteriaQuery;
 public class LoginDao implements LoginDaoInterface {
 
     @Override
-    public boolean loginUser(User user) {
+    public boolean loginUser(String credential,String password) {
 
      //   Session session=sessionFactory.openSession();
 
         /*AnnotationConfiguration config = new AnnotationConfiguration();
         config.addAnnotatedClass(User.class);
         SessionFactory factory= config.configure().buildSessionFactory();*/
+
+        String checkCredentialForUsernameOREmail;
+        String queryString;
+
+        if(credential.matches("/([a-zA-Z0-9]+)([\\_\\.\\-{1}])?([a-zA-Z0-9]+)\\@([a-zA-Z0-9]+)([\\.])([a-zA-Z\\.]+)/g"))
+        {
+            checkCredentialForUsernameOREmail = "email";
+        }
+        else
+        {
+            checkCredentialForUsernameOREmail = "username";
+        }
+
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        String queryString = "from User where username = :username AND password = :password";
+        if(checkCredentialForUsernameOREmail.equals("username"))
+        {
+            queryString = "from User where username = :username AND password = :password";
+        }
+        else {
+           queryString = "from User where email = :username AND password = :password";
+        }
         Query query = session.createQuery(queryString);
-        query.setString("username", user.getUsername());
-        query.setString("password",user.getPassword());
+        query.setString("username", credential);
+        query.setString("password",password);
         Object queryResult = query.uniqueResult();
         User user1 = (User)queryResult;
         session.getTransaction().commit();
@@ -36,6 +55,5 @@ public class LoginDao implements LoginDaoInterface {
             return true;
         else
             return false;
-
     }
 }
