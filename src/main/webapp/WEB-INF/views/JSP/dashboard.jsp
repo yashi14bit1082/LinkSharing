@@ -11,7 +11,61 @@
     <title>Title</title>
 </head>
 <body>
-<p><%= session.getAttribute("username")%>yashi </p>
+<div align="center">
+    <h1 style="text-align: center">Welcome, <%= session.getAttribute("username")%></h1>
+    <form action="javascript:void(0)" method="post">
+        <table border="0">
+            <tr>
+                <td colspan="2" align="center"><h2>Add Topic</h2></td>
+            </tr>
+
+            <tr>
+                <td>Topic Name:</td>
+                <td><input type="text" name="topicName" id="topicName"/></td>
+            </tr>
+            <tr>
+                <td>Visibility:</td>
+                <td>
+                    <select name="visibility" id="visibility">
+                        <option>PUBLIC</option>
+                        <option>PRIVATE</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="ADD TOPIC" id="addTopic"/></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script>
+        $(function () {
+            $("#addTopic").click(function () {
+                $.ajax({
+                    url:"addTopic",
+                    type:"post",
+                    data:{
+                      'topicName':$("#topicName"),
+                        'visibility':$("#visibility"),
+                        'sessionUsername':"<%= session.getAttribute("username")%>"
+                    },
+                    success:function (result) {
+                        if(result>0)
+                        {
+                            alert("Topic Successfully Added");
+                        }
+                    },
+                    error:function (result) {
+                        alert("Not successfully added");
+                    }
+                });
+            });
+        });
+    </script>
 
 </body>
 </html>

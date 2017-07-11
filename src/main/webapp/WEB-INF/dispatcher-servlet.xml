@@ -26,4 +26,8 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
 
     <bean id="loginInterface" class="com.yashi.service.Login"/>
     <bean id="loginDaoInterface" class="com.yashi.dao.LoginDao"/>
+
+    <bean id="topicServiceInterface" class="com.yashi.service.TopicService"/>
+    <bean id="topicDaoInterface" class="com.yashi.dao.TopicDao"/>
+
 </beans>

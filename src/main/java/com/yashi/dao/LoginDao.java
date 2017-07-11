@@ -39,10 +39,10 @@ public class LoginDao implements LoginDaoInterface {
         session.beginTransaction();
         if(checkCredentialForUsernameOREmail.equals("username"))
         {
-            queryString = "from User where username = :username AND password = :password";
+            queryString = "from User where username = :username AND password = :password AND active = true";
         }
         else {
-           queryString = "from User where email = :username AND password = :password";
+           queryString = "from User where email = :username AND password = :password AND active = true";
         }
         Query query = session.createQuery(queryString);
         query.setString("username", credential);

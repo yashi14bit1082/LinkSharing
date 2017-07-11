@@ -10,29 +10,22 @@ import java.util.Date;
 public class Topic {
     @Id
     @GeneratedValue (strategy = GenerationType.TABLE)
-    int id;
-    String topicName;
+   private int id;
+   private String topicName;
     @ManyToOne
-    User createdBy;
+   private User createdBy;
     @Temporal(TemporalType.DATE)
-    Date dateCreated;
+   private Date dateCreated = new Date();
     @Temporal(TemporalType.DATE)
-    Date lastUpdated;
+   private Date lastUpdated = new Date();
+  private Visibility visibility;
 
-    public enum Visibility {
+    public Visibility getVisibility() {
+        return visibility;
+    }
 
-        PRIVATE("private"),
-        PUBLIC("public");
-
-        private final String value;
-
-         Visibility(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return this.value;
-        }
+    public void setVisibility(Visibility visibility) {
+        this.visibility = visibility;
     }
 
     public int getId() {
