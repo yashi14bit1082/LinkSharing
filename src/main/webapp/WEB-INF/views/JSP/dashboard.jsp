@@ -45,14 +45,19 @@
     <script>
         $(function () {
             $("#addTopic").click(function () {
+                var topicName = $("#topicName").val();
+                var visibility = $("#visibility").val();
                 $.ajax({
                     url:"addTopic",
                     type:"post",
                     data:{
-                      topicName:$("#topicName").val(),
-                        visibility:$("#visibility").val(),
+                      topicName:topicName,
+                        visibility:visibility
                     },
                     success:function (result) {
+                        console.log(result);
+
+                        /*
                         if(result>0)
                         {
                             alert("Topic Successfully Added");
@@ -60,7 +65,7 @@
                         else
                         {
                             alert("Not Successfully Added");
-                        }
+                        }*/
                     },
                     error:function (result) {
                         alert("Error");
