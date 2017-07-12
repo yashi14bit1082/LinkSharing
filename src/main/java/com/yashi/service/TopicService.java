@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * Created by yashi on 11-07-2017.
  */
-public class TopicService implements TopicServiceInterface{
+public class TopicService implements TopicServiceInterface,CheckUniquenessInterface {
         @Autowired
         TopicDaoInterface topicDaoInterface;
 
@@ -16,4 +16,5 @@ public class TopicService implements TopicServiceInterface{
 
         return val;
     }
+
 }

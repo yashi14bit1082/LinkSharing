@@ -13,11 +13,11 @@ import org.hibernate.Session;
 /**
  * Created by yashi on 11-07-2017.
  */
-public class TopicDao implements TopicServiceInterface,startSession,stopSession {
+public class TopicDao implements TopicDaoInterface,startSession,stopSession {
     @Override
-    public Integer addTopic(String topicName, String visibility, String topicCreatedBy) {
-        Session session1 = null;
-        Session session = startsession(session1);
+    public Integer topicAddDatabase(String topicName, String visibility, String topicCreatedBy) {
+
+        Session session = startsession();
 
         String queryString = "from User where username = :username";
 

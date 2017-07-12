@@ -1,5 +1,7 @@
 package com.yashi.dao;
 
+import com.yashi.Handlers.startSession;
+import com.yashi.Handlers.stopSession;
 import com.yashi.model.User;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
@@ -12,16 +14,13 @@ import javax.persistence.criteria.CriteriaQuery;
 /**
  * Created by yashi on 10-07-2017.
  */
-public class LoginDao implements LoginDaoInterface {
+
+
+public class LoginDao implements LoginDaoInterface,startSession,stopSession {
 
     @Override
     public boolean loginUser(String credential,String password) {
 
-     //   Session session=sessionFactory.openSession();
-
-        /*AnnotationConfiguration config = new AnnotationConfiguration();
-        config.addAnnotatedClass(User.class);
-        SessionFactory factory= config.configure().buildSessionFactory();*/
 
         String checkCredentialForUsernameOREmail;
         String queryString;
@@ -35,8 +34,7 @@ public class LoginDao implements LoginDaoInterface {
             checkCredentialForUsernameOREmail = "username";
         }
 
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
+        Session session = startsession();
         if(checkCredentialForUsernameOREmail.equals("username"))
         {
             queryString = "from User where username = :username AND password = :password AND active = true";
@@ -49,8 +47,7 @@ public class LoginDao implements LoginDaoInterface {
         query.setString("password",password);
         Object queryResult = query.uniqueResult();
         User user1 = (User)queryResult;
-        session.getTransaction().commit();
-        session.close();
+        stopsession(session);
         if(user1!=null)
             return true;
         else

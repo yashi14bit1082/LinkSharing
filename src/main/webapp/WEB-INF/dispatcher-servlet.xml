@@ -30,4 +30,6 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
     <bean id="topicServiceInterface" class="com.yashi.service.TopicService"/>
     <bean id="topicDaoInterface" class="com.yashi.dao.TopicDao"/>
 
+    <bean id="checkUniquenessInterface" class="com.yashi.service.CheckUniqueness"/>
+    <bean id="checkUniqueDaoInterface" class="com.yashi.dao.CheckUniqueDao"/>
 </beans>

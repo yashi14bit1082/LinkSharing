@@ -44,33 +44,56 @@
 
     <script>
         $(function () {
-            $("#addTopic").click(function () {
-                var topicName = $("#topicName").val();
-                var visibility = $("#visibility").val();
-                $.ajax({
-                    url:"addTopic",
-                    type:"post",
-                    data:{
-                      topicName:topicName,
-                        visibility:visibility
-                    },
-                    success:function (result) {
-                        console.log(result);
+            var uniqueness = true;
 
-                        /*
-                        if(result>0)
-                        {
-                            alert("Topic Successfully Added");
-                        }
-                        else
-                        {
-                            alert("Not Successfully Added");
-                        }*/
+            $("#topicName").focusout(function () {
+            if($("#topicName")!=null) {
+                $.ajax({
+                    url: "checkTopicUniqueness",
+                    type: "post",
+                    data: {
+                        topicName: $("#topicName").val()
                     },
-                    error:function (result) {
-                        alert("Error");
+                    success: function (result) {
+                        if (result == "true") {
+                            uniqueness = false;
+                        }
+
+                    },
+                    error: function (result) {
+                        console.log(result);
                     }
                 });
+            }
+            });
+
+
+            $("#addTopic").click(function () {
+                if (uniqueness == true) {
+                    var topicName = $("#topicName").val();
+                    var visibility = $("#visibility").val();
+                    $.ajax({
+                        url: "addTopic",
+                        type: "post",
+                        data: {
+                            topicName: topicName,
+                            visibility: visibility
+                        },
+                        success: function (result) {
+
+                            if (result > 0) {
+                                alert("Topic Successfully Added");
+                            }
+                            else {
+                                alert("Not Successfully Added");
+                            }
+                        },
+                        error: function (result) {
+                            console.log(result);
+                        }
+                    });
+                }
+
             });
         });
     </script>
