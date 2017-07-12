@@ -31,8 +31,7 @@ public class User {
     private boolean active = true;
     @Lob
     private byte[] photo;
-    @OneToMany (mappedBy = "createdBy")
-    private Collection<Topic> topic = new ArrayList<>();
+
 
     public boolean isAdmin() {
         return admin;
@@ -40,14 +39,6 @@ public class User {
 
     public boolean isActive() {
         return active;
-    }
-
-    public Collection<Topic> getTopic() {
-        return topic;
-    }
-
-    public void setTopic(Collection<Topic> topic) {
-        this.topic = topic;
     }
 
     public Integer getId() {

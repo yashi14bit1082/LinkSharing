@@ -16,7 +16,7 @@ import java.util.Date;
 public class RegisterDao implements RegisterDaoInterface,startSession,stopSession {
     @Override
     public boolean saveRegisteredUser(User user) {
-Session session = startsession();
+        Session session = startsession();
 
        Integer committed = (Integer) session.save(user);
         stopsession(session);

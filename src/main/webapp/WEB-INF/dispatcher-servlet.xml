@@ -32,4 +32,9 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
 
     <bean id="checkUniquenessInterface" class="com.yashi.service.CheckUniqueness"/>
     <bean id="checkUniqueDaoInterface" class="com.yashi.dao.CheckUniqueDao"/>
+
+    <bean id="subscriptionInterface" class="com.yashi.service.SubscriptionService"/>
+    <bean id="subscriptionDaoInterface" class="com.yashi.dao.SubscriptionDao"/>
+
+    <bean id="fetchFromDatabaseInterface" class="com.yashi.dao.FetchFromDatabase"/>
 </beans>

@@ -4,9 +4,9 @@ package com.yashi.model;
  * Created by yashi on 12-07-2017.
  */
 public enum Seriousness {
-    SERIOUS("serious"),
-    VERY_SERIOUS("very_serious"),
-    CASUAL("casual");
+    SERIOUS("SERIOUS"),
+    VERY_SERIOUS("VERY_SERIOUS"),
+    CASUAL("CASUAL");
 
     private final String value;
 

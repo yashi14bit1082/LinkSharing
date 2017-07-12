@@ -29,13 +29,6 @@ public class TopicDao implements TopicDaoInterface,startSession,stopSession {
         User user1 = (User)queryResult;
 
         topic.setCreatedBy(user1);
-        /*topic.setTopicName(topicName);
-
-        if(visibility.equalsIgnoreCase("public"))
-        topic.setVisibility(Visibility.PUBLIC);
-        else
-            topic.setVisibility(Visibility.PRIVATE);*/
-
         Integer topicAdded = (Integer) session.save(topic);
         stopsession(session);
         return topicAdded;
