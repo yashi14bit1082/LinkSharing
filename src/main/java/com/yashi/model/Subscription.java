@@ -16,5 +16,5 @@ public class Subscription {
     private Seriousness seriousness ;
     @Temporal(TemporalType.DATE)
     private Date dateCreated = new Date();
-    
+
 }
