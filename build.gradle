@@ -26,4 +26,5 @@ dependencies {
     compile 'org.hibernate:hibernate-core:4.3.6.Final'
     compile 'commons-dbcp:commons-dbcp:1.4'
     compile 'org.slf4j:slf4j-simple:1.7.7'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.0.1'
 }

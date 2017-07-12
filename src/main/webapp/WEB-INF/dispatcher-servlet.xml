@@ -37,4 +37,5 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
     <bean id="subscriptionDaoInterface" class="com.yashi.dao.SubscriptionDao"/>
 
     <bean id="fetchFromDatabaseInterface" class="com.yashi.dao.FetchFromDatabase"/>
+    <bean id="fetchDataServiceInterface" class="com.yashi.service.FetchDataService"/>
 </beans>

@@ -38,6 +38,9 @@
             </tr>
         </table>
     </form>
+    <br>
+    <br>
+    <input type="text" id="searchTopic" value="searchTopic">
 </div>
 
 <script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -81,6 +84,8 @@
                         success: function (result) {
 
                             if (result > 0) {
+                                $("#topicName").val("");
+                                $("#visibility").val("");
                                 alert("Topic Successfully Added");
                             }
                             else {
@@ -93,6 +98,26 @@
                     });
                 }
 
+            });
+
+            $("#searchTopic").keyup(function () {
+                $.ajax({
+                    url:"fetchListSearch",
+                    contentType: "application/json",
+                    dataType: "json",
+                    data:{
+                        table_name:"Topic",
+                        field_name:"topicName",
+                      search_string:$("#searchTopic").val()
+                    },
+                    success:function (result) {
+                        console.log(result);
+                    },
+                    error:function (result) {
+                        console.log(result);
+                    }
+
+                });
             });
         });
     </script>

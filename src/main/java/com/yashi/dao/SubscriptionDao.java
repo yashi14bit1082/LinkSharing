@@ -25,8 +25,6 @@ public class SubscriptionDao implements SubscriptionDaoInterface,startSession,st
         session.save(subscription);
         stopsession(session);
 
-        stopsession(session);
-
         return null;
     }
 }
