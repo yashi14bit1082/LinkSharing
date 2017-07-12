@@ -5,7 +5,7 @@ package com.yashi.dao;
  */
 public interface CheckUniqueDaoInterface {
 
-    default Boolean checkUniqueTopic(String topicName)
+    default Boolean checkUniqueTopic(String topicName, String currentUser)
     {
         return false;
     }

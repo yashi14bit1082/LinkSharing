@@ -12,9 +12,9 @@ public class CheckUniqueness implements CheckUniquenessInterface {
     CheckUniqueDaoInterface checkUniqueDaoInterface;
 
     @Override
-    public Boolean checkTopicUniqueness(String topicName) {
+    public Boolean checkTopicUniqueness(String topicName, String currentUser) {
 
-       Boolean response = checkUniqueDaoInterface.checkUniqueTopic(topicName);
+       Boolean response = checkUniqueDaoInterface.checkUniqueTopic(topicName,currentUser);
         return response;
     }
 }

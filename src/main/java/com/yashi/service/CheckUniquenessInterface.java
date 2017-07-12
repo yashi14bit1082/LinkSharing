@@ -6,7 +6,7 @@ package com.yashi.service;
 
 public interface CheckUniquenessInterface {
 
-    default Boolean checkTopicUniqueness(String topicName)
+    default Boolean checkTopicUniqueness(String topicName,String currentUser)
     {
         return false;
     }

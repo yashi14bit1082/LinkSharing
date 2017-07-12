@@ -9,35 +9,34 @@ import com.yashi.service.TopicServiceInterface;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import javax.persistence.ManyToOne;
+
 
 /**
  * Created by yashi on 11-07-2017.
  */
 public class TopicDao implements TopicDaoInterface,startSession,stopSession {
     @Override
-    public Integer topicAddDatabase(String topicName, String visibility, String topicCreatedBy) {
+    public Integer topicAddDatabase(Topic topic, String topicCreatedBy) {
 
         Session session = startsession();
 
         String queryString = "from User where username = :username";
 
         Query query = session.createQuery(queryString);
-        query.setString("username", topicCreatedBy);
+        query.setString("username", topicCreatedBy );
         Object queryResult = query.uniqueResult();
         User user1 = (User)queryResult;
 
-        Topic topic = new Topic();
-
         topic.setCreatedBy(user1);
-        topic.setTopicName(topicName);
+        /*topic.setTopicName(topicName);
 
         if(visibility.equalsIgnoreCase("public"))
         topic.setVisibility(Visibility.PUBLIC);
         else
-            topic.setVisibility(Visibility.PRIVATE);
+            topic.setVisibility(Visibility.PRIVATE);*/
 
         Integer topicAdded = (Integer) session.save(topic);
-
         stopsession(session);
         return topicAdded;
     }

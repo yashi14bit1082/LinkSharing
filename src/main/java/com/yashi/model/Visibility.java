@@ -5,8 +5,8 @@ package com.yashi.model;
  */
 public enum Visibility {
 
-    PRIVATE("private"),
-    PUBLIC("public");
+    Private("Private"),
+    Public("Public");
 
     private final String value;
 

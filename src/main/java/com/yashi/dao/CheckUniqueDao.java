@@ -15,13 +15,14 @@ public class CheckUniqueDao implements CheckUniqueDaoInterface,startSession,stop
 
     Boolean result;
     @Override
-    public Boolean checkUniqueTopic(String topicName) {
+    public Boolean checkUniqueTopic(String topicName, String currentUser) {
 
         Session session = startsession();
-        String queryString = "from Topic where topicName = :topicName";
+        String queryString = "from Topic where topicName = :topicName AND createdBy IN (select id from User where username = :currentUser)";
 
         Query query = session.createQuery(queryString);
         query.setString("topicName", topicName);
+        query.setString("currentUser",currentUser);
         Object queryResult = query.uniqueResult();
         Topic topic = (Topic)queryResult;
 

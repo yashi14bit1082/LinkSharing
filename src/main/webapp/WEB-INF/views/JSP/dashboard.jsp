@@ -13,7 +13,7 @@
 <body>
 <div align="center">
     <h1 style="text-align: center">Welcome, <%= session.getAttribute("username")%></h1>
-    <form action="javascript:void(0)" method="post">
+    <form action="javascript:void(0)" method="post" >
         <table border="0">
             <tr>
                 <td colspan="2" align="center"><h2>Add Topic</h2></td>
@@ -27,8 +27,8 @@
                 <td>Visibility:</td>
                 <td>
                     <select name="visibility" id="visibility">
-                        <option>PUBLIC</option>
-                        <option>PRIVATE</option>
+                        <option value="Public">PUBLIC</option>
+                        <option value="Private">PRIVATE</option>
                     </select>
                 </td>
             </tr>
@@ -70,14 +70,13 @@
 
             $("#addTopic").click(function () {
                 if (uniqueness == true) {
-                    var topicName = $("#topicName").val();
-                    var visibility = $("#visibility").val();
+
                     $.ajax({
                         url: "addTopic",
                         type: "post",
                         data: {
-                            topicName: topicName,
-                            visibility: visibility
+                            topicName: $("#topicName").val(),
+                            visibility: $("#visibility").val()
                         },
                         success: function (result) {
 

@@ -1,7 +1,10 @@
 package com.yashi.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by yashi on 11-07-2017.
@@ -19,6 +22,12 @@ public class Topic {
     @Temporal(TemporalType.DATE)
    private Date lastUpdated = new Date();
   private Visibility visibility;
+
+    @OneToMany(mappedBy = "topic")
+  private Collection<Subscription> topic = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private Collection<Subscription> user = new ArrayList<>();
 
     public Visibility getVisibility() {
         return visibility;

@@ -1,6 +1,7 @@
 package com.yashi.service;
 
 import com.yashi.dao.TopicDaoInterface;
+import com.yashi.model.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -11,8 +12,8 @@ public class TopicService implements TopicServiceInterface,CheckUniquenessInterf
         TopicDaoInterface topicDaoInterface;
 
     @Override
-    public Integer addTopic(String topicName, String visibility, String topicCreatedBy) {
-        Integer val = topicDaoInterface.topicAddDatabase(topicName,visibility,topicCreatedBy);
+    public Integer addTopic(Topic topic, String topicCreatedBy) {
+        Integer val = topicDaoInterface.topicAddDatabase(topic,topicCreatedBy);
 
         return val;
     }
