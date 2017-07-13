@@ -21,6 +21,7 @@ public class Topic {
    private Date dateCreated = new Date();
     @Temporal(TemporalType.DATE)
    private Date lastUpdated = new Date();
+    @Enumerated(EnumType.STRING)
   private Visibility visibility;
 
     @OneToMany(mappedBy = "topic")

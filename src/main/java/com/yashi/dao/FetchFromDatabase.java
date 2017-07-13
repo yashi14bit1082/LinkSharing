@@ -28,12 +28,12 @@ public class FetchFromDatabase implements FetchFromDatabaseInterface,startSessio
     @Override
     public List<Topic> fetchData(String search_string) {
         Session session = startsession();
-        String queryString = "select topicName,createdBy.username from Topic where topicName LIKE "+":field_value";
+        String queryString = "select topicName,createdBy.username from Topic where topicName LIKE "+":field_value"+" AND visibility = :visibility";
         Query query = session.createQuery(queryString);
         query.setString("field_value", search_string+"%");
+        query.setString("visibility","Public");
         List<Topic> object = query.list();
         stopsession(session);
-        System.out.println(object.get(0));
         return object;
     }
 }

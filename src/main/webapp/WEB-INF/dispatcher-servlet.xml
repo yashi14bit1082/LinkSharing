@@ -38,4 +38,8 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
 
     <bean id="fetchFromDatabaseInterface" class="com.yashi.dao.FetchFromDatabase"/>
     <bean id="fetchDataServiceInterface" class="com.yashi.service.FetchDataService"/>
+
+    <bean id="resourceServiceInterface" class="com.yashi.service.ResourceService"/>
+    <bean id="resourceDaoInterface" class="com.yashi.dao.ResourceDao"/>
+
 </beans>

@@ -26,5 +26,6 @@
           <mapping class="com.yashi.model.User"/>
         <mapping class="com.yashi.model.Topic"/>
         <mapping class="com.yashi.model.Subscription"/>
+        <mapping class="com.yashi.model.Resource"/>
     </session-factory>
 </hibernate-configuration>

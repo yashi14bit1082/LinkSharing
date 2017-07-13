@@ -7,6 +7,7 @@ import com.yashi.service.TopicServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,6 +51,14 @@ public class DashboardTopicController {
     {
         List<Topic> fetched_list = fetchDataServiceInterface.fetchData(search);
         return fetched_list;
+    }
+
+    @RequestMapping(value = "/displaySelectedTopicPage",method = RequestMethod.GET)
+    public ModelAndView redirectToSelectedTopic(@RequestParam ("SelectedItem") String selectedItem)
+    {
+        ModelAndView modelAndView = new ModelAndView("TopicView");
+        modelAndView.addObject("TopicName",selectedItem);
+        return modelAndView;
     }
 
 }

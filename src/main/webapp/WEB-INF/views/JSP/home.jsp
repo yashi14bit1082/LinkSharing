@@ -43,6 +43,7 @@
             </tr>
 
             <tr>
+
                 <td>E-mail:</td>
                 <td><form:input path="email" id="email"/></td>
             </tr>

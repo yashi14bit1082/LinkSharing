@@ -15,7 +15,8 @@ public class Subscription {
    private Topic topic;
     @ManyToOne
     private User user;
-    private Seriousness seriousness ;
+    @Enumerated(EnumType.STRING)
+    private Seriousness seriousness;
     @Temporal(TemporalType.DATE)
     private Date dateCreated = new Date();
 

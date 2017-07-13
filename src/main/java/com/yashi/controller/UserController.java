@@ -61,7 +61,10 @@ public class UserController {
     public ModelAndView loginUser(@RequestParam("credential") String credential, @RequestParam("password") String password, HttpServletRequest request) {
 
         String view =  loginInterface.loginUser(credential,password,request);
+        if(view=="dashboard")
         return new ModelAndView(view);
+        else
+            return new ModelAndView(view,"userRegisterForm",new User());
 
     }
 
