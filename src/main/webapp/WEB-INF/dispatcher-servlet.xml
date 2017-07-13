@@ -42,4 +42,6 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
     <bean id="resourceServiceInterface" class="com.yashi.service.ResourceService"/>
     <bean id="resourceDaoInterface" class="com.yashi.dao.ResourceDao"/>
 
+    
+
 </beans>

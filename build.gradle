@@ -21,7 +21,7 @@ dependencies {
     compile 'javax.servlet:jstl:1.2'
     compile("javax.servlet:servlet-api:2.5")
     compile group: 'commons-fileupload', name: 'commons-fileupload', version: '1.2'
-    compile group: 'commons-io', name: 'commons-io', version: '2.1'
+    compile group: 'commons-io', name: 'commons-io', version: '2.4'
     compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.13'
     compile 'org.hibernate:hibernate-core:4.3.6.Final'
     compile 'commons-dbcp:commons-dbcp:1.4'
