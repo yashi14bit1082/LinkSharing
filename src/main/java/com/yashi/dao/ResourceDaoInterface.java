@@ -11,4 +11,9 @@ public interface ResourceDaoInterface {
     {
         return 0;
     }
+
+    default Integer saveDocxResourceDao(String attachedFile, String desc, Topic topic, User user)
+    {
+        return 0;
+    }
 }

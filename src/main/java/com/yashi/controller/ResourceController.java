@@ -25,4 +25,13 @@ String saveLinkResource(@RequestParam ("link") String link, @RequestParam ("desc
     return result+"";
 }
 
+
+    @RequestMapping (value = "/shareDocxResource",method = RequestMethod.POST)
+    public @ResponseBody
+    String saveDocxResource(@RequestParam ("attachedFile") String attachedFile, @RequestParam ("description") String description, @RequestParam ("topic") String topic)
+    {
+        Integer result = resourceServiceInterface.saveLinkResourceService(attachedFile,description,topic);
+        return result+"";
+    }
+
 }
