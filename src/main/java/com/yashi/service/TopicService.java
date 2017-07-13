@@ -28,7 +28,7 @@ public class TopicService implements TopicServiceInterface,CheckUniquenessInterf
 
        User user = (User)fetchFromDatabaseInterface.fetchData("User","username",topicCreatedBy);
        Seriousness seriousness = Seriousness.VERY_SERIOUS;
-        subscriptionDaoInterface.addSubscriptionDB(topic,user,seriousness);
+        Integer t = subscriptionDaoInterface.addSubscriptionDB(topic,user,seriousness);
         return val;
     }
 

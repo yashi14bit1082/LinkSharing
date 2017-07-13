@@ -19,7 +19,7 @@ public class Resource {
     @ManyToOne
     Topic topic;
     @Temporal(TemporalType.DATE)
-    Date dateCreated;
+    Date dateCreated = new Date();
     @Temporal(TemporalType.DATE)
     Date dateUpdated;
 

@@ -61,17 +61,46 @@
 
             <tr>
                 <td>
-                    <datalist>
-                        <input type="text" name="topic" id="topic" value="Topic">
-                    </datalist>
+                    <input type="text" name="topic" id="topic_link" value="Topic">
                 </td>
             </tr>
 
             <tr>
-                <td colspan="2"><input type="submit" value="Share" id="share_link"/></td>
+                <td colspan="2">Topic: <input type="submit" value="Share" id="share_link"/></td>
             </tr>
             <tr>
-                <td colspan="2"><input type="submit" value="Cancel" id="cancel_link"/></td>
+                <td colspan="2"><input type="submit" value="Cancel" id="cancel"/></td>
+            </tr>
+        </table>
+    </form>
+    <br>
+    <br>
+    <form action="javascript:void(0)" method="post" >
+        <table border="0">
+            <tr>
+                <td colspan="2" align="center"><h2>Add DocumentResource</h2></td>
+            </tr>
+
+            <tr>
+                <td>Document: </td>
+                <td><input type="file" name="docx" id="docx"/></td>
+            </tr>
+            <tr>
+                <td>Document Description:</td>
+                <td><input type="text" name="docx_desc" id="docx_desc"/></td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="text" name="topic" id="topic_docx" value="Topic">
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2"><input type="submit" value="Share" id="share_docx"/></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Cancel" id="cancel_docx"/></td>
             </tr>
         </table>
     </form>
@@ -136,7 +165,7 @@
             });
 
 
-            $('#searchTopic').autocomplete({
+            $('#searchTopic,#topic_link,#topic_docx').autocomplete({
                 source: function( request, response ) {
                     $.ajax({
                         url:"fetchListSearch",
@@ -151,41 +180,85 @@
                         success: function( data ) {
                             response( $.map( data, function( item ) {
                                 return {
-                                    label: item[0],
-                                    value: item[0]
+                                    label: item,
+                                    value: item
                                 }
                             }));
                         }
                     });
-                },
-                select: function( event, ui ) {
-
-                    // Get Injection
-                    window.location.replace("/displaySelectedTopicPage?SelectedItem="+ui.item.label);
-
                 },
 
                 autoFocus: true,
                 minLength: 0
             });
 
+            $("#searchTopic").autocomplete({
+                select: function( event, ui ) {
+
+
+                    /*rather than doing get injection, save value in a session and redirect the page in ModalAndView. It is
+                   important as for now if user wanna go back page, he will see the home page and
+                     not the dashboard, as we are running an ajax call before that is just working in background .*/
+
+
+                     // Get Injection
+                    window.location.replace("/displaySelectedTopicPage?SelectedItem="+ui.item.label);
+
+                }
+            });
+
 
 
             $("#share_link").click(function () {
                 $.ajax({
-                    url:"share_link_resource",
+                    url:"shareLinkResource",
                     type:"post",
                     data:
                         {
-                            link:$("#link"),
-                            description:$("#link_desc"),
-                            topic:$("#topic")
-                        }
+                            link:$("#link").val(),
+                            description:$("#link_desc").val(),
+                            topic:$("#topic_link").val()
+                        },
+                        success:function (result) {
+                        if(result=="1")
+                        alert("post added successfully");
+                        else
+                            alert("post not added successfully");
+                        },
+                    error:function (result) {
+                        console.log(result);
+                    }
 
                 });
             });
 
-            $("#cancel_link").click(function () {
+
+            $("#share_docx").click(function () {
+                $.ajax({
+                    url:"shareDocxResource",
+                    type:"post",
+                    data:
+                        {
+                            attachedFile:$("#docx").val(),
+                            description:$("#docx_desc").val(),
+                            topic:$("#topic_docx").val()
+                        },
+                    success:function (result) {
+                        if(result=="1")
+                            alert("post added successfully");
+                        else
+                            alert("post not added successfully");
+                    },
+                    error:function (result) {
+                        console.log(result);
+                    }
+
+                });
+            });
+
+
+
+            $("#cancel").click(function () {
 
             });
 

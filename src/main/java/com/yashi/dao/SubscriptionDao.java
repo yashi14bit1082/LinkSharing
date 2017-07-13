@@ -22,9 +22,12 @@ public class SubscriptionDao implements SubscriptionDaoInterface,startSession,st
         subscription.setUser(user);
         subscription.setSeriousness(seriousness);
 
-        session.save(subscription);
+        Integer result = (Integer)session.save(subscription);
         stopsession(session);
 
-        return null;
+        if(result>0)
+        return 1;
+        else
+            return 0;
     }
 }
