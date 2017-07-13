@@ -145,11 +145,12 @@
                 }});
         }
 
-
             $("#register").on('click', function(e) {
-                if(usernameCorrect==0 || emailCorrect==0 || confirmPassword==0)
-                e.preventDefault();
+                if(usernameCorrect==0 || emailCorrect==0 || confirmPassword==0) {
+                    e.preventDefault();
+                }
 
+                // mandatorily close the model after user click register button
             });
 
         });

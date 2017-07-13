@@ -2,6 +2,7 @@ package com.yashi.dao;
 
 import com.yashi.Handlers.startSession;
 import com.yashi.Handlers.stopSession;
+import com.yashi.model.Topic;
 import com.yashi.model.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -25,13 +26,14 @@ public class FetchFromDatabase implements FetchFromDatabaseInterface,startSessio
     }
 
     @Override
-    public List<Object> fetchData(String table_name, String field_name, String search_string, int randomval) {
+    public List<Topic> fetchData(String search_string) {
         Session session = startsession();
-        String queryString = "from "+table_name+" where "+field_name+" LIKE "+":field_value";
+        String queryString = "select topicName,createdBy.username from Topic where topicName LIKE "+":field_value";
         Query query = session.createQuery(queryString);
-        query.setString("field_value", "\"%"+search_string+"%\"");
-        List<Object> object = query.list();
+        query.setString("field_value", search_string+"%");
+        List<Topic> object = query.list();
         stopsession(session);
+        System.out.println(object.get(0));
         return object;
     }
 }

@@ -1,6 +1,7 @@
 package com.yashi.service;
 
 import com.yashi.dao.FetchFromDatabaseInterface;
+import com.yashi.model.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -12,8 +13,8 @@ public class FetchDataService implements FetchDataServiceInterface {
     @Autowired
     FetchFromDatabaseInterface fetchFromDatabaseInterface;
     @Override
-    public List<Object> fetchData(String table_name,String field_name,String search_string,int randonval) {
-        List<Object> fetched_list = fetchFromDatabaseInterface.fetchData(table_name,field_name,search_string,1);
+    public List<Topic> fetchData(String search_string) {
+        List<Topic> fetched_list = fetchFromDatabaseInterface.fetchData(search_string);
 
         return fetched_list;
     }

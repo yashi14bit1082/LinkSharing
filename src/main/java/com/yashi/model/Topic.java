@@ -79,6 +79,6 @@ public class Topic {
 
     @Override
     public String toString() {
-        return "topicName"+topicName;
+        return "topicName"+topicName+"username"+createdBy.getUsername();
     }
 }

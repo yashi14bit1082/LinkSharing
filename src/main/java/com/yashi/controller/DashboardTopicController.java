@@ -46,11 +46,10 @@ public class DashboardTopicController {
     }
 
     @RequestMapping(value = "/fetchListSearch",method = RequestMethod.POST)
-    public @ResponseBody List<Object> fetchTopicList(@RequestParam("table_name") String table_name, @RequestParam("field_name") String field_name, @RequestParam ("search_string") String search)
+    public @ResponseBody List<Topic> fetchTopicList(@RequestParam("tableName") String tableName, @RequestParam("fieldName") String field_name, @RequestParam ("searchString") String search)
     {
-        List<Object> fetched_list = fetchDataServiceInterface.fetchData(table_name,field_name,search,1);
+        List<Topic> fetched_list = fetchDataServiceInterface.fetchData(search);
         return fetched_list;
-
     }
 
 }

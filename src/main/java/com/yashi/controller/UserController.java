@@ -51,6 +51,7 @@ public class UserController {
                 Path path = Paths.get("C:\\Users\\hp\\Downloads\\TTN Demo Project\\LinkSharing\\src\\main\\webapp\\WEB-INF\\resources\\default_photu.jpg");
                 user.setPhoto(Files.readAllBytes(path));
             }
+        System.out.println(user);
            String view =  registerInterface.registerUser(user,request);
                 return new ModelAndView(view);
 

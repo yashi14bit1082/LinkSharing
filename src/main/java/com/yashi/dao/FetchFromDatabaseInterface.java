@@ -1,5 +1,7 @@
 package com.yashi.dao;
 
+import com.yashi.model.Topic;
+
 import java.util.List;
 
 /**
@@ -12,7 +14,7 @@ public interface FetchFromDatabaseInterface {
         return null;
     }
 
-    default List<Object> fetchData(String table_name,String field_name,String search_string,int randomval)
+    default List<Topic> fetchData(String search_string)
     {
         return null;
     }

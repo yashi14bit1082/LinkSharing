@@ -40,7 +40,7 @@
     </form>
     <br>
     <br>
-    <input type="text" id="searchTopic" value="searchTopic">
+    <input type="text" id="searchTopic">
 </div>
 
 <script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -48,6 +48,7 @@
     <script>
         $(function () {
             var uniqueness = true;
+
 
             $("#topicName").focusout(function () {
             if($("#topicName")!=null) {
@@ -61,6 +62,8 @@
                         if (result == "true") {
                             uniqueness = false;
                         }
+                        else
+                            uniqueness = true;
 
                     },
                     error: function (result) {
@@ -85,7 +88,6 @@
 
                             if (result > 0) {
                                 $("#topicName").val("");
-                                $("#visibility").val("");
                                 alert("Topic Successfully Added");
                             }
                             else {
@@ -100,15 +102,44 @@
 
             });
 
+
+            $('#searchTopic').autocomplete({
+                source: function( request, response ) {
+                    $.ajax({
+                        url:"fetchListSearch",
+                        type:"post",
+                        accept: "application/json",
+
+                        data:{
+                            tableName:"Topic",
+                            fieldName:"topicName",
+                            searchString:$("#searchTopic").val()
+                        },
+                        success: function( data ) {
+                            response( $.map( data, function( item ) {
+                                return {
+                                    label: item[0],
+                                    value: item[0]
+                                }
+                            }));
+                        }
+                    });
+                },
+                autoFocus: true,
+                minLength: 0
+            });
+
+
             $("#searchTopic").keyup(function () {
                 $.ajax({
                     url:"fetchListSearch",
-                    contentType: "application/json",
-                    dataType: "json",
+                    type:"post",
+                    accept: "application/json",
+
                     data:{
-                        table_name:"Topic",
-                        field_name:"topicName",
-                      search_string:$("#searchTopic").val()
+                        tableName:"Topic",
+                        fieldName:"topicName",
+                      searchString:$("#searchTopic").val()
                     },
                     success:function (result) {
                         console.log(result);
