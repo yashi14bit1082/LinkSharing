@@ -34,11 +34,12 @@ public class PasswordResetController {
     @RequestMapping (value = "/sendOtpMail",method = RequestMethod.POST)
     public @ResponseBody String sendOtpMail(@RequestParam ("email") String email)
     {
-        Integer response = sendEmailServiceInterface.sendEmail(email);
+       // Integer response = sendEmailServiceInterface.sendEmail(email);
 
-        if(response==1)
-            return "OTP sent to your Mail...";
-        else
+       /* if(response==1)*/
+            /*return "OTP sent to your Mail...";
+        else*/
+        System.out.println("svghjdskam");
             return "Problem while sending OTP!!!";
     }
 

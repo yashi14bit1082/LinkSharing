@@ -35,7 +35,7 @@ public class SendEmailService implements SendEmailServiceInterface {
         // email body
         String body = "Your OTP for password reset is "+randomNum;
         emailHandler.ReadyToSendEmail(toAddr, fromAddr, subject, body);
-
+        System.out.println("xfcghjklhbcgfxdgh");
         return 0;
     }
 }

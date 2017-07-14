@@ -34,11 +34,12 @@
 
         var uniqueEmailCheck = 1;
 
-        $("#SendOTP").click(function () {
+        $("#email").focusout(function () {
+
             $.ajax({
                 url:"checkEmail",
                 type:"post",
-                async:false,
+
                 data:{
                     email:$("#email").val()
                 },
@@ -55,20 +56,27 @@
                 }
             });
 
-            if(uniqueEmailCheck==1)
-            $.ajax({
-                url:"sendOtpMail",
-                type:"post",
-                data:{
-                    email:$("#email").val()
-                },
-                success:function (result) {
-                    alert(result);
-                },
-                error:function (result) {
-                    console.log(result);
-                }
-            });
+        });
+
+        $("#SendOTP").click(function () {
+
+            /*if(uniqueEmailCheck==1) {*/
+                $.ajax({
+                    url: "sendOtpMail",
+                    type: "post",
+
+                    data: {
+                        email: $("#email")
+
+                    },
+                    success: function (result) {
+                        console.log(result);
+                    },
+                    error: function (result) {
+                        console.log(result);
+                    }
+                });
+          //  }
         }) ;
     });
 </script>
