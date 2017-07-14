@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface FetchFromDatabaseInterface {
 
-    default Object fetchData(String table_name,String where_field,String field_value)
+    default Object fetchData(String... a)
     {
         return null;
     }

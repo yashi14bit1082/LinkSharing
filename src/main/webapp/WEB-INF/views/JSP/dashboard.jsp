@@ -75,7 +75,7 @@
     </form>
     <br>
     <br>
-    <form action="javascript:void(0)" method="post" >
+    <form action="share_docx" method="post" enctype="multipart/form-data" id="uploadDocxFile">
         <table border="0">
             <tr>
                 <td colspan="2" align="center"><h2>Add DocumentResource</h2></td>
@@ -92,7 +92,7 @@
 
             <tr>
                 <td>
-                    <input type="text" name="topic" id="topic_docx" value="Topic">
+                    <input type="text" name="topic_docx" id="topic_docx" value="Topic">
                 </td>
             </tr>
 
@@ -108,10 +108,13 @@
 
 <script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.1/jquery.form.min.js"></script>
 
     <script>
         $(function () {
             var uniqueness = true;
+
+
             $("#topicName").focusout(function () {
             if($("#topicName")!=null) {
                 $.ajax({
@@ -220,10 +223,7 @@
                             topic:$("#topic_link").val()
                         },
                         success:function (result) {
-                        if(result=="1")
-                        alert("post added successfully");
-                        else
-                            alert("post not added successfully");
+                        alert(result);
                         },
                     error:function (result) {
                         console.log(result);
@@ -232,29 +232,37 @@
                 });
             });
 
+            $('#uploadDocxFile').ajaxForm({
+                success: function(msg) {
+                    alert(msg);
+                },
+                error: function(msg) {
+                    console.log(msg);
+                }
+            });
 
-            $("#share_docx").click(function () {
+           /* $("#share_docx").click(function () {
                 $.ajax({
                     url:"shareDocxResource",
                     type:"post",
+                    contentType:false,
+                    processData:false,
                     data:
                         {
+                            files:
                             attachedFile:$("#docx").val(),
                             description:$("#docx_desc").val(),
                             topic:$("#topic_docx").val()
                         },
                     success:function (result) {
-                        if(result=="1")
-                            alert("post added successfully");
-                        else
-                            alert("post not added successfully");
+                       alert(result);
                     },
                     error:function (result) {
                         console.log(result);
                     }
 
                 });
-            });
+            });*/
 
 
 

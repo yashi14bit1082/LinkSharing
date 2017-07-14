@@ -15,11 +15,23 @@ import java.util.List;
 public class FetchFromDatabase implements FetchFromDatabaseInterface,startSession,stopSession {
 
     @Override
-    public Object fetchData(String table_name, String where_field,String field_value) {
+    public Object fetchData(String... a) {
         Session session = startsession();
-        String queryString = "from "+table_name+" where "+where_field+" = :field_value";
-        Query query = session.createQuery(queryString);
-        query.setString("field_value", field_value);
+        String queryString;
+        Query query = null;
+
+        if(a.length==3) {
+           queryString = "from " + a[0] + " where " + a[1] + " = :field_value";
+            query = session.createQuery(queryString);
+            query.setString("field_value", a[2]);
+        }
+        else if(a.length==5)
+        {
+            queryString = "from " + a[0] + " where " + a[1] + " = :field_value1"+" AND "+a[3]+" = :field_value2";
+            query = session.createQuery(queryString);
+            query.setString("field_value1", a[2]);
+            query.setString("field_value2",a[4]);
+        }
         Object object = query.uniqueResult();
         stopsession(session);
         return object;

@@ -17,17 +17,18 @@ public class ResourceService implements ResourceServiceInterface {
     FetchFromDatabaseInterface fetchFromDatabaseInterface;
 
     @Override
-    public Integer saveLinkResourceService(String link, String desc, String topic) {
+    public Integer saveLinkResourceService(String link, String desc, String topic,String resourceType) {
 
         int str_length = topic.length();
         int indexOfComma = topic.lastIndexOf(',');
         String userName = topic.substring(indexOfComma+1,str_length);
         String topicName = topic.substring(0,indexOfComma);
 
-        Topic topic1 = (Topic)fetchFromDatabaseInterface.fetchData("Topic","topicName",topicName);
         User user = (User)fetchFromDatabaseInterface.fetchData("User","username",userName);
+        Topic topic1 = (Topic)fetchFromDatabaseInterface.fetchData("Topic","topicName",topicName,"createdBy_id",user.getId().toString());
 
-        Integer result = resourceDaoInterface.saveLinkResourceDao(link,desc,topic1,user);
+
+        Integer result = resourceDaoInterface.saveLinkResourceDao(link,desc,topic1,user,resourceType);
         return result;
     }
 }

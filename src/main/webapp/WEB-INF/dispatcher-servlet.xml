@@ -21,6 +21,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
         <property name="maxUploadSize" value="10240000"/>
     </bean>
 
+
     <bean id="registerInterface" class="com.yashi.service.Register"/>
     <bean id="registerDaoInterface" class="com.yashi.dao.RegisterDao"/>
 
@@ -42,6 +43,6 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
     <bean id="resourceServiceInterface" class="com.yashi.service.ResourceService"/>
     <bean id="resourceDaoInterface" class="com.yashi.dao.ResourceDao"/>
 
-    
+
 
 </beans>

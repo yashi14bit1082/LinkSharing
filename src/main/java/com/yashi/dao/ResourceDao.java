@@ -28,28 +28,19 @@ public class ResourceDao implements ResourceDaoInterface, startSession,stopSessi
         return resource;
     }
     @Override
-    public Integer saveLinkResourceDao(String link, String desc, Topic topic, User user) {
+    public Integer saveLinkResourceDao(String link, String desc, Topic topic, User user,String resourceType) {
 
         Session session = startsession();
 
         Resource resource = setUpSaveFun(link,desc,topic,user);
+        if(resourceType.equalsIgnoreCase("link"))
         resource.setResource_type(Link_Doc_Resource.Link);
+        else
+            resource.setResource_type(Link_Doc_Resource.Document);
         Integer result = (Integer)session.save(resource);
        stopsession(session);
 
         return result;
     }
 
-    @Override
-    public Integer saveDocxResourceDao(String attachedFile, String desc, Topic topic, User user) {
-        Session session = startsession();
-
-        Resource resource = setUpSaveFun(attachedFile,desc,topic,user);
-        resource.setResource_type(Link_Doc_Resource.Document);
-
-        Integer result = (Integer)session.save(resource);
-        stopsession(session);
-
-        return result;
-    }
 }
