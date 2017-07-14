@@ -21,6 +21,25 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
         <property name="maxUploadSize" value="10240000"/>
     </bean>
 
+    <!-- Production implementation of the JavaMailSender interface, supporting
+		both JavaMail MimeMessages and Spring SimpleMailMessages -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com" />
+        <property name="port" value="587" />
+        <property name="username" value="yashi.gupta@tothenew.com" />
+		<property name="password" value="LastChance@1" />
+
+		<!-- The name of the property, following JavaBean naming conventions -->
+		<property name="javaMailProperties">
+        <props>
+            <prop key="mail.transport.protocol">smtp</prop>
+            <prop key="mail.smtp.auth">true</prop>
+            <prop key="mail.smtp.starttls.enable">true</prop>
+            <prop key="mail.debug">true</prop>
+        </props>
+    </property>
+    </bean>
+
 
     <bean id="registerInterface" class="com.yashi.service.Register"/>
     <bean id="registerDaoInterface" class="com.yashi.dao.RegisterDao"/>
@@ -43,6 +62,8 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
     <bean id="resourceServiceInterface" class="com.yashi.service.ResourceService"/>
     <bean id="resourceDaoInterface" class="com.yashi.dao.ResourceDao"/>
 
+    <bean id="sendEmailServiceInterface" class="com.yashi.service.SendEmailService"/>
+    <bean id="sendEmailDaoInterface" class="com.yashi.dao.SendEmailDao"/>
 
 
 </beans>

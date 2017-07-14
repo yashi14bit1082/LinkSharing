@@ -3,12 +3,10 @@ package com.yashi.controller;
 import com.yashi.dao.FetchFromDatabaseInterface;
 import com.yashi.service.FetchDataService;
 import com.yashi.service.FetchDataServiceInterface;
+import com.yashi.service.SendEmailServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -18,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class PasswordResetController {
     @Autowired
     FetchDataServiceInterface fetchDataServiceInterface;
+    @Autowired
+    SendEmailServiceInterface sendEmailServiceInterface;
 
     @RequestMapping(value = "/resetPassword")
     public ModelAndView resetPasswordView() {
@@ -30,4 +30,16 @@ public class PasswordResetController {
         boolean response = fetchDataServiceInterface.checkDataExistence("User","email",email);
         return response+"";
     }
+
+    @RequestMapping (value = "/sendOtpMail",method = RequestMethod.POST)
+    public @ResponseBody String sendOtpMail(@RequestParam ("email") String email)
+    {
+        Integer response = sendEmailServiceInterface.sendEmail(email);
+
+        if(response==1)
+            return "OTP sent to your Mail...";
+        else
+            return "Problem while sending OTP!!!";
+    }
+
 }

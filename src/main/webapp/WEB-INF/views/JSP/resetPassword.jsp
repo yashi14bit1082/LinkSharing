@@ -56,12 +56,20 @@
             });
 
             if(uniqueEmailCheck==1)
-            {  alert("cbdhskjnmax");}
 
-            /*$.ajax({
-                url:"",
-
-            });*/
+            $.ajax({
+                url:"sendOtpMail",
+                type:"post",
+                data:{
+                    email:$("#email").val()
+                },
+                success:function (result) {
+                    alert(result);
+                },
+                error:function (result) {
+                    alert(result)
+                }
+            });
         }) ;
     });
 </script>

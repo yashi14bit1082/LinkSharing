@@ -34,20 +34,18 @@ String saveDocxResource(@RequestParam ("docx") MultipartFile file, @RequestParam
             byte[] bytes = file.getBytes();
 
             // Creating the directory to store file
-            String rootPath = "C:\\Users\\hp\\Downloads\\TTN Demo Project\\LinkSharing\\src\\main\\webapp\\WEB-INF\\resources";
-            File dir = new File(rootPath + File.separator + "assets");
-            if (!dir.exists())
-                dir.mkdirs();
+            String rootPath = "C:/Users/hp/Downloads/TTN Demo Project/LinkSharing/src/main/webapp/WEB-INF/resources/assets/";
 
             // Create the file on server
-            File serverFile = new File(dir.getAbsolutePath()
-                    + File.separator + file.getOriginalFilename());
+            File serverFile = new File(rootPath
+                     + file.getOriginalFilename());
+
             BufferedOutputStream stream = new BufferedOutputStream(
                     new FileOutputStream(serverFile));
             stream.write(bytes);
             stream.close();
 
-            resourceServiceInterface.saveLinkResourceService(serverFile.getAbsolutePath(),description,topic,"Document");
+            resourceServiceInterface.saveLinkResourceService(rootPath+file.getOriginalFilename(),description,topic,"Document");
 
             return "You successfully uploaded file";
         } catch (Exception e) {

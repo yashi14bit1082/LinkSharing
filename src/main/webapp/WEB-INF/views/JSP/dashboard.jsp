@@ -241,29 +241,6 @@
                 }
             });
 
-           /* $("#share_docx").click(function () {
-                $.ajax({
-                    url:"shareDocxResource",
-                    type:"post",
-                    contentType:false,
-                    processData:false,
-                    data:
-                        {
-                            files:
-                            attachedFile:$("#docx").val(),
-                            description:$("#docx_desc").val(),
-                            topic:$("#topic_docx").val()
-                        },
-                    success:function (result) {
-                       alert(result);
-                    },
-                    error:function (result) {
-                        console.log(result);
-                    }
-
-                });
-            });*/
-
 
 
             $("#cancel").click(function () {
