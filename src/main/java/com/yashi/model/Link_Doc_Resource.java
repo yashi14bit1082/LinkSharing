@@ -3,7 +3,8 @@ package com.yashi.model;
 /**
  * Created by yashi on 13-07-2017.
  */
-public enum Link_Doc_Resource {
+public enum
+Link_Doc_Resource {
     Link("Link"),
     Document("Document");
 

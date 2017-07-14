@@ -12,4 +12,9 @@ public interface FetchDataServiceInterface {
     {
         return null;
     }
+
+    default boolean checkDataExistence(String... a)
+    {
+        return false;
+    }
 }

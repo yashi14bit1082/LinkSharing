@@ -18,4 +18,11 @@ public class FetchDataService implements FetchDataServiceInterface {
 
         return fetched_list;
     }
+
+    @Override
+    public boolean checkDataExistence(String... a) {
+
+        boolean response = fetchFromDatabaseInterface.checkDataExistence(a[0],a[1],a[2]);
+        return response;
+    }
 }

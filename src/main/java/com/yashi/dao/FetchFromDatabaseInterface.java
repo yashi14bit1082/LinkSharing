@@ -18,4 +18,9 @@ public interface FetchFromDatabaseInterface {
     {
         return null;
     }
+
+    default boolean checkDataExistence(String... a)
+    {
+        return false;
+    }
 }

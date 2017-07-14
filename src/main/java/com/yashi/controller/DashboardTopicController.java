@@ -60,5 +60,4 @@ public class DashboardTopicController {
         modelAndView.addObject("TopicName",selectedItem);
         return modelAndView;
     }
-
 }

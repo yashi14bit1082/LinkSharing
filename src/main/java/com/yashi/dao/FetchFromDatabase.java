@@ -48,4 +48,21 @@ public class FetchFromDatabase implements FetchFromDatabaseInterface,startSessio
         stopsession(session);
         return object;
     }
+
+
+    @Override
+    public boolean checkDataExistence(String... a) {
+
+        Session session = startsession();
+        String queryString = "from "+a[0]+" where "+a[1]+" = :fieldData";
+        Query query = session.createQuery(queryString);
+        query.setString("fieldData",a[2]);
+        Object obj = query.uniqueResult();
+        stopsession(session);
+
+        if(obj!=null)
+            return true;
+        else
+            return false;
+    }
 }
