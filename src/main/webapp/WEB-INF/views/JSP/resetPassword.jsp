@@ -34,8 +34,7 @@
 
         var uniqueEmailCheck = 1;
 
-        $("#sendOTP").click(function () {
-            alert("fdxfgvhbj");
+        $("#SendOTP").click(function () {
             $.ajax({
                 url:"checkEmail",
                 type:"post",
@@ -57,9 +56,7 @@
             });
 
             if(uniqueEmailCheck==1)
-                alert("ghkbn");
-            /*$.ajax(
-                {
+            $.ajax({
                 url:"sendOtpMail",
                 type:"post",
                 data:{
@@ -69,9 +66,9 @@
                     alert(result);
                 },
                 error:function (result) {
-                    alert(result);
+                    console.log(result);
                 }
-            });*/
+            });
         }) ;
     });
 </script>
