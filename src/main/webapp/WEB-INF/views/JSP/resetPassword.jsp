@@ -18,7 +18,7 @@
 
         <br>
         <br>
-        <form id="resetPasswordForm" action="updatePassword">
+        <form id="resetPasswordForm" action="updatePassword" method="post">
             <input type="email" id="emailRegistered" name="emailRegistered" placeholder="email">
             <input type="text" id="OTP" name="OTP">
             <input type="text" id="password" name="password">

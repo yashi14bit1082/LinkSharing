@@ -43,7 +43,7 @@ public class PasswordResetController {
         }
     }
 
-    @RequestMapping (value = "/updatePassword")
+    @RequestMapping (value = "/updatePassword",method = RequestMethod.POST)
     public @ResponseBody String updatePassword(@RequestParam("emailRegistered") String emailRegistered,@RequestParam("OTP") String OTP,@RequestParam("password") String password)
     {
         Boolean response = sendEmailServiceInterface.validateEmailOtp(emailRegistered,OTP);
