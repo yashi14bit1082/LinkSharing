@@ -7,9 +7,11 @@ import org.springframework.mail.SimpleMailMessage;
 /**
  * Created by yashi on 14-07-2017.
  */
+
+
 public class EmailHandler {
     @Autowired
-    private MailSender mailSender; 
+    private MailSender mailSender;
 
     public void ReadyToSendEmail(String toAddress, String fromAddress, String subject, String msgBody) {
 
@@ -18,6 +20,8 @@ public class EmailHandler {
         simpleMailMsg.setTo(toAddress);
         simpleMailMsg.setSubject(subject);
         simpleMailMsg.setText(msgBody);
+        System.out.println(simpleMailMsg);
+        System.out.println(mailSender);
         mailSender.send(simpleMailMsg);
     }
 }
