@@ -11,13 +11,16 @@
     <title>Title</title>
 </head>
 <body>
-        <form id="emailForm">
+        <form id="emailForm" action="javascript:void(0)">
             <input type="email" id="email" placeholder="email">
             <input type="submit" id="SendOTP" value="Send OTP">
         </form>
+        <p id="xyz">
+
+        </p>
         <br>
         <br>
-        <form id="resetPasswordForm">
+        <form id="resetPasswordForm" action="javascript:void(0)">
             <input type="email" id="emailRegistered" placeholder="email">
             <input type="text" id="OTP">
             <input type="text" id="password">
@@ -60,23 +63,24 @@
 
         $("#SendOTP").click(function () {
 
-            /*if(uniqueEmailCheck==1) {*/
+            if(uniqueEmailCheck==1) {
                 $.ajax({
-                    url: "sendOtpMail",
-                    type: "post",
+                    url:"sendOtpMail",
+                    type:"post",
 
                     data: {
-                        email: $("#email")
+                        email: $("#email").val()
 
                     },
                     success: function (result) {
                         console.log(result);
                     },
                     error: function (result) {
+                        $("#xyz").html(result.response);
                         console.log(result);
                     }
                 });
-          //  }
+          }
         }) ;
     });
 </script>
