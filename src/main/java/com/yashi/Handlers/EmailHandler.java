@@ -21,8 +21,6 @@ public class EmailHandler {
         simpleMailMsg.setTo(toAddress);
         simpleMailMsg.setSubject(subject);
         simpleMailMsg.setText(msgBody);
-        System.out.println(simpleMailMsg);
-        System.out.println(mailSender);
         mailSender.send(simpleMailMsg);
     }
 }

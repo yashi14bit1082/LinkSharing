@@ -15,9 +15,7 @@
             <input type="email" id="email" placeholder="email">
             <input type="submit" id="SendOTP" value="Send OTP">
         </form>
-        <p id="xyz">
 
-        </p>
         <br>
         <br>
         <form id="resetPasswordForm" action="javascript:void(0)">
@@ -28,8 +26,6 @@
             <input type="submit" id="ChangePassword" value="Change Password">
         </form>
 
-
-</body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
@@ -76,13 +72,13 @@
                         console.log(result);
                     },
                     error: function (result) {
-                        $("#xyz").html(result.response);
                         console.log(result);
                     }
                 });
           }
         }) ;
     });
-</script>
+        </script>
 
+    </body>
 </html>

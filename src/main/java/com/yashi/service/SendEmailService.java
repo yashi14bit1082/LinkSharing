@@ -12,6 +12,7 @@ import java.util.concurrent.ThreadLocalRandom;
  * Created by yashi on 14-07-2017.
  */
 
+
 public class SendEmailService implements SendEmailServiceInterface {
     @Autowired
     SendEmailDaoInterface sendEmailDaoInterface;
@@ -26,14 +27,11 @@ public class SendEmailService implements SendEmailServiceInterface {
 
         String toAddr = a[0];
         String fromAddr = "yashi.gupta@tothenew.com";
-
-        // email subject
         String subject = "Reset Password";
-
-        // email body
         String body = "Your OTP for password reset is "+randomNum;
         emailHandler.ReadyToSendEmail(toAddr, fromAddr, subject, body);
-        System.out.println("xfcghjklhbcgfxdgh");
-        return 0;
+
+        Integer response = sendEmailDaoInterface.sendEmail(a[0],randomNum+"");
+        return response;
     }
 }

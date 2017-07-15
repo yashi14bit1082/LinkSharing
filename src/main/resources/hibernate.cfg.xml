@@ -27,5 +27,6 @@
         <mapping class="com.yashi.model.Topic"/>
         <mapping class="com.yashi.model.Subscription"/>
         <mapping class="com.yashi.model.Resource"/>
+        <mapping class="com.yashi.model.EmailOTP"/>
     </session-factory>
 </hibernate-configuration>
