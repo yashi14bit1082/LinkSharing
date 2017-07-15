@@ -2,7 +2,7 @@ package com.yashi.controller;
 
 import com.yashi.model.Topic;
 import com.yashi.service.CheckUniquenessInterface;
-import com.yashi.service.FetchDataServiceInterface;
+import com.yashi.service.DatabaseConnectionServiceInterface;
 import com.yashi.service.TopicServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +26,7 @@ public class DashboardTopicController {
     @Autowired
     CheckUniquenessInterface checkUniquenessInterface;
     @Autowired
-    FetchDataServiceInterface fetchDataServiceInterface;
+    DatabaseConnectionServiceInterface databaseConnectionServiceInterface;
 
     @RequestMapping(value = "/addTopic",method = RequestMethod.POST)
     public @ResponseBody String addTopic(@ModelAttribute Topic topic , HttpServletRequest request)
@@ -49,7 +49,7 @@ public class DashboardTopicController {
     @RequestMapping(value = "/fetchListSearch",method = RequestMethod.POST)
     public @ResponseBody List<Topic> fetchTopicList(@RequestParam("tableName") String tableName, @RequestParam("fieldName") String field_name, @RequestParam ("searchString") String search)
     {
-        List<Topic> fetched_list = fetchDataServiceInterface.fetchData(search);
+        List<Topic> fetched_list = databaseConnectionServiceInterface.fetchData(search);
         return fetched_list;
     }
 

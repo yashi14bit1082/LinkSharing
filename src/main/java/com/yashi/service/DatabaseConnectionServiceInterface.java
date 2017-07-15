@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by yashi on 12-07-2017.
  */
-public interface FetchDataServiceInterface {
+public interface DatabaseConnectionServiceInterface {
     default List<Topic> fetchData(String search_string)
     {
         return null;

@@ -1,8 +1,6 @@
 package com.yashi.controller;
 
-import com.yashi.dao.FetchFromDatabaseInterface;
-import com.yashi.service.FetchDataService;
-import com.yashi.service.FetchDataServiceInterface;
+import com.yashi.service.DatabaseConnectionServiceInterface;
 import com.yashi.service.SendEmailServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class PasswordResetController {
     @Autowired
-    FetchDataServiceInterface fetchDataServiceInterface;
+    DatabaseConnectionServiceInterface databaseConnectionServiceInterface;
     @Autowired
     SendEmailServiceInterface sendEmailServiceInterface;
 
@@ -27,7 +25,7 @@ public class PasswordResetController {
     @RequestMapping (value = "/checkEmail",method = RequestMethod.POST)
     public @ResponseBody  String checkEmail(@RequestParam ("email") String email)
     {
-        boolean response = fetchDataServiceInterface.checkDataExistence("User","email",email);
+        boolean response = databaseConnectionServiceInterface.checkDataExistence("User","email",email);
         return response+"";
     }
 
@@ -44,5 +42,27 @@ public class PasswordResetController {
             return "Problem while sending OTP!!!";
         }
     }
+
+    @RequestMapping (value = "/updatePassword")
+    public @ResponseBody String updatePassword(@RequestParam("emailRegistered") String emailRegistered,@RequestParam("OTP") String OTP,@RequestParam("password") String password)
+    {
+        Boolean response = sendEmailServiceInterface.validateEmailOtp(emailRegistered,OTP);
+        if(response==true)
+        {
+            Integer updateResponse = sendEmailServiceInterface.updatePassword(password,emailRegistered);
+            if(updateResponse==1) {
+                return "Password is Updated successfully";
+            }
+            else {
+                return "Password is not updated!!!";
+            }
+        }
+        else
+        {
+            return "Password cannot be updated, Wrong Email/OTP!!!";
+        }
+
+    }
+
 
 }

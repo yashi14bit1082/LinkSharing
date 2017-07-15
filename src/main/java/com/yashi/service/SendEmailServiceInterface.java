@@ -8,4 +8,14 @@ public interface SendEmailServiceInterface {
     {
         return 0;
     }
+
+    default Boolean validateEmailOtp(String... a)
+    {
+        return false;
+    }
+
+    default Integer updatePassword(String... a)
+    {
+        return 0;
+    }
 }

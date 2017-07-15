@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by yashi on 12-07-2017.
  */
-public interface FetchFromDatabaseInterface {
+public interface DatabaseConnectionDaoInterface {
 
     default Object fetchData(String... a)
     {
@@ -22,5 +22,9 @@ public interface FetchFromDatabaseInterface {
     default boolean checkDataExistence(String... a)
     {
         return false;
+    }
+    default Integer updateTable(String... a)
+    {
+        return 0;
     }
 }

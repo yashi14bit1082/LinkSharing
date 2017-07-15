@@ -18,16 +18,18 @@
 
         <br>
         <br>
-        <form id="resetPasswordForm" action="javascript:void(0)">
-            <input type="email" id="emailRegistered" placeholder="email">
-            <input type="text" id="OTP">
-            <input type="text" id="password">
-            <input type="text" id="confirmPassword">
-            <input type="submit" id="ChangePassword" value="Change Password">
+        <form id="resetPasswordForm" action="updatePassword">
+            <input type="email" id="emailRegistered" name="emailRegistered" placeholder="email">
+            <input type="text" id="OTP" name="OTP">
+            <input type="text" id="password" name="password">
+            <input type="text" id="confirmPassword" name="confirmPassword">
+            <input type="submit" id="ChangePassword" name="ChangePassword" value="Change Password">
         </form>
 
 
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.1/jquery.form.min.js"></script>
 <script>
     $(function () {
 
@@ -77,6 +79,18 @@
                 });
           }
         }) ;
+
+
+       $("#ChangePassword").ajaxForm({
+           success:function (result) {
+               console.log(result);
+           },
+           error:function (result) {
+               console.log(result);
+           }
+       });
+
+
     });
         </script>
 

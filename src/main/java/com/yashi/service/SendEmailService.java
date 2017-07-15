@@ -1,6 +1,7 @@
 package com.yashi.service;
 
 import com.yashi.Handlers.EmailHandler;
+import com.yashi.dao.DatabaseConnectionDaoInterface;
 import com.yashi.dao.SendEmailDaoInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -18,6 +19,9 @@ public class SendEmailService implements SendEmailServiceInterface {
     SendEmailDaoInterface sendEmailDaoInterface;
     @Autowired
     EmailHandler emailHandler;
+    @Autowired
+    DatabaseConnectionDaoInterface databaseConnectionDaoInterface;
+
     @Override
     public Integer sendEmail(String... a) {
 
@@ -32,6 +36,20 @@ public class SendEmailService implements SendEmailServiceInterface {
         emailHandler.ReadyToSendEmail(toAddr, fromAddr, subject, body);
 
         Integer response = sendEmailDaoInterface.sendEmail(a[0],randomNum+"");
+        return response;
+    }
+
+    @Override
+    public Boolean validateEmailOtp(String... a) {
+
+        Boolean response = databaseConnectionDaoInterface.checkDataExistence("EmailOTP","emailSendTo",a[0],"Otp",a[1]);
+        return response;
+    }
+
+    @Override
+    public Integer updatePassword(String... a) {
+
+        Integer response = databaseConnectionDaoInterface.updateTable("User","password",a[0],"email",a[1]);
         return response;
     }
 }

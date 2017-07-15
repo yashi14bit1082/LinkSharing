@@ -1,6 +1,6 @@
 package com.yashi.service;
 
-import com.yashi.dao.FetchFromDatabaseInterface;
+import com.yashi.dao.DatabaseConnectionDaoInterface;
 import com.yashi.dao.ResourceDaoInterface;
 import com.yashi.model.Topic;
 import com.yashi.model.User;
@@ -14,7 +14,7 @@ public class ResourceService implements ResourceServiceInterface {
     @Autowired
     ResourceDaoInterface resourceDaoInterface;
     @Autowired
-    FetchFromDatabaseInterface fetchFromDatabaseInterface;
+    DatabaseConnectionDaoInterface databaseConnectionInterface;
 
     @Override
     public Integer saveLinkResourceService(String link, String desc, String topic,String resourceType) {
@@ -24,8 +24,8 @@ public class ResourceService implements ResourceServiceInterface {
         String userName = topic.substring(indexOfComma+1,str_length);
         String topicName = topic.substring(0,indexOfComma);
 
-        User user = (User)fetchFromDatabaseInterface.fetchData("User","username",userName);
-        Topic topic1 = (Topic)fetchFromDatabaseInterface.fetchData("Topic","topicName",topicName,"createdBy_id",user.getId().toString());
+        User user = (User) databaseConnectionInterface.fetchData("User","username",userName);
+        Topic topic1 = (Topic) databaseConnectionInterface.fetchData("Topic","topicName",topicName,"createdBy_id",user.getId().toString());
 
 
         Integer result = resourceDaoInterface.saveLinkResourceDao(link,desc,topic1,user,resourceType);

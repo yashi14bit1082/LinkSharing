@@ -1,11 +1,9 @@
 package com.yashi.service;
 
-import com.yashi.dao.FetchFromDatabase;
-import com.yashi.dao.FetchFromDatabaseInterface;
+import com.yashi.dao.DatabaseConnectionDaoInterface;
 import com.yashi.dao.SubscriptionDaoInterface;
 import com.yashi.dao.TopicDaoInterface;
 import com.yashi.model.Seriousness;
-import com.yashi.model.Subscription;
 import com.yashi.model.Topic;
 import com.yashi.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +17,14 @@ public class TopicService implements TopicServiceInterface,CheckUniquenessInterf
         @Autowired
     SubscriptionDaoInterface subscriptionDaoInterface;
         @Autowired
-    FetchFromDatabaseInterface fetchFromDatabaseInterface;
+        DatabaseConnectionDaoInterface databaseConnectionInterface;
 
     @Override
     public Integer addTopic(Topic topic, String topicCreatedBy) {
         Integer val = topicDaoInterface.topicAddDatabase(topic,topicCreatedBy);
         // Topic Creator automatically get subscribed to the topic
 
-       User user = (User)fetchFromDatabaseInterface.fetchData("User","username",topicCreatedBy);
+       User user = (User) databaseConnectionInterface.fetchData("User","username",topicCreatedBy);
        Seriousness seriousness = Seriousness.VERY_SERIOUS;
         Integer t = subscriptionDaoInterface.addSubscriptionDB(topic,user,seriousness);
         return val;
