@@ -11,10 +11,12 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * Created by yashi on 14-07-2017.
  */
+
 public class SendEmailService implements SendEmailServiceInterface {
     @Autowired
     SendEmailDaoInterface sendEmailDaoInterface;
-
+    @Autowired
+    EmailHandler emailHandler;
     @Override
     public Integer sendEmail(String... a) {
 
@@ -22,10 +24,6 @@ public class SendEmailService implements SendEmailServiceInterface {
         int max = 9999;
         int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
 
-        /*ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("main/resources/servlet-config.xml");
-        EmailHandler emailHandler = (EmailHandler) context.getBean("mailSender");*/
-
-      EmailHandler emailHandler = new EmailHandler();
         String toAddr = a[0];
         String fromAddr = "yashi.gupta@tothenew.com";
 
