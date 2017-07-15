@@ -1,5 +1,6 @@
 package com.yashi.dao;
 
+import com.yashi.model.Resource;
 import com.yashi.model.Topic;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public interface DatabaseConnectionDaoInterface {
     {
         return null;
     }
+    default List<Topic> fetchListOfIdWithSameTopic(String... a) {return null;}
 
     default boolean checkDataExistence(String... a)
     {
@@ -26,5 +28,10 @@ public interface DatabaseConnectionDaoInterface {
     default Integer updateTable(String... a)
     {
         return 0;
+    }
+
+    default List<Resource> fetchResourceList(List<Topic> resourceList)
+    {
+        return null;
     }
 }

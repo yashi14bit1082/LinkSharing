@@ -8,6 +8,7 @@ import com.yashi.model.Visibility;
 import com.yashi.service.TopicServiceInterface;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.ManyToOne;
 
@@ -16,19 +17,17 @@ import javax.persistence.ManyToOne;
  * Created by yashi on 11-07-2017.
  */
 public class TopicDao implements TopicDaoInterface,startSession,stopSession {
+
+    @Autowired
+    DatabaseConnectionDaoInterface databaseConnectionDaoInterface;
+
     @Override
     public Integer topicAddDatabase(Topic topic, String topicCreatedBy) {
 
         Session session = startsession();
+        User user = (User)databaseConnectionDaoInterface.fetchData("User","username",topicCreatedBy);
 
-        String queryString = "from User where username = :username";
-
-        Query query = session.createQuery(queryString);
-        query.setString("username", topicCreatedBy );
-        Object queryResult = query.uniqueResult();
-        User user1 = (User)queryResult;
-
-        topic.setCreatedBy(user1);
+        topic.setCreatedBy(user);
         Integer topicAdded = (Integer) session.save(topic);
         stopsession(session);
         return topicAdded;

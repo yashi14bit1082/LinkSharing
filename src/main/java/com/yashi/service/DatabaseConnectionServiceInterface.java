@@ -1,5 +1,6 @@
 package com.yashi.service;
 
+import com.yashi.model.Resource;
 import com.yashi.model.Topic;
 
 import java.util.List;
@@ -13,8 +14,14 @@ public interface DatabaseConnectionServiceInterface {
         return null;
     }
 
+
     default boolean checkDataExistence(String... a)
     {
         return false;
+    }
+
+    default List<Resource> fetchResourceList(String... a)
+    {
+        return null;
     }
 }

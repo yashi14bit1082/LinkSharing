@@ -1,6 +1,8 @@
 package com.yashi.controller;
 
+import com.yashi.model.Resource;
 import com.yashi.model.Topic;
+import com.yashi.model.User;
 import com.yashi.service.CheckUniquenessInterface;
 import com.yashi.service.DatabaseConnectionServiceInterface;
 import com.yashi.service.TopicServiceInterface;
@@ -12,6 +14,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -58,6 +61,11 @@ public class DashboardTopicController {
     {
         ModelAndView modelAndView = new ModelAndView("TopicView");
         modelAndView.addObject("TopicName",selectedItem);
-        return modelAndView;
+
+     List<Resource> ResourceList =  databaseConnectionServiceInterface.fetchResourceList();
+      modelAndView.addObject("resourceList",ResourceList);
+
+      return modelAndView;
     }
+
 }

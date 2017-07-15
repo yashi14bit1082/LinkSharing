@@ -14,7 +14,7 @@ public class ResourceService implements ResourceServiceInterface {
     @Autowired
     ResourceDaoInterface resourceDaoInterface;
     @Autowired
-    DatabaseConnectionDaoInterface databaseConnectionInterface;
+    DatabaseConnectionDaoInterface databaseConnectionDaoInterface;
 
     @Override
     public Integer saveLinkResourceService(String link, String desc, String topic,String resourceType) {
@@ -24,8 +24,8 @@ public class ResourceService implements ResourceServiceInterface {
         String userName = topic.substring(indexOfComma+1,str_length);
         String topicName = topic.substring(0,indexOfComma);
 
-        User user = (User) databaseConnectionInterface.fetchData("User","username",userName);
-        Topic topic1 = (Topic) databaseConnectionInterface.fetchData("Topic","topicName",topicName,"createdBy_id",user.getId().toString());
+        User user = (User) databaseConnectionDaoInterface.fetchData("User","username",userName);
+        Topic topic1 = (Topic) databaseConnectionDaoInterface.fetchData("Topic","topicName",topicName,"createdBy_id",user.getId().toString());
 
 
         Integer result = resourceDaoInterface.saveLinkResourceDao(link,desc,topic1,user,resourceType);

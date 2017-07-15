@@ -1,6 +1,7 @@
 package com.yashi.service;
 
 import com.yashi.dao.DatabaseConnectionDaoInterface;
+import com.yashi.model.Resource;
 import com.yashi.model.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,10 +12,10 @@ import java.util.List;
  */
 public class DatabaseConnectionService implements DatabaseConnectionServiceInterface {
     @Autowired
-    DatabaseConnectionDaoInterface databaseConnectionInterface;
+    DatabaseConnectionDaoInterface databaseConnectionDaoInterface;
     @Override
     public List<Topic> fetchData(String search_string) {
-        List<Topic> fetched_list = databaseConnectionInterface.fetchData(search_string);
+        List<Topic> fetched_list = databaseConnectionDaoInterface.fetchData(search_string);
 
         return fetched_list;
     }
@@ -22,7 +23,21 @@ public class DatabaseConnectionService implements DatabaseConnectionServiceInter
     @Override
     public boolean checkDataExistence(String... a) {
 
-        boolean response = databaseConnectionInterface.checkDataExistence(a[0],a[1],a[2]);
+        boolean response = databaseConnectionDaoInterface.checkDataExistence(a[0],a[1],a[2]);
         return response;
+    }
+
+
+    @Override
+    public List<Resource> fetchResourceList(String... a) {
+
+        int indexOfComma = a[0].lastIndexOf(',');
+        String topicName = a[0].substring(0,indexOfComma);
+        List<Topic> topic1ist = databaseConnectionDaoInterface.fetchListOfIdWithSameTopic(topicName);
+
+
+        List<Resource> resourceList = databaseConnectionDaoInterface.fetchResourceList(topic1ist);
+
+        return resourceList;
     }
 }

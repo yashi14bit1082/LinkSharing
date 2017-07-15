@@ -83,10 +83,10 @@
 
        $("#ChangePassword").ajaxForm({
            success:function (result) {
-               console.log(result);
+               alert(result);
            },
            error:function (result) {
-               console.log(result);
+               alert(result);
            }
        });
 

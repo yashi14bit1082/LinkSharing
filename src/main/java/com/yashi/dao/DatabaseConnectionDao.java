@@ -2,6 +2,7 @@ package com.yashi.dao;
 
 import com.yashi.Handlers.startSession;
 import com.yashi.Handlers.stopSession;
+import com.yashi.model.Resource;
 import com.yashi.model.Topic;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -44,6 +45,38 @@ public class DatabaseConnectionDao implements DatabaseConnectionDaoInterface,sta
         query.setString("field_value", search_string+"%");
         query.setString("visibility","Public");
         List<Topic> object = query.list();
+        stopsession(session);
+        return object;
+    }
+
+
+
+    @Override
+    public List<Topic> fetchListOfIdWithSameTopic(String... a) {
+        Session session = startsession();
+        String queryString = "select id,createdBy.id from Topic where topicName LIKE "+":field_value";
+        Query query = session.createQuery(queryString);
+        query.setString("field_value", a[0]+"%");
+        List<Topic> object = query.list();
+        stopsession(session);
+        return object;
+    }
+
+
+
+    @Override
+    public List<Resource> fetchResourceList(List<Topic> resourceList) {
+
+        List<Resource> object = null;
+        Session session = startsession();
+        for(int i=1;i<resourceList.size()+1;i++)
+        {
+            String queryString = "from Resource where topic =:fieldData1 AND user =:fieldData2";
+            Query query = session.createQuery(queryString);
+            query.setString("fieldData1", resourceList.get(i).getId()+"");
+            query.setString("fieldData2", resourceList.get(i).getCreatedBy()+"");
+            object.addAll(query.list());
+        }
         stopsession(session);
         return object;
     }
