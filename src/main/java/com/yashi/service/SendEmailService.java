@@ -22,10 +22,11 @@ public class SendEmailService implements SendEmailServiceInterface {
         int max = 9999;
         int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
 
-        ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("main/resources/servlet-config.xml");
-        EmailHandler emailHandler = (EmailHandler) context.getBean("mailSender");
-     /*  EmailHandler emailHandler = new EmailHandler();*/
-       String toAddr = a[0];
+        /*ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("main/resources/servlet-config.xml");
+        EmailHandler emailHandler = (EmailHandler) context.getBean("mailSender");*/
+
+      EmailHandler emailHandler = new EmailHandler();
+        String toAddr = a[0];
         String fromAddr = "yashi.gupta@tothenew.com";
 
         // email subject
