@@ -13,7 +13,7 @@ public class SendEmailDao implements SendEmailDaoInterface,startSession,stopSess
     @Override
     public Integer sendEmail(String... a) {
 
-        Integer respose = 0;
+        Integer response = 0;
         Session session = startsession();
         EmailOTP emailOTP = new EmailOTP();
 
@@ -26,7 +26,7 @@ public class SendEmailDao implements SendEmailDaoInterface,startSession,stopSess
         {
             emailOTP.setEmailSendTo(a[0]);
             emailOTP.setOtp(a[1]);
-            Integer response = (Integer)session.save(emailOTP);
+            response = (Integer)session.save(emailOTP);
 
         }
         else
@@ -35,12 +35,11 @@ public class SendEmailDao implements SendEmailDaoInterface,startSession,stopSess
             Query query1 = session.createQuery(queryString1);
             query1.setString("Otp",a[1]);
             query1.setString("email",a[0]);
-            Object queryResult1= query1.executeUpdate();
-            respose = (Integer)queryResult1;
+            response = query1.executeUpdate();
 
         }
         stopsession(session);
-        return respose;
+        return response;
 
 
     }
