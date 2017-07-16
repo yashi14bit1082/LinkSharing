@@ -60,13 +60,24 @@ public class DashboardTopicController {
     public ModelAndView redirectToSelectedTopic(@RequestParam ("SelectedItem") String selectedItem)
     {
         ModelAndView modelAndView = new ModelAndView("TopicView");
-        modelAndView.addObject("TopicName",selectedItem);
 
-     List<Resource> ResourceList =  databaseConnectionServiceInterface.fetchResourceList(selectedItem);
-       System.out.println(ResourceList);
+        int indexOfComma = selectedItem.lastIndexOf(',');
+        String topicName = selectedItem.substring(0,indexOfComma);
+        modelAndView.addObject("TopicName",topicName);
+
+     List<Resource> ResourceList =  databaseConnectionServiceInterface.fetchResourceList(selectedItem,0+""); // 0 is the starting index of ajaxified pagination
+      // System.out.println(ResourceList);
       modelAndView.addObject("resourceList",ResourceList);
 
       return modelAndView;
+    }
+
+    @RequestMapping(value = "/ajaxifiedPaginationTopic",method = RequestMethod.POST)
+    public @ResponseBody List<Resource> ajaxifiedPaginationTopic(@RequestParam("topicName") String topicName, @RequestParam("index") String index)
+    {
+        List<Resource> ResourceList =  databaseConnectionServiceInterface.fetchResourceList(topicName,index); // 0 is the starting index of ajaxified pagination
+
+        return ResourceList;
     }
 
 }

@@ -34,7 +34,7 @@ public class DatabaseConnectionService implements DatabaseConnectionServiceInter
         int indexOfComma = a[0].lastIndexOf(',');
         String topicName = a[0].substring(0,indexOfComma);
 
-        List<Resource> resourceList = databaseConnectionDaoInterface.fetchResourceList(topicName);
+        List<Resource> resourceList = databaseConnectionDaoInterface.fetchResourceList(topicName,a[1]);
         System.out.println("resourceList"+resourceList);
         return resourceList;
     }

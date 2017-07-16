@@ -58,6 +58,8 @@ public class DatabaseConnectionDao implements DatabaseConnectionDaoInterface,sta
 
           String queryString = "from Resource where topic.topicName =:fieldData1";
             Query query = session.createQuery(queryString);
+            query.setMaxResults(2);
+            query.setFirstResult(Integer.parseInt(a[1]));
             query.setString("fieldData1", a[0]);
 
             object = query.list();
