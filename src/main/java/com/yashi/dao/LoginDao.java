@@ -19,7 +19,7 @@ import javax.persistence.criteria.CriteriaQuery;
 public class LoginDao implements LoginDaoInterface,startSession,stopSession {
 
     @Override
-    public boolean loginUser(String credential,String password) {
+    public User loginUser(String credential,String password) {
 
 
         String checkCredentialForUsernameOREmail;
@@ -48,9 +48,6 @@ public class LoginDao implements LoginDaoInterface,startSession,stopSession {
         Object queryResult = query.uniqueResult();
         User user1 = (User)queryResult;
         stopsession(session);
-        if(user1!=null)
-            return true;
-        else
-            return false;
+        return user1;
     }
 }

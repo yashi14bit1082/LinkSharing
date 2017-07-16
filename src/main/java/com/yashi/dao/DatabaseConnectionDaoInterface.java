@@ -33,4 +33,10 @@ public interface DatabaseConnectionDaoInterface {
     {
         return null;
     }
+
+    default List<Object> fetchList(String... a)
+    {
+        return null;
+    }
+
 }

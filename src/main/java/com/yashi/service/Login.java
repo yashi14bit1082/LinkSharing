@@ -17,13 +17,19 @@ public class Login implements LoginInterface{
 
     @Override
     public String loginUser(String credential, String password, HttpServletRequest request) {
-        boolean fetchedLoginResult = loginDaoInterface.loginUser(credential,password);
+        User fetchedLoginResult = loginDaoInterface.loginUser(credential,password);
         HttpSession session = request.getSession();
 
-        if(fetchedLoginResult) {
-          // set Attribute for session . If credential is email, return username from dao layer
-            session.setAttribute("username",credential);
-            return "dashboard";
+        if(fetchedLoginResult!=null) {
+
+            session.setAttribute("username",fetchedLoginResult.getUsername());
+            if(fetchedLoginResult.getUsername().equals("admin"))
+            {
+                return "adminPage";
+            }
+            else {
+                return "dashboard";
+            }
         }
         else
             return "home";

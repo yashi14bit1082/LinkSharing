@@ -11,8 +11,8 @@ public interface LoginDaoInterface {
 
     final SessionFactory sessionFactory=new Configuration().configure().buildSessionFactory();
 
-    default boolean loginUser(String username,String password)
+    default User loginUser(String username,String password)
     {
-        return false;
+        return null;
     }
 }

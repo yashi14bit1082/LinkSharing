@@ -123,4 +123,30 @@ public class DatabaseConnectionDao implements DatabaseConnectionDaoInterface,sta
         stopsession(session);
         return response;
     }
+
+
+    @Override
+    public List<Object> fetchList(String... a) {
+
+        Session session = startsession();
+        String queryString = null;
+        Query query = null;
+        List<Object> response = null;
+
+        if(a.length==1)
+        {
+            queryString = "from "+a[0];
+            query = session.createQuery(queryString);
+            response = query.list();
+        }
+        else if(a.length==3)
+        {
+            queryString = "from "+a[0]+" where "+a[1]+" = :fieldData";
+            query = session.createQuery(queryString);
+            query.setString("fieldData1",a[2]);
+            response = query.list();
+        }
+        stopsession(session);
+        return response;
+    }
 }
