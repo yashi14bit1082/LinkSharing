@@ -15,8 +15,7 @@
 <h1 id="TopicName">${TopicName}</h1>
 
 <c:if test="${not empty resourceList}">
-    <div id="ajaxifiedResourceList">
-    <ul>
+    <ul id="ajaxifiedResourceList">
         <c:forEach var="listValue" items="${resourceList}">
            <c:choose>
             <c:when test="${listValue.getResource_type() == 'Link'}">
@@ -28,7 +27,6 @@
             </c:choose>
         </c:forEach>
     </ul>
-    </div>
 
 </c:if>
 
@@ -43,16 +41,29 @@
 
         var index=0;
 
-        $("#prev","#next").click(function () {
-            if($("#prev"))
-            {
-                if(index!=0)
-                {index -=2;}
-            }
-            else
-            {
-                index+=2;
-            }
+        $("#prev").click(function () {
+           index -=2;
+           $.ajax({
+                url:"ajaxifiedPaginationTopic",
+                type:"post",
+                data:{
+                    topicName:$("#TopicName").val(),
+                    index:index
+                },
+                success:function (result) {
+                    $("#ajaxifiedResourceList").empty();
+                    $("#ajaxifiedResourceList").append('<li><a>result</a></li>');
+                },
+                error:function (result) {
+
+                }
+            });
+        });
+
+
+        $("#next").click(function () {
+            index+=2;
+
             $.ajax({
                 url:"ajaxifiedPaginationTopic",
                 type:"post",
@@ -62,13 +73,15 @@
                 },
                 success:function (result) {
                     $("#ajaxifiedResourceList").empty();
-                    $("#ajaxifiedResourceList ul").append('<li><a href="">result</a></li>');
+                    $("#ajaxifiedResourceList ul").append('<li><a>result</a></li>');
                 },
                 error:function (result) {
 
                 }
             });
         });
+
+
     });
 
 </script>
