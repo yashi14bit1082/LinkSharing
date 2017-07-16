@@ -54,17 +54,18 @@
                     $("#ajaxifiedResourceList").empty();
 
                     $.each(result,function (k,v) {
-                       $("#ajaxifiedResourceList").append(
-                        if(v.resource_type==='Link')
+                        if(v.resource_type==="Link")
                         {
-                            "<li><a href= "+v.resource_path+">"+v.resource_path+"</a></li>"
+                       $("#ajaxifiedResourceList").append(
+
+                            "<li><a href= '"+v.resource_path+"'>"+v.resource_path+"</a></li>");
                         }
 
                         else
                         {
                             "<li>"+v.resource_path+"</li>"
                         }
-                       );
+
                     });
                         },
                 error:function (result) {
