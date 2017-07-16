@@ -52,8 +52,15 @@
                 },
                 success:function (result) {
                     $("#ajaxifiedResourceList").empty();
-                    $("#ajaxifiedResourceList").append('<li><a>result</a></li>');
-                },
+
+                    $.each(result,function (k,v) {
+                        $('#ajaxifiedResourceList').append(
+
+                            "<li><a href="${listValue.getResource_path()}">${listValue.getResource_path()}</a></li>"
+
+                        )
+                    });
+                        },
                 error:function (result) {
 
                 }
@@ -62,7 +69,7 @@
 
 
         $("#next").click(function () {
-            index+=2;
+            index +=2;
 
             $.ajax({
                 url:"ajaxifiedPaginationTopic",
