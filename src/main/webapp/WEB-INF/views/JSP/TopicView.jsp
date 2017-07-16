@@ -54,11 +54,17 @@
                     $("#ajaxifiedResourceList").empty();
 
                     $.each(result,function (k,v) {
-                        $('#ajaxifiedResourceList').append(
+                       $("#ajaxifiedResourceList").append(
+                        if(v.resource_type==='Link')
+                        {
+                            "<li><a href= "+v.resource_path+">"+v.resource_path+"</a></li>"
+                        }
 
-                            "<li><a href="${listValue.getResource_path()}">${listValue.getResource_path()}</a></li>"
-
-                        )
+                        else
+                        {
+                            "<li>"+v.resource_path+"</li>"
+                        }
+                       );
                     });
                         },
                 error:function (result) {
@@ -80,8 +86,23 @@
                 },
                 success:function (result) {
                     $("#ajaxifiedResourceList").empty();
-                    $("#ajaxifiedResourceList ul").append('<li><a>result</a></li>');
-                },
+
+                    $.each(result,function (k,v) {
+                        $("#ajaxifiedResourceList").append(
+                        if(v.resource_type=="Link")
+                        {
+                            "<li><a href= "+v.resource_path+">"+v.resource_path+"</a></li>"
+                        }
+
+                        else
+                        {
+                            "<li>"+v.resource_path+"</li>"
+                        }
+
+                        );
+                    });
+
+                    },
                 error:function (result) {
 
                 }
