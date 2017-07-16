@@ -40,21 +40,27 @@
     $(function () {
 
         var index=0;
+        $("#prev").attr("disabled",true);
 
         $("#prev").click(function () {
-           index -=2;
+            if(index!=0)
+            {index -=2;}
+            else{
+                $("#prev").attr("disabled",true);
+            }
            $.ajax({
                 url:"ajaxifiedPaginationTopic",
                 type:"post",
                 data:{
-                    topicName:$("#TopicName").val(),
+                    topicName:$("#TopicName").text(),
                     index:index
                 },
                 success:function (result) {
+                    console.log(result);
                     $("#ajaxifiedResourceList").empty();
 
                     $.each(result,function (k,v) {
-                        if(v.resource_type==="Link")
+                        if(v.resource_type=="Link")
                         {
                        $("#ajaxifiedResourceList").append(
 
@@ -70,27 +76,30 @@
                     });
                         },
                 error:function (result) {
-
+                    console.log(result);
                 }
             });
         });
 
 
         $("#next").click(function () {
+
             index +=2;
+            $("#prev").attr("disabled",false);
 
             $.ajax({
                 url:"ajaxifiedPaginationTopic",
                 type:"post",
                 data:{
-                    topicName:$("#TopicName").val(),
+                    topicName:$("#TopicName").text(),
                     index:index
                 },
                 success:function (result) {
+                    console.log(result);
                     $("#ajaxifiedResourceList").empty();
 
                     $.each(result,function (k,v) {
-                        if(v.resource_type==="Link")
+                        if(v.resource_type=="Link")
                         {
                             $("#ajaxifiedResourceList").append(
 
@@ -106,7 +115,7 @@
                     });
                 },
                 error:function (result) {
-
+                    console.log(result);
                 }
             });
         });

@@ -65,7 +65,7 @@ public class DashboardTopicController {
         String topicName = selectedItem.substring(0,indexOfComma);
         modelAndView.addObject("TopicName",topicName);
 
-     List<Resource> ResourceList =  databaseConnectionServiceInterface.fetchResourceList(selectedItem,0+""); // 0 is the starting index of ajaxified pagination
+     List<Resource> ResourceList =  databaseConnectionServiceInterface.fetchResourceList(topicName,0+""); // 0 is the starting index of ajaxified pagination
       // System.out.println(ResourceList);
       modelAndView.addObject("resourceList",ResourceList);
 
@@ -76,7 +76,6 @@ public class DashboardTopicController {
     public @ResponseBody List<Resource> ajaxifiedPaginationTopic(@RequestParam("topicName") String topicName, @RequestParam("index") String index)
     {
         List<Resource> ResourceList =  databaseConnectionServiceInterface.fetchResourceList(topicName,index); // 0 is the starting index of ajaxified pagination
-
         return ResourceList;
     }
 
