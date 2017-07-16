@@ -70,7 +70,12 @@
                 }
 
                 addOption(option1,option2,option3);
+                ajaxCall($("#selectUTP").val(),$("#selectUTPOptions").val());
 
+            });
+
+            $("#selectUTPOptions").change(function () {
+                ajaxCall($("#selectUTP").val(),$("#selectUTPOptions").val());
             });
 
             function ajaxCall(utpSelected,utpOtionSelected)

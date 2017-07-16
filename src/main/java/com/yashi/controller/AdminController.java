@@ -23,6 +23,7 @@ public class AdminController {
     public @ResponseBody List<Object> fetchUTPListForAdmin(@RequestParam ("utpSelected") String utpSelected,@RequestParam ("utpOptionSelected") String utpOptionSelected)
     {
         List<Object> responseList = adminServiceInterface.fetchList(utpSelected,utpOptionSelected);
+
         return responseList;
     }
 }

@@ -23,7 +23,7 @@ int b = 0;
         switch(a[0])
         {
             case "Users":{
-                if(a[1]=="All Users")
+                if(a[1].equals("All Users"))
                 {
                     resultList = databaseConnectionDaoInterface.fetchList("User");
 
@@ -43,7 +43,7 @@ int b = 0;
                 break;
             }
             case "Topic":{
-                if(a[1]=="All Topics")
+                if(a[1].equals("All Topics"))
                 {
                     resultList = databaseConnectionDaoInterface.fetchList("Topic");
                 }
@@ -54,7 +54,7 @@ int b = 0;
                 break;
             }
             case "Posts":{
-                if(a[1]=="All Posts")
+                if(a[1].equals("All Posts"))
                 {
                     resultList = databaseConnectionDaoInterface.fetchList("Resource");
                 }

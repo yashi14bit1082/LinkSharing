@@ -143,7 +143,7 @@ public class DatabaseConnectionDao implements DatabaseConnectionDaoInterface,sta
         {
             queryString = "from "+a[0]+" where "+a[1]+" = :fieldData";
             query = session.createQuery(queryString);
-            query.setString("fieldData1",a[2]);
+            query.setString("fieldData",a[2]);
             response = query.list();
         }
         stopsession(session);
