@@ -30,8 +30,8 @@
 
 </c:if>
 
-<a id="prev">Prev</a>
-<a id="next">Next</a>
+<button id="prev">Prev</button>
+<button id="next">Next</button>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -63,7 +63,8 @@
 
                         else
                         {
-                            "<li>"+v.resource_path+"</li>"
+                            $("#ajaxifiedResourceList").append(
+                            "<li>"+v.resource_path+"</li>");
                         }
 
                     });
@@ -89,21 +90,21 @@
                     $("#ajaxifiedResourceList").empty();
 
                     $.each(result,function (k,v) {
-                        $("#ajaxifiedResourceList").append(
-                        if(v.resource_type=="Link")
+                        if(v.resource_type==="Link")
                         {
-                            "<li><a href= "+v.resource_path+">"+v.resource_path+"</a></li>"
+                            $("#ajaxifiedResourceList").append(
+
+                                "<li><a href= '"+v.resource_path+"'>"+v.resource_path+"</a></li>");
                         }
 
                         else
                         {
-                            "<li>"+v.resource_path+"</li>"
+                            $("#ajaxifiedResourceList").append(
+                                "<li>"+v.resource_path+"</li>");
                         }
 
-                        );
                     });
-
-                    },
+                },
                 error:function (result) {
 
                 }
