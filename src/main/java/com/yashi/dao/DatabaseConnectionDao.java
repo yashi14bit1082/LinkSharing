@@ -50,35 +50,18 @@ public class DatabaseConnectionDao implements DatabaseConnectionDaoInterface,sta
     }
 
 
-
     @Override
-    public List<Topic> fetchListOfIdWithSameTopic(String... a) {
-        Session session = startsession();
-        String queryString = "select id,createdBy.id from Topic where topicName LIKE "+":field_value";
-        Query query = session.createQuery(queryString);
-        query.setString("field_value", a[0]+"%");
-        List<Topic> object = query.list();
-        stopsession(session);
-        return object;
-    }
-
-
-
-    @Override
-    public List<Resource> fetchResourceList(List<Topic> resourceList) {
+    public List<Resource> fetchResourceList(String... a) {
 
         List<Resource> object = null;
         Session session = startsession();
-        for(int i=1;i<=resourceList.size();i++)
-        {
-            String queryString = "from Resource where topic =:fieldData1 AND user =:fieldData2";
+
+          String queryString = "from Resource where topic.topicName =:fieldData1";
             Query query = session.createQuery(queryString);
-            query.setString("fieldData1", resourceList.get(i).getId()+"");
-            System.out.println("aaya"+resourceList.get(i).getId());
-            query.setString("fieldData2", resourceList.get(i).getCreatedBy()+"");
-            System.out.println("aaya aaya"+resourceList.get(i).getCreatedBy());
-            object.addAll(query.list());
-        }
+            query.setString("fieldData1", a[0]);
+
+            object = query.list();
+
         stopsession(session);
         return object;
     }

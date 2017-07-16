@@ -19,7 +19,6 @@ public interface DatabaseConnectionDaoInterface {
     {
         return null;
     }
-    default List<Topic> fetchListOfIdWithSameTopic(String... a) {return null;}
 
     default boolean checkDataExistence(String... a)
     {
@@ -30,7 +29,7 @@ public interface DatabaseConnectionDaoInterface {
         return 0;
     }
 
-    default List<Resource> fetchResourceList(List<Topic> resourceList)
+    default List<Resource> fetchResourceList(String... a)
     {
         return null;
     }
