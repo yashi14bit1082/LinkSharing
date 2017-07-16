@@ -62,7 +62,8 @@ public class DashboardTopicController {
         ModelAndView modelAndView = new ModelAndView("TopicView");
         modelAndView.addObject("TopicName",selectedItem);
 
-     List<Resource> ResourceList =  databaseConnectionServiceInterface.fetchResourceList();
+     List<Resource> ResourceList =  databaseConnectionServiceInterface.fetchResourceList(selectedItem);
+       System.out.println(ResourceList);
       modelAndView.addObject("resourceList",ResourceList);
 
       return modelAndView;
