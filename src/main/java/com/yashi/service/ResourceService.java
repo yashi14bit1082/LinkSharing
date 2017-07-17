@@ -34,7 +34,8 @@ public class ResourceService implements ResourceServiceInterface {
 
 
         Resource resource = resourceDaoInterface.saveLinkResourceDao(link,desc,topic1,user,resourceType);
-                        if(resource!=null) {
+
+        if(resource!=null) {
                             result = 1;
                             List<Subscription> userList = databaseConnectionDaoInterface.fetchSubscribedUsersFromSubscription(topic1);
                             resourceDaoInterface.setPostReadUnread(resource,userList);

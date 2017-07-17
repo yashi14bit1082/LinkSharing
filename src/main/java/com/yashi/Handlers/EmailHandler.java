@@ -5,6 +5,8 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
+import javax.mail.internet.MimeMessage;
+
 /**
  * Created by yashi on 14-07-2017.
  */
@@ -22,5 +24,6 @@ public class EmailHandler {
         simpleMailMsg.setSubject(subject);
         simpleMailMsg.setText(msgBody);
         mailSender.send(simpleMailMsg);
+
     }
 }

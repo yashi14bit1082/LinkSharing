@@ -175,7 +175,6 @@ public class DatabaseConnectionDao implements DatabaseConnectionDaoInterface,sta
         query.setString("fieldData2",topic1.getCreatedBy().getUsername());
 
         List<Subscription> userList = query.list();
-        System.out.println(userList.size());
         stopsession(session);
         return userList;
     }

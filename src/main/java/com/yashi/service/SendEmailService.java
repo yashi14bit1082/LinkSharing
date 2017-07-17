@@ -25,17 +25,32 @@ public class SendEmailService implements SendEmailServiceInterface {
     @Override
     public Integer sendEmail(String... a) {
 
-        int min = 1000;
-        int max = 9999;
-        int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
+        Integer response = 0;
 
-        String toAddr = a[0];
-        String fromAddr = "yashi.gupta@tothenew.com";
-        String subject = "Reset Password";
-        String body = "Your OTP for password reset is "+randomNum;
-        emailHandler.ReadyToSendEmail(toAddr, fromAddr, subject, body);
+        if(a[1].equals("OTPforPasswordReset")) {
+            int min = 1000;
+            int max = 9999;
+            int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
 
-        Integer response = sendEmailDaoInterface.sendEmail(a[0],randomNum+"");
+            String toAddr = a[0];
+            String fromAddr = "yashi.gupta@tothenew.com";
+            String subject = "Reset Password";
+            String body = "Your OTP for password reset is " + randomNum;
+            emailHandler.ReadyToSendEmail(toAddr, fromAddr, subject, body);
+
+            response = sendEmailDaoInterface.sendEmail(a[0], randomNum + "");
+
+        }
+        else if(a[1].equals("TopicSubscriptionMail"))
+        {
+            String toAddr = a[0];
+            String fromAddr = "yashi.gupta@tothenew.com";
+            String subject = "Topic Subscription Invitation";
+            String body = "Click here for subscribing";
+
+            emailHandler.ReadyToSendEmail(toAddr, fromAddr, subject, body);
+            response = 1;
+        }
         return response;
     }
 

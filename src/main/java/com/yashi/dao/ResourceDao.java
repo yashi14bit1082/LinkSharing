@@ -32,17 +32,18 @@ public class ResourceDao implements ResourceDaoInterface, startSession,stopSessi
 
         Resource resource = setUpSaveFun(link,desc,topic,user);
 
-        if(resourceType.equalsIgnoreCase("link"))
-        resource.setResource_type(Link_Doc_Resource.Link);
-        else
+        if(resourceType.equalsIgnoreCase("link")) {
+            resource.setResource_type(Link_Doc_Resource.Link);
+        } else
+
             resource.setResource_type(Link_Doc_Resource.Document);
 
            session.save(resource);
             stopsession(session);
 
         return resource;
-    }
 
+}
 
     @Override
     public void setPostReadUnread(Resource resource, List<Subscription> userList) {

@@ -44,7 +44,7 @@
     <input type="text" id="searchTopic">
     <br>
     <br>
-    <form action="javascript:void(0)" method="post" >
+    <form action="javascript:void(0)" method="post" id="share_link">
         <table border="0">
             <tr>
                 <td colspan="2" align="center"><h2>Add LinkResource</h2></td>
@@ -66,7 +66,7 @@
             </tr>
 
             <tr>
-                <td colspan="2">Topic: <input type="submit" value="Share" id="share_link"/></td>
+                <td colspan="2">Topic: <input type="submit" value="Share"/></td>
             </tr>
             <tr>
                 <td colspan="2"><input type="submit" value="Cancel" id="cancel"/></td>
@@ -97,7 +97,7 @@
             </tr>
 
             <tr>
-                <td colspan="2"><input type="submit" value="Share" id="share_docx"/></td>
+                <td colspan="2"><input type="submit" value="Share"/></td>
             </tr>
             <tr>
                 <td colspan="2"><input type="submit" value="Cancel" id="cancel_docx"/></td>
@@ -107,6 +107,34 @@
 
     <br>
     <br>
+
+
+    <form action="sendSubscriptionInvitation" method="post" enctype="multipart/form-data" id="sendInvitation">
+        <table border="0">
+            <tr>
+                <td colspan="2" align="center"><h2>Send Invitation:</h2></td>
+            </tr>
+
+            <tr>
+                <td>Email: </td>
+                <td><input type="email" name="email" id="email"/></td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="text" name="topicInvite" id="topicInvite" value="Topic">
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2"><input type="submit" value="Invite"/></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Cancel" id="cancel_invite"/></td>
+            </tr>
+        </table>
+    </form>
+
     <button id="logOut">Log Out</button>
 </div>
 
@@ -186,7 +214,8 @@
                             response( $.map( data, function( item ) {
                                 return {
                                     label: item,
-                                    value: item
+                                    value: item,
+                                    target:"/displaySelectedTopicPage?SelectedItem="+item
                                 }
                             }));
                         }
@@ -195,6 +224,14 @@
 
                 autoFocus: true,
                 minLength: 1
+            });
+
+            $("#searchTopic").autocomplete({
+                select: function( event, ui ) {
+
+                    window.location.href=ui.item.target;
+
+                }
             });
 
 
@@ -240,7 +277,7 @@
                             response( $.map( data, function( item ) {
                                 return {
                                     label: item,
-                                    value: item
+                                    value: item,
                                 }
                             }));
                         }
@@ -253,20 +290,7 @@
 
 
 
-            $("#searchTopic").autocomplete({
-                select: function( event, ui ) {
 
-
-                    /*rather than doing get injection, save value in a session and redirect the page in ModalAndView. It is
-                   important as for now if user wanna go back page, he will see the home page and
-                     not the dashboard, as we are running an ajax call before that is just working in background .*/
-
-
-                     // Get Injection
-                    window.location.replace("/displaySelectedTopicPage?SelectedItem="+ui.item.label);
-
-                }
-            });
 
 
 
@@ -290,7 +314,33 @@
                 });
             });
 
-            $('#uploadDocxFile').ajaxForm({
+            $('#topicInvite').autocomplete({
+                source: function( request, response ) {
+                    $.ajax({
+                        url:"fetchSubscribedListSearch",
+                        type:"post",
+                        accept: "application/json",
+
+                        data:{
+                            searchString:$("#topicInvite").val()
+                        },
+                        success: function( data ) {
+                            response( $.map( data, function( item ) {
+                                return {
+                                    label: item,
+                                    value: item,
+                                }
+                            }));
+                        }
+                    });
+                },
+
+                autoFocus: true,
+                minLength: 1
+            });
+
+
+            $('#uploadDocxFile,#sendInvitation').ajaxForm({
                 success: function(msg) {
                     alert(msg);
                 },
@@ -298,6 +348,7 @@
                     console.log(msg);
                 }
             });
+
 
 
 

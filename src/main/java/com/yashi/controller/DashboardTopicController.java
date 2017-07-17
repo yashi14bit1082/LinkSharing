@@ -6,6 +6,7 @@ import com.yashi.model.Topic;
 import com.yashi.model.User;
 import com.yashi.service.CheckUniquenessInterface;
 import com.yashi.service.DatabaseConnectionServiceInterface;
+import com.yashi.service.SendEmailServiceInterface;
 import com.yashi.service.TopicServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +32,8 @@ public class DashboardTopicController {
     CheckUniquenessInterface checkUniquenessInterface;
     @Autowired
     DatabaseConnectionServiceInterface databaseConnectionServiceInterface;
+    @Autowired
+    SendEmailServiceInterface sendEmailServiceInterface;
 
     @RequestMapping(value = "/addTopic",method = RequestMethod.POST)
     public @ResponseBody String addTopic(@ModelAttribute Topic topic , HttpServletRequest request)
@@ -87,6 +90,22 @@ public class DashboardTopicController {
     {
         List<Resource> ResourceList =  databaseConnectionServiceInterface.fetchResourceList(topicName,index); // 0 is the starting index of ajaxified pagination
         return ResourceList;
+    }
+
+
+    @RequestMapping(value = "/sendSubscriptionInvitation",method = RequestMethod.POST)
+    public @ResponseBody String sendSubscriptionInvitation(@RequestParam ("email") String email, @RequestParam ("topicInvite") String topicInvite)
+    {
+        Integer response = sendEmailServiceInterface.sendEmail(email,"TopicSubscriptionMail");
+
+        if(response==1) {
+            return "Subscription mail sent successfully.";
+        }
+        else {
+
+            return "Problem while sending Subscription Mail!!!";
+        }
+
     }
 
 }
