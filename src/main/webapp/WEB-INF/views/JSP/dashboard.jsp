@@ -104,6 +104,10 @@
             </tr>
         </table>
     </form>
+
+    <br>
+    <br>
+    <button id="logOut">Log Out</button>
 </div>
 
 <script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -168,7 +172,7 @@
             });
 
 
-            $('#searchTopic,#topic_link,#topic_docx').autocomplete({
+            $('#searchTopic').autocomplete({
                 source: function( request, response ) {
                     $.ajax({
                         url:"fetchListSearch",
@@ -176,8 +180,6 @@
                         accept: "application/json",
 
                         data:{
-                            tableName:"Topic",
-                            fieldName:"topicName",
                             searchString:$("#searchTopic").val()
                         },
                         success: function( data ) {
@@ -192,8 +194,64 @@
                 },
 
                 autoFocus: true,
-                minLength: 0
+                minLength: 1
             });
+
+
+
+            $('#topic_link').autocomplete({
+                source: function( request, response ) {
+                    $.ajax({
+                        url:"fetchSubscribedListSearch",
+                        type:"post",
+                        accept: "application/json",
+
+                        data:{
+                            searchString:$("#topic_link").val()
+                        },
+                        success: function( data ) {
+                            response( $.map( data, function( item ) {
+                                return {
+                                    label: item,
+                                    value: item
+                                }
+                            }));
+                        }
+                    });
+                },
+
+                autoFocus: true,
+                minLength: 1
+            });
+
+
+
+            $('#topic_docx').autocomplete({
+                source: function( request, response ) {
+                    $.ajax({
+                        url:"fetchSubscribedListSearch",
+                        type:"post",
+                        accept: "application/json",
+
+                        data:{
+                            searchString:$("#topic_docx").val()
+                        },
+                        success: function( data ) {
+                            response( $.map( data, function( item ) {
+                                return {
+                                    label: item,
+                                    value: item
+                                }
+                            }));
+                        }
+                    });
+                },
+
+                autoFocus: true,
+                minLength: 1
+            });
+
+
 
             $("#searchTopic").autocomplete({
                 select: function( event, ui ) {
@@ -248,6 +306,10 @@
             });
 
 
+            $("#logOut").click(function(){
+
+                window.location.replace("logOut");
+            });
 
         });
     </script>

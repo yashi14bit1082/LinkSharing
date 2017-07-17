@@ -3,7 +3,9 @@ package com.yashi.dao;
 import com.yashi.Handlers.startSession;
 import com.yashi.Handlers.stopSession;
 import com.yashi.model.Resource;
+import com.yashi.model.Subscription;
 import com.yashi.model.Topic;
+import com.yashi.model.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -49,6 +51,19 @@ public class DatabaseConnectionDao implements DatabaseConnectionDaoInterface,sta
         return object;
     }
 
+
+    @Override
+    public List<Subscription> fetchSubscribedData(String... a) {
+
+        Session session = startsession();
+        String queryString = "select topic.topicName,user.username from Subscription where topic.topicName LIKE "+":field_value"+" AND user.username = :field_value2";
+        Query query = session.createQuery(queryString);
+        query.setString("field_value", a[0]+"%");
+        query.setString("field_value2",a[1]);
+        List<Subscription> object = query.list();
+        stopsession(session);
+        return object;
+    }
 
     @Override
     public List<Resource> fetchResourceList(String... a) {
@@ -148,5 +163,19 @@ public class DatabaseConnectionDao implements DatabaseConnectionDaoInterface,sta
         }
         stopsession(session);
         return response;
+    }
+
+    @Override
+    public List<User> fetchSubscribedUsersFromSubscription(Topic topic1) {
+
+        Session session = startsession();
+        String queryString = "Select user.username from Subscription where topic.topicName = :fieldData1 AND topic.createdBy.username = :fieldData2";
+        Query query = session.createQuery(queryString);
+        query.setString("fieldData1",topic1.getTopicName());
+        query.setString("fieldData2",topic1.getCreatedBy().getUsername());
+        List<String> userList = query.list();
+        System.out.println(userList.size());
+        stopsession(session);
+        return null;
     }
 }

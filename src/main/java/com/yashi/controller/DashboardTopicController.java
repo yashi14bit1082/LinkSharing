@@ -1,6 +1,7 @@
 package com.yashi.controller;
 
 import com.yashi.model.Resource;
+import com.yashi.model.Subscription;
 import com.yashi.model.Topic;
 import com.yashi.model.User;
 import com.yashi.service.CheckUniquenessInterface;
@@ -50,9 +51,18 @@ public class DashboardTopicController {
     }
 
     @RequestMapping(value = "/fetchListSearch",method = RequestMethod.POST)
-    public @ResponseBody List<Topic> fetchTopicList(@RequestParam("tableName") String tableName, @RequestParam("fieldName") String field_name, @RequestParam ("searchString") String search)
+    public @ResponseBody List<Topic> fetchTopicList(@RequestParam ("searchString") String search)
     {
         List<Topic> fetched_list = databaseConnectionServiceInterface.fetchData(search);
+        return fetched_list;
+    }
+
+    @RequestMapping(value = "/fetchSubscribedListSearch",method = RequestMethod.POST)
+    public @ResponseBody List<Subscription> fetchSubscribedTopicList(@RequestParam ("searchString") String search,HttpServletRequest request)
+    {
+        String username = request.getSession().getAttribute("username").toString();
+
+        List<Subscription> fetched_list = databaseConnectionServiceInterface.fetchSubscribedList(search,username);
         return fetched_list;
     }
 

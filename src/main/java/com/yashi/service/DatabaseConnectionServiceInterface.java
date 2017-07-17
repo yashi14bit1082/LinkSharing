@@ -1,6 +1,7 @@
 package com.yashi.service;
 
 import com.yashi.model.Resource;
+import com.yashi.model.Subscription;
 import com.yashi.model.Topic;
 
 import java.util.List;
@@ -14,6 +15,7 @@ public interface DatabaseConnectionServiceInterface {
         return null;
     }
 
+    default List<Subscription> fetchSubscribedList(String... a){return null;}
 
     default boolean checkDataExistence(String... a)
     {

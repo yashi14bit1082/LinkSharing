@@ -1,7 +1,9 @@
 package com.yashi.dao;
 
 import com.yashi.model.Resource;
+import com.yashi.model.Subscription;
 import com.yashi.model.Topic;
+import com.yashi.model.User;
 
 import java.util.List;
 
@@ -35,6 +37,16 @@ public interface DatabaseConnectionDaoInterface {
     }
 
     default List<Object> fetchList(String... a)
+    {
+        return null;
+    }
+
+    default List<Subscription> fetchSubscribedData(String... a)
+    {
+        return null;
+    }
+
+    default List<User> fetchSubscribedUsersFromSubscription (Topic topic)
     {
         return null;
     }

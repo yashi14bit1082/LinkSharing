@@ -28,5 +28,6 @@
         <mapping class="com.yashi.model.Subscription"/>
         <mapping class="com.yashi.model.Resource"/>
         <mapping class="com.yashi.model.EmailOTP"/>
+        <mapping class="com.yashi.model.ReadingItem"/>
     </session-factory>
 </hibernate-configuration>

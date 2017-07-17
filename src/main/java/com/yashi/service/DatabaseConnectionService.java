@@ -2,6 +2,7 @@ package com.yashi.service;
 
 import com.yashi.dao.DatabaseConnectionDaoInterface;
 import com.yashi.model.Resource;
+import com.yashi.model.Subscription;
 import com.yashi.model.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,6 +22,13 @@ public class DatabaseConnectionService implements DatabaseConnectionServiceInter
     }
 
     @Override
+    public List<Subscription> fetchSubscribedList(String... a) {
+
+        List<Subscription> subscriptionList = databaseConnectionDaoInterface.fetchSubscribedData(a[0],a[1]);
+        return subscriptionList;
+    }
+
+    @Override
     public boolean checkDataExistence(String... a) {
 
         boolean response = databaseConnectionDaoInterface.checkDataExistence(a[0],a[1],a[2]);
@@ -35,4 +43,6 @@ public class DatabaseConnectionService implements DatabaseConnectionServiceInter
         System.out.println("resourceList"+resourceList);
         return resourceList;
     }
+
+
 }

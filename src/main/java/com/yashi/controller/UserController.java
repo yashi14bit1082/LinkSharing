@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
@@ -33,11 +36,18 @@ public class UserController {
     LoginInterface loginInterface;
 
     @RequestMapping("/")
-    public ModelAndView callHome()
+    public ModelAndView callHome(HttpServletRequest request)
     {
-        ModelAndView modelAndView = new ModelAndView("home");
-        modelAndView.addObject("userRegisterForm",new User());
+        ModelAndView modelAndView;
+        if(request.getSession().getAttribute("username")==null)
+        {
+            modelAndView = new ModelAndView("home");
+            modelAndView.addObject("userRegisterForm",new User());
 
+        }
+        else {
+            modelAndView = new ModelAndView("dashboard");
+        }
         return modelAndView;
     }
 
@@ -73,5 +83,11 @@ public class UserController {
     {
         boolean result = registerInterface.validateUsername(credential);
         return result+"";
+    }
+
+    @RequestMapping(value = "/logOut",method = RequestMethod.GET)
+    public String logOut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+         request.getSession().invalidate();
+        return "redirect:/";
     }
 }
