@@ -1,6 +1,7 @@
 package com.yashi.dao;
 
 import com.yashi.model.Resource;
+import com.yashi.model.Subscription;
 import com.yashi.model.Topic;
 import com.yashi.model.User;
 
@@ -15,7 +16,7 @@ public interface ResourceDaoInterface {
         return null;
     }
 
-    default void setPostReadUnread(Resource resource, List<User> userList)
+    default void setPostReadUnread(Resource resource, List<Subscription> userList)
     {
 
     }

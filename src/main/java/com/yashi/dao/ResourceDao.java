@@ -45,15 +45,14 @@ public class ResourceDao implements ResourceDaoInterface, startSession,stopSessi
 
 
     @Override
-    public void setPostReadUnread(Resource resource, List<User> userList) {
+    public void setPostReadUnread(Resource resource, List<Subscription> userList) {
 
-        for(User u:userList)
+        for(Subscription u:userList)
         {
             Session session = startsession();
             ReadingItem readingItem = new ReadingItem();
             readingItem.setResource(resource);
-            readingItem.setRead(true);
-            readingItem.setUser(u);
+            readingItem.setUser(u.getUser());
             session.save(readingItem);
             stopsession(session);
         }

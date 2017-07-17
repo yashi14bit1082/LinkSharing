@@ -3,6 +3,7 @@ package com.yashi.service;
 import com.yashi.dao.DatabaseConnectionDaoInterface;
 import com.yashi.dao.ResourceDaoInterface;
 import com.yashi.model.Resource;
+import com.yashi.model.Subscription;
 import com.yashi.model.Topic;
 import com.yashi.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class ResourceService implements ResourceServiceInterface {
         Resource resource = resourceDaoInterface.saveLinkResourceDao(link,desc,topic1,user,resourceType);
                         if(resource!=null) {
                             result = 1;
-                            List<User> userList = databaseConnectionDaoInterface.fetchSubscribedUsersFromSubscription(topic1);
+                            List<Subscription> userList = databaseConnectionDaoInterface.fetchSubscribedUsersFromSubscription(topic1);
                             resourceDaoInterface.setPostReadUnread(resource,userList);
                         }
 

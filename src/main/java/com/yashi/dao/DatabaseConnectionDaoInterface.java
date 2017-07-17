@@ -46,7 +46,7 @@ public interface DatabaseConnectionDaoInterface {
         return null;
     }
 
-    default List<User> fetchSubscribedUsersFromSubscription (Topic topic)
+    default List<Subscription> fetchSubscribedUsersFromSubscription (Topic topic)
     {
         return null;
     }

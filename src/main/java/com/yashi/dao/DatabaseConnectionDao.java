@@ -166,16 +166,17 @@ public class DatabaseConnectionDao implements DatabaseConnectionDaoInterface,sta
     }
 
     @Override
-    public List<User> fetchSubscribedUsersFromSubscription(Topic topic1) {
+    public List<Subscription> fetchSubscribedUsersFromSubscription(Topic topic1) {
 
         Session session = startsession();
-        String queryString = "Select user.username from Subscription where topic.topicName = :fieldData1 AND topic.createdBy.username = :fieldData2";
+        String queryString = "from Subscription where topic.topicName = :fieldData1 AND topic.createdBy.username = :fieldData2";
         Query query = session.createQuery(queryString);
         query.setString("fieldData1",topic1.getTopicName());
         query.setString("fieldData2",topic1.getCreatedBy().getUsername());
-        List<String> userList = query.list();
+
+        List<Subscription> userList = query.list();
         System.out.println(userList.size());
         stopsession(session);
-        return null;
+        return userList;
     }
 }
