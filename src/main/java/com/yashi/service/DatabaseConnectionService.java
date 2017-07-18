@@ -49,4 +49,10 @@ public class DatabaseConnectionService implements DatabaseConnectionServiceInter
        List<Resource> recentSharesList =  databaseConnectionDaoInterface.recentShares();
         return recentSharesList;
     }
+
+    @Override
+    public Object fetchObject(String... a) {
+        Object obj = databaseConnectionDaoInterface.fetchData(a[0],a[1],a[2]);
+        return obj;
+    }
 }

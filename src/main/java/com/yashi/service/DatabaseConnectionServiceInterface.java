@@ -31,4 +31,9 @@ public interface DatabaseConnectionServiceInterface {
     {
         return null;
     }
+
+    default Object fetchObject(String... a)
+    {
+        return null;
+    }
 }

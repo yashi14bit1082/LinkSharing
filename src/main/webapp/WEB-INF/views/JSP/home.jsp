@@ -68,11 +68,11 @@
                         <c:forEach var="item" items="${recentShares}">
                             <div class="media" style="padding-top :10px">
                                 <div class="media-left">
-                                <img src="/resources/unknown_icon.png" width="120" height="120">
+                                <img src="fetchImage?username=${item.user.username}" width="120" height="120">
                             </div>
                             <div class="media-body">
-                                <h4 class="media-heading">${item.createdBy.firstname} ${item.createdBy.lastname} <small><i>@${item.createdBy.username}</i></small><a href="" style="float:right;font-size:12px">${item.topic.topicName}</a></h4>
-                                <p>${item.Description}</p>
+                                <h4 class="media-heading">${item.user.firstname} ${item.user.lastname} <small><i>@${item.user.username}</i></small><a href="" style="float:right;font-size:12px">${item.topic.topicName}</a></h4>
+                                <p>${item.description}</p>
                                 <div class="pgd">
                                     <div class="soc">
                                     <a href="#" class="fa fa-facebook"></a>
@@ -195,89 +195,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.1/jquery.form.min.js"></script>
-
-
-<%--
-<html>
-<head>
-    <title>Link Sharing</title>
-
-</head>
-<body>
-
-<div align="center">
-    <form:form action="registerUser" method="post" modelAttribute="userRegisterForm" enctype="multipart/form-data" id="RegisterForm">
-        <table border="0">
-            <tr>
-                <td colspan="2" align="center"><h2>User Registration</h2></td>
-            </tr>
-
-            <tr>
-                <td>First Name:</td>
-                <td><form:input path="firstname" /></td>
-            </tr>
-            <tr>
-                <td>Last Name:</td>
-                <td><form:input path="lastname" /></td>
-            </tr>
-            <tr>
-                <td>User Name:</td>
-                <td><form:input path="username" id="username"/></td>
-            </tr>
-            <tr>
-                <td>Password:</td>
-                <td><form:password path="password" id="password" /></td>
-            </tr>
-            <tr>
-                <td>Confirm Password:</td>
-                <td><input type="password" name="c_password" id="confirmPassword"/></td>
-            </tr>
-
-            <tr>
-
-                <td>E-mail:</td>
-                <td><form:input path="email" id="email"/></td>
-            </tr>
-            <tr>
-                <td>Photo:</td>
-                <td><form:input type="file" path="photo" name="photo" /></td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center"><input type="submit" value="Register" id="register"/></td>
-            </tr>
-        </table>
-    </form:form>
-</div>
-
-
-<br>
-<br>
-
-<div align="center">
-    <form action="loginUser" method="post">
-        <table border="0">
-            <tr>
-                <td colspan="2" align="center"><h2>User Login</h2></td>
-            </tr>
-
-            <tr>
-                <td>User Name:</td>
-                <td><input type="text" name="credential" /></td>
-            </tr>
-            <tr>
-                <td>Password:</td>
-                <td><input type=" password" name="password" /></td>
-            </tr>
-
-            <tr>
-                <td colspan="2" align="center"><input type="submit" value="Login"/></td>
-            </tr>
-        </table>
-    </form>
-    <br>
-    <a id="forgotPassword" href="resetPassword">Forgot Password?</a>
-</div>
---%>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 
 <script>

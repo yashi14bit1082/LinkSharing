@@ -13,7 +13,7 @@ public class Resource {
     @Id
     @GeneratedValue
     int id;
-    String Description;
+    String description;
     @ManyToOne
     User user;
     @ManyToOne
@@ -52,11 +52,11 @@ public class Resource {
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
     }
 
     public User getUser() {
