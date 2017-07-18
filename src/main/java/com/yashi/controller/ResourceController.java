@@ -34,7 +34,7 @@ String saveDocxResource(@RequestParam ("docx") MultipartFile file, @RequestParam
             byte[] bytes = file.getBytes();
 
             // Creating the directory to store file
-            String rootPath = "C:/Users/hp/Downloads/TTN Demo Project/LinkSharing/src/main/webapp/WEB-INF/resources/assets/";
+            String rootPath = "C:/Users/hp/Downloads/TTN Demo Project/LinkSharing/src/main/webapp/resources/assets/";
 
             // Create the file on server
             File serverFile = new File(rootPath

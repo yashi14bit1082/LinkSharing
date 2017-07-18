@@ -178,4 +178,15 @@ public class DatabaseConnectionDao implements DatabaseConnectionDaoInterface,sta
         stopsession(session);
         return userList;
     }
+
+
+    @Override
+    public List<Resource> recentShares() {
+        Session session = startsession();
+        String queryString = "from Resource where topic.visibility = 'Public' order by dateCreated DESC";
+        Query query = session.createQuery(queryString);
+        List<Resource> recentSharesList = query.list();
+        stopsession(session);
+        return recentSharesList;
+    }
 }

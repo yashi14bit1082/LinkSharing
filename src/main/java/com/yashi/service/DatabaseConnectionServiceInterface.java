@@ -26,4 +26,9 @@ public interface DatabaseConnectionServiceInterface {
     {
         return null;
     }
+
+    default List<Resource> recentShares()
+    {
+        return null;
+    }
 }

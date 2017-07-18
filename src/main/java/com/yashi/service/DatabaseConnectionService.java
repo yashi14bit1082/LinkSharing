@@ -44,5 +44,9 @@ public class DatabaseConnectionService implements DatabaseConnectionServiceInter
         return resourceList;
     }
 
-
+    @Override
+    public List<Resource> recentShares() {
+       List<Resource> recentSharesList =  databaseConnectionDaoInterface.recentShares();
+        return recentSharesList;
+    }
 }

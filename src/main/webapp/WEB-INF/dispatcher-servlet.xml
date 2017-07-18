@@ -70,4 +70,6 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
     <bean id="adminServiceInterface" class="com.yashi.service.AdminService"/>
     <bean id="adminDaoInterface" class="com.yashi.dao.AdminDao"/>
 
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
+
 </beans>

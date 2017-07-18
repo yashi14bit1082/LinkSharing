@@ -230,7 +230,6 @@
                 select: function( event, ui ) {
 
                     window.location.href=ui.item.target;
-
                 }
             });
 

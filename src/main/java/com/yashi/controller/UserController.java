@@ -1,6 +1,8 @@
 package com.yashi.controller;
 
+import com.yashi.model.Resource;
 import com.yashi.model.User;
+import com.yashi.service.DatabaseConnectionServiceInterface;
 import com.yashi.service.LoginInterface;
 import com.yashi.service.RegisterInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 /**
  * Created by yashi on 10-07-2017.
@@ -34,6 +37,8 @@ public class UserController {
     RegisterInterface registerInterface;
     @Autowired
     LoginInterface loginInterface;
+    @Autowired
+    DatabaseConnectionServiceInterface databaseConnectionServiceInterface;
 
     @RequestMapping("/")
     public ModelAndView callHome(HttpServletRequest request)
@@ -43,7 +48,9 @@ public class UserController {
         {
             modelAndView = new ModelAndView("home");
             modelAndView.addObject("userRegisterForm",new User());
-
+            List<Resource> recentSharesList = databaseConnectionServiceInterface.recentShares();
+            System.out.println(recentSharesList);
+            modelAndView.addObject("recentShares",recentSharesList);
         }
         else {
             modelAndView = new ModelAndView("dashboard");
@@ -58,7 +65,7 @@ public class UserController {
             {
                 user.setPhoto(file.getBytes());
             }else{
-                Path path = Paths.get("C:\\Users\\hp\\Downloads\\TTN Demo Project\\LinkSharing\\src\\main\\webapp\\WEB-INF\\resources\\default_photu.jpg");
+                Path path = Paths.get("C:\\Users\\hp\\Downloads\\TTN Demo Project\\LinkSharing\\src\\main\\webapp\\resources\\unknown_icon.png");
                 user.setPhoto(Files.readAllBytes(path));
             }
         System.out.println(user);

@@ -18,9 +18,9 @@ public class Resource {
     User user;
     @ManyToOne
     Topic topic;
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     Date dateCreated = new Date();
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     Date dateUpdated;
 
     String resource_path;
