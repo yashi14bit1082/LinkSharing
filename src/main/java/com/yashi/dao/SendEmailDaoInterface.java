@@ -8,4 +8,13 @@ public interface SendEmailDaoInterface {
     {
         return 0;
     }
+    default Integer updatePassword(String... a)
+    {
+        return 0;
+    }
+
+    default void deleteOTPEntry(String... a)
+    {
+
+    }
 }

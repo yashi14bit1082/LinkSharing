@@ -2,10 +2,7 @@ package com.yashi.dao;
 
 import com.yashi.Handlers.startSession;
 import com.yashi.Handlers.stopSession;
-import com.yashi.model.Resource;
-import com.yashi.model.Subscription;
-import com.yashi.model.Topic;
-import com.yashi.model.User;
+import com.yashi.model.*;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -97,7 +94,10 @@ public class DatabaseConnectionDao implements DatabaseConnectionDaoInterface,sta
              query = session.createQuery(queryString);
             query.setString("fieldData", a[2]);
             obj = query.uniqueResult();
+
         }
+
+
 
         else if(a.length==5)
         {
@@ -107,6 +107,8 @@ public class DatabaseConnectionDao implements DatabaseConnectionDaoInterface,sta
             query.setString("fieldData1", a[2]);
             query.setString("fieldData2",a[4]);
             obj = query.uniqueResult();
+            System.out.println(obj);
+
         }
 
         stopsession(session);
@@ -133,7 +135,8 @@ public class DatabaseConnectionDao implements DatabaseConnectionDaoInterface,sta
             query = session.createQuery(queryString);
             query.setString("fieldData1",a[2]);
             query.setString("fieldData2",a[4]);
-            response = query.executeUpdate();
+            response = (Integer)query.executeUpdate();
+
         }
         stopsession(session);
         return response;
@@ -185,8 +188,82 @@ public class DatabaseConnectionDao implements DatabaseConnectionDaoInterface,sta
         Session session = startsession();
         String queryString = "from Resource where topic.visibility = 'Public' order by dateCreated DESC";
         Query query = session.createQuery(queryString);
+        query.setFirstResult(0);
+        query.setMaxResults(5);
         List<Resource> recentSharesList = query.list();
         stopsession(session);
         return recentSharesList;
+    }
+
+
+    @Override
+    public Long fetchNumberSubscription(String username) {
+
+        Session session =startsession();
+        String queryString = "select count(user) from Subscription where user.username = :username";
+        Query query = session.createQuery(queryString);
+        query.setString("username",username);
+        Long subsNumber = (Long)query.uniqueResult();
+        stopsession(session);
+        return subsNumber;
+    }
+
+    @Override
+    public Long fetchNumberTopic(String username) {
+
+        Session session =startsession();
+        String queryString = "select count(topic) from Subscription where topic.createdBy.username = :username";
+        Query query = session.createQuery(queryString);
+        query.setString("username",username);
+        Long topicNumber = (Long)query.uniqueResult();
+        stopsession(session);
+        return topicNumber;
+
+    }
+
+
+    @Override
+    public List<ReadingItem> fetchUnreadPosts(String username,int index) {
+
+        Session session = startsession();
+        String queryString = "from ReadingItem r where r.user.username = :username AND r.isRead = false";
+        Query query = session.createQuery(queryString);
+        query.setFirstResult(index);
+        query.setMaxResults(5);
+        query.setString("username",username);
+        List<ReadingItem> unreadPosts = query.list();
+        System.out.println(unreadPosts+"aaya dao mein");
+
+        return unreadPosts;
+    }
+
+
+    @Override
+    public Long fetchMaxPostCount(String username) {
+
+
+        Session session =startsession();
+        String queryString = "select count(user) from ReadingItem where user.username = :username";
+        Query query = session.createQuery(queryString);
+        query.setString("username",username);
+        Long maxPostCount = (Long)query.uniqueResult();
+        stopsession(session);
+        return maxPostCount;
+
+    }
+
+
+    @Override
+    public Integer markPostRead(int id) {
+
+        Session session = startsession();
+        String queryString = "update ReadingItem set isRead = true where id = :id";
+        Query query = session.createQuery(queryString);
+        query.setString("id",id+"");
+        Integer response = (Integer)query.executeUpdate();
+        stopsession(session);
+        System.out.println("dao mein aaya"+response);
+        return response;
+
     }
 }

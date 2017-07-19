@@ -1,9 +1,7 @@
 package com.yashi.dao;
 
-import com.yashi.model.Resource;
-import com.yashi.model.Subscription;
-import com.yashi.model.Topic;
-import com.yashi.model.User;
+import com.yashi.model.*;
+import org.hibernate.annotations.Fetch;
 
 import java.util.List;
 
@@ -56,4 +54,30 @@ public interface DatabaseConnectionDaoInterface {
         return null;
     }
 
+    default Long fetchNumberSubscription(String username)
+    {
+        return null;
+    }
+
+    default Long fetchNumberTopic(String username)
+    {
+        return null;
+    }
+
+    default List<ReadingItem> fetchUnreadPosts(String username, int index)
+    {
+        return null;
+    }
+
+
+    default Long fetchMaxPostCount(String username)
+
+    {
+        return null;
+    }
+
+    default Integer markPostRead(int id)
+    {
+        return null;
+    }
 }

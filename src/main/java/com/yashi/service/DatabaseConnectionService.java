@@ -1,6 +1,7 @@
 package com.yashi.service;
 
 import com.yashi.dao.DatabaseConnectionDaoInterface;
+import com.yashi.model.ReadingItem;
 import com.yashi.model.Resource;
 import com.yashi.model.Subscription;
 import com.yashi.model.Topic;
@@ -54,5 +55,45 @@ public class DatabaseConnectionService implements DatabaseConnectionServiceInter
     public Object fetchObject(String... a) {
         Object obj = databaseConnectionDaoInterface.fetchData(a[0],a[1],a[2]);
         return obj;
+    }
+
+    @Override
+    public Long fetchNumberSubscription(String username) {
+
+       Long subscriptionCount =  databaseConnectionDaoInterface.fetchNumberSubscription(username);
+        return subscriptionCount;
+    }
+
+    @Override
+    public Long fetchNumberTopic(String username) {
+
+        Long topicCount = databaseConnectionDaoInterface.fetchNumberTopic(username);
+        return topicCount;
+    }
+
+
+    @Override
+    public List<ReadingItem> fetchUnreadPosts(String username,int index) {
+
+        List<ReadingItem> unreadPosts = databaseConnectionDaoInterface.fetchUnreadPosts(username,index);
+        System.out.println(unreadPosts.size()+"service mein aaya");
+        return unreadPosts;
+    }
+
+
+    @Override
+    public Long fetchMaxPostCount(String username) {
+
+        Long maxPostCount = databaseConnectionDaoInterface.fetchMaxPostCount(username);
+        return maxPostCount;
+    }
+
+
+    @Override
+    public Integer markPostRead(int id) {
+
+        Integer response = databaseConnectionDaoInterface.markPostRead(id);
+        System.out.println("service mein aaya"+response);
+        return response;
     }
 }

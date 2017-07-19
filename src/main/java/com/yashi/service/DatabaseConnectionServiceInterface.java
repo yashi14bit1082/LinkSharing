@@ -1,5 +1,6 @@
 package com.yashi.service;
 
+import com.yashi.model.ReadingItem;
 import com.yashi.model.Resource;
 import com.yashi.model.Subscription;
 import com.yashi.model.Topic;
@@ -33,6 +34,31 @@ public interface DatabaseConnectionServiceInterface {
     }
 
     default Object fetchObject(String... a)
+    {
+        return null;
+    }
+
+    default Long fetchNumberSubscription(String username)
+    {
+        return null;
+    }
+
+    default Long fetchNumberTopic(String username)
+    {
+        return null;
+    }
+
+    default List<ReadingItem> fetchUnreadPosts(String username,int index)
+    {
+        return null;
+    }
+
+    default Long fetchMaxPostCount(String username)
+    {
+        return null;
+    }
+
+    default Integer markPostRead(int id)
     {
         return null;
     }

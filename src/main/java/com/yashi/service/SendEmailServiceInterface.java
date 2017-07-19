@@ -9,7 +9,7 @@ public interface SendEmailServiceInterface {
         return 0;
     }
 
-    default Boolean validateEmailOtp(String... a)
+    default boolean validateEmailOtp(String... a)
     {
         return false;
     }

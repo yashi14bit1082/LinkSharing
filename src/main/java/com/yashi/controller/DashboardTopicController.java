@@ -1,9 +1,6 @@
 package com.yashi.controller;
 
-import com.yashi.model.Resource;
-import com.yashi.model.Subscription;
-import com.yashi.model.Topic;
-import com.yashi.model.User;
+import com.yashi.model.*;
 import com.yashi.service.CheckUniquenessInterface;
 import com.yashi.service.DatabaseConnectionServiceInterface;
 import com.yashi.service.SendEmailServiceInterface;
@@ -96,8 +93,10 @@ public class DashboardTopicController {
     @RequestMapping(value = "/sendSubscriptionInvitation",method = RequestMethod.POST)
     public @ResponseBody String sendSubscriptionInvitation(@RequestParam ("email") String email, @RequestParam ("topicInvite") String topicInvite)
     {
+        System.out.println(email+"aaya  "+topicInvite);
         Integer response = sendEmailServiceInterface.sendEmail(email,"TopicSubscriptionMail");
-
+        System.out.println(email+"aaya  "+topicInvite);
+        System.out.println(response);
         if(response==1) {
             return "Subscription mail sent successfully.";
         }
@@ -106,6 +105,23 @@ public class DashboardTopicController {
             return "Problem while sending Subscription Mail!!!";
         }
 
+    }
+
+
+    @RequestMapping(value = "/fetchAjaxInbox",method = RequestMethod.POST)
+    public @ResponseBody List<ReadingItem> fetchAjaxInbox(HttpServletRequest request,@RequestParam("index") String index)
+    {
+        String username = request.getSession().getAttribute("username").toString();
+        List<ReadingItem> fetchedPostListDynamically = databaseConnectionServiceInterface.fetchUnreadPosts(username,Integer.parseInt(index));
+        return fetchedPostListDynamically;
+    }
+
+    @RequestMapping(value = "markPostRead",method = RequestMethod.POST)
+    public @ResponseBody String markPostRead(@RequestParam("id") int id)
+    {
+        Integer i = databaseConnectionServiceInterface.markPostRead(id);
+        System.out.println(i+"aaya");
+        return i+"";
     }
 
 }

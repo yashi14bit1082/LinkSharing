@@ -21,19 +21,30 @@ public class SendEmailDao implements SendEmailDaoInterface,startSession,stopSess
         Integer response = 0;
         Session session = startsession();
         EmailOTP emailOTP = new EmailOTP();
+        String email = a[0];
+        String otp = a[1];
+        boolean dataExist = databaseConnectionDaoInterface.checkDataExistence("EmailOTP","emailSendTo",email);
 
-        boolean dataExist = databaseConnectionDaoInterface.checkDataExistence("EmailOTP","emailSendTo",a[0]);
+        System.out.println("aaya dataExistResult "+dataExist);
 
-        if(dataExist==false)
+        if(!dataExist)
         {
-            emailOTP.setEmailSendTo(a[0]);
-            emailOTP.setOtp(a[1]);
-            response = (Integer)session.save(emailOTP);
+            System.out.println("data table mein nhi h...nyii entry h");
+            emailOTP.setEmailSendTo(email);
+            emailOTP.setOtp(otp);
+            session.save(emailOTP);
+
+            response = 1 ;
+
 
         }
         else
         {
-            response = databaseConnectionDaoInterface.updateTable("EmailOTP","Otp",a[1],"emailSendTo",a[0]);
+            System.out.println("data alredy table mein h....update krna h");
+            response = databaseConnectionDaoInterface.updateTable("EmailOTP","Otp",otp,"emailSendTo",email);
+
+
+            System.out.println("update table ka response "+response);
 
         }
         stopsession(session);
@@ -41,4 +52,31 @@ public class SendEmailDao implements SendEmailDaoInterface,startSession,stopSess
 
 
     }
+
+    @Override
+    public Integer updatePassword(String... a) {
+
+        Session session = startsession();
+        String queryString = "update User u set u.password = :password where u.email = :email";
+        Query query = session.createQuery(queryString);
+        System.out.println(queryString +" "+a[0]+a[1]);
+        query.setString("password",a[0]);
+        query.setString("email",a[1]);
+        Integer response = (Integer)query.executeUpdate();
+        return response;
+
+    }
+
+    @Override
+    public void deleteOTPEntry(String... a) {
+        String email = a[0];
+      Session  session = startsession();
+        String  queryString = "delete EmailOTP where emailSendTo = :email";
+        Query query = session.createQuery(queryString);
+        query.setString("email",email);
+        query.executeUpdate();
+    }
+
+
+
 }

@@ -54,6 +54,17 @@ public class UserController {
         }
         else {
             modelAndView = new ModelAndView("dashboard");
+            String username= request.getSession().getAttribute("username").toString();
+
+            modelAndView.addObject("unreadPosts",databaseConnectionServiceInterface.fetchUnreadPosts(username,0));
+
+            modelAndView.addObject("maxPosts",databaseConnectionServiceInterface.fetchMaxPostCount(username));
+
+            modelAndView.addObject("user",(User)databaseConnectionServiceInterface.fetchObject("User","username",username));
+            modelAndView.addObject("subscriptionNumber",databaseConnectionServiceInterface.fetchNumberSubscription(username));
+            modelAndView.addObject("topicNumber",databaseConnectionServiceInterface.fetchNumberTopic(username));
+
+
         }
         return modelAndView;
     }
@@ -70,19 +81,25 @@ public class UserController {
             }
         System.out.println(user);
            String view =  registerInterface.registerUser(user,request);
-                return new ModelAndView(view);
+           if(view=="dashboard")
+           {
+               return new ModelAndView("redirect:/");
+           }
+               else
+           {return new ModelAndView(view);}
 
     }
 
     @RequestMapping(value = "/loginUser", method = RequestMethod.POST)
     public ModelAndView loginUser(@RequestParam("credential") String credential, @RequestParam("password") String password, HttpServletRequest request) {
 
-        String view =  loginInterface.loginUser(credential,password,request);
-        if(view=="home")
-            return new ModelAndView(view,"userRegisterForm",new User());
-        else
+        String view = loginInterface.loginUser(credential, password, request);
+        if (view == "home" || view=="dashboard") {
+            return new ModelAndView("redirect:/");
+        }
+        else {
             return new ModelAndView(view);
-
+        }
     }
 
     @RequestMapping(value = "/CheckUniqueUsername",method = RequestMethod.POST)
