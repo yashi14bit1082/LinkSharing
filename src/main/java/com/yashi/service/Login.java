@@ -23,7 +23,7 @@ public class Login implements LoginInterface{
         if(fetchedLoginResult!=null) {
 
             session.setAttribute("username",fetchedLoginResult.getUsername());
-            if(fetchedLoginResult.getUsername().equals("admin"))
+            if(fetchedLoginResult.getAdmin())
             {
                 return "adminPage";
             }

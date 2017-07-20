@@ -10,17 +10,8 @@ import org.hibernate.Session;
 public class Main implements startSession {
 
     public static void main(String[] args) {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        String queryString = "update User u set u.password = :password where u.email = :email";
-        Query query = session.createQuery(queryString);
-
-        query.setString("password","1234");
-        query.setString("email","yashi22gupta@gmail.com");
-        Integer response = query.executeUpdate();
-        session.getTransaction().commit();
-        session.close();
-        System.out.println(response);
+        String s = "C:\\Users\\hp\\Downloads\\TTN Demo Project\\LinkSharing\\src\\main\\webapp\\resources\\assets\\";
+        System.out.println(s.length());
     }
 
 }

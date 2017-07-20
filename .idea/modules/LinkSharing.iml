@@ -57,6 +57,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="TEST" name="Gradle: junit:junit:4.12" level="project" />
+    <orderEntry type="library" name="Gradle: commons-lang:commons-lang:2.6" level="project" />
     <orderEntry type="library" name="Gradle: javax.activation:activation:1.1" level="project" />
     <orderEntry type="library" name="Gradle: javax.mail:mail:1.4.1" level="project" />
     <orderEntry type="library" name="Gradle: commons-io:commons-io:2.4" level="project" />

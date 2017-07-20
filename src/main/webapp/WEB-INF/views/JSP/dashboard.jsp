@@ -267,9 +267,6 @@
 
 </div>
 
-<h3>Welcome,<%=session.getAttribute("username")%></h3>
-
-
 
 
 
@@ -612,7 +609,7 @@
 
                                         <c:choose>
                                             <c:when test="${item.resource.resource_type=='Document'}">
-                                                <a class="p-5" style="float:left" href="#">Download</a>
+                                                <a class="p-5" style="float:left" href='/downloadDocx?filePath="+${item.resource.resource_path}+"'>Download</a>
                                             </c:when>
                                             <c:otherwise>
                                                 <a class="p-5" style="float:left" href="${item.resource.resource_path}" target="_blank">View Link</a>
@@ -952,7 +949,7 @@
                         $.each(r, function(k,v) {
                                 var anchor;
                                 if (v.resourse_type == "Document") {
-                                    anchor = "<a class='p-5' style='float:left' href='#'>Download</a>";
+                                    anchor = "<a class='p-5' style='float:left' href='/downloadDocx?filePath=\"+"+v.resource.resource_path+"+\"'>Download</a>";
                                 }
                                 else {
                                     anchor = "<a class='p-5' style='float:left' href='" + v.resource.resource_path + "' target='_blank'>View Link</a>";

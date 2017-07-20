@@ -20,7 +20,7 @@ public class DatabaseConnectionDao implements DatabaseConnectionDaoInterface,sta
         Query query = null;
 
         if(a.length==3) {
-           queryString = "from " + a[0] + " where " + a[1] + " = :field_value";
+            queryString = "from " + a[0] + " where " + a[1] + " = :field_value";
             query = session.createQuery(queryString);
             query.setString("field_value", a[2]);
         }
@@ -68,13 +68,13 @@ public class DatabaseConnectionDao implements DatabaseConnectionDaoInterface,sta
         List<Resource> object = null;
         Session session = startsession();
 
-          String queryString = "from Resource where topic.topicName =:fieldData1";
-            Query query = session.createQuery(queryString);
-            query.setMaxResults(2);
-            query.setFirstResult(Integer.parseInt(a[1]));
-            query.setString("fieldData1", a[0]);
+        String queryString = "from Resource where topic.topicName =:fieldData1";
+        Query query = session.createQuery(queryString);
+        query.setMaxResults(2);
+        query.setFirstResult(Integer.parseInt(a[1]));
+        query.setString("fieldData1", a[0]);
 
-            object = query.list();
+        object = query.list();
 
         stopsession(session);
         return object;
@@ -89,15 +89,12 @@ public class DatabaseConnectionDao implements DatabaseConnectionDaoInterface,sta
         Query query = null;
         Session session = startsession();
         if(a.length==3) {
-             queryString = "from " + a[0] + " where " + a[1] + " = :fieldData";
+            queryString = "from " + a[0] + " where " + a[1] + " = :fieldData";
 
-             query = session.createQuery(queryString);
+            query = session.createQuery(queryString);
             query.setString("fieldData", a[2]);
             obj = query.uniqueResult();
-
         }
-
-
 
         else if(a.length==5)
         {
@@ -107,15 +104,13 @@ public class DatabaseConnectionDao implements DatabaseConnectionDaoInterface,sta
             query.setString("fieldData1", a[2]);
             query.setString("fieldData2",a[4]);
             obj = query.uniqueResult();
-            System.out.println(obj);
-
         }
 
         stopsession(session);
 
-            if(obj!=null)
+        if(obj!=null)
             return true;
-            else
+        else
             return false;
     }
 
@@ -135,8 +130,7 @@ public class DatabaseConnectionDao implements DatabaseConnectionDaoInterface,sta
             query = session.createQuery(queryString);
             query.setString("fieldData1",a[2]);
             query.setString("fieldData2",a[4]);
-            response = (Integer)query.executeUpdate();
-
+            response = query.executeUpdate();
         }
         stopsession(session);
         return response;
@@ -243,7 +237,7 @@ public class DatabaseConnectionDao implements DatabaseConnectionDaoInterface,sta
 
 
         Session session =startsession();
-        String queryString = "select count(user) from ReadingItem where user.username = :username";
+        String queryString = "select count(user) from ReadingItem where user.username = :username AND isRead = false";
         Query query = session.createQuery(queryString);
         query.setString("username",username);
         Long maxPostCount = (Long)query.uniqueResult();
@@ -266,4 +260,6 @@ public class DatabaseConnectionDao implements DatabaseConnectionDaoInterface,sta
         return response;
 
     }
+
 }
+

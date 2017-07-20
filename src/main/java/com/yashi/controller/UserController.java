@@ -59,6 +59,7 @@ public class UserController {
             modelAndView.addObject("unreadPosts",databaseConnectionServiceInterface.fetchUnreadPosts(username,0));
 
             modelAndView.addObject("maxPosts",databaseConnectionServiceInterface.fetchMaxPostCount(username));
+            System.out.println(databaseConnectionServiceInterface.fetchMaxPostCount(username));
 
             modelAndView.addObject("user",(User)databaseConnectionServiceInterface.fetchObject("User","username",username));
             modelAndView.addObject("subscriptionNumber",databaseConnectionServiceInterface.fetchNumberSubscription(username));
