@@ -96,4 +96,28 @@ public class DatabaseConnectionService implements DatabaseConnectionServiceInter
         System.out.println("service mein aaya"+response);
         return response;
     }
+
+
+    @Override
+    public Long fetchMaxPostCountForTopicShow(String topicName) {
+
+        Long maxPostCount = databaseConnectionDaoInterface.fetchMaxPostCountForTopicShow(topicName);
+
+        return maxPostCount;
+    }
+
+
+    @Override
+    public Long topicSubscriptionCount(String topicName,String username) {
+
+        Long response = databaseConnectionDaoInterface.topicSubscriptionCount(topicName,username);
+        return response;
+    }
+
+    @Override
+    public Long topicPostCount(String topicName,String username) {
+
+        Long response = databaseConnectionDaoInterface.topicPostCount(topicName,username);
+        return response;
+    }
 }

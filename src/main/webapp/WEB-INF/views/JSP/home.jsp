@@ -288,7 +288,7 @@
                     });
                 },
                 select: function( event, ui ) {
-
+                    $("#searchTopic").val("");
                     window.location.href=ui.item.target;
 
                 },

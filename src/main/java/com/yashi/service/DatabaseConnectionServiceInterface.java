@@ -62,4 +62,20 @@ public interface DatabaseConnectionServiceInterface {
     {
         return null;
     }
+
+    default Long fetchMaxPostCountForTopicShow(String topicName)
+    {
+        return null;
+    }
+
+
+    default Long topicSubscriptionCount(String topicName,String username)
+    {
+        return null;
+    }
+
+    default Long topicPostCount(String topicName,String username)
+    {
+        return null;
+    }
 }

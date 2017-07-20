@@ -70,7 +70,7 @@ public class DatabaseConnectionDao implements DatabaseConnectionDaoInterface,sta
 
         String queryString = "from Resource where topic.topicName =:fieldData1";
         Query query = session.createQuery(queryString);
-        query.setMaxResults(2);
+        query.setMaxResults(10);
         query.setFirstResult(Integer.parseInt(a[1]));
         query.setString("fieldData1", a[0]);
 
@@ -261,5 +261,44 @@ public class DatabaseConnectionDao implements DatabaseConnectionDaoInterface,sta
 
     }
 
+
+    @Override
+    public Long fetchMaxPostCountForTopicShow(String topicName) {
+
+        Session session =startsession();
+        String queryString = "select count(topic) from Resource where  topic.topicName = :topicName";
+        Query query = session.createQuery(queryString);
+        query.setString("topicName",topicName);
+        Long maxPostCount = (Long)query.uniqueResult();
+        stopsession(session);
+        return maxPostCount;
+    }
+
+
+    @Override
+    public Long topicSubscriptionCount(String topicName, String username) {
+
+        Session session =startsession();
+        String queryString = "select count(topic) from Subscription where  topic.topicName = :topicName AND user.username = :username";
+        Query query = session.createQuery(queryString);
+        query.setString("topicName",topicName);
+        query.setString("username",username);
+        Long topicSubscriptionSize = (Long)query.uniqueResult();
+        stopsession(session);
+        return topicSubscriptionSize;
+    }
+
+    @Override
+    public Long topicPostCount(String topicName, String username) {
+
+        Session session =startsession();
+        String queryString = "select count(topic) from Resource where  topic.topicName = :topicName AND user.username = :username";
+        Query query = session.createQuery(queryString);
+        query.setString("topicName",topicName);
+        query.setString("username",username);
+        Long maxPostCount = (Long)query.uniqueResult();
+        stopsession(session);
+        return maxPostCount;
+    }
 }
 

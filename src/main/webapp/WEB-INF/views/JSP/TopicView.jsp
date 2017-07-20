@@ -12,7 +12,6 @@
     <title>Title</title>
 </head>
 <body>
-<h1 id="TopicName">${TopicName}</h1>
 
 <c:if test="${not empty resourceList}">
     <ul id="ajaxifiedResourceList">

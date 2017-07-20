@@ -57,6 +57,8 @@ public class DashboardTopicController {
         return fetched_list;
     }
 
+
+
     @RequestMapping(value = "/fetchSubscribedListSearch",method = RequestMethod.POST)
     public @ResponseBody List<Subscription> fetchSubscribedTopicList(@RequestParam ("searchString") String search,HttpServletRequest request)
     {
@@ -66,14 +68,26 @@ public class DashboardTopicController {
         return fetched_list;
     }
 
+
+
+
     @RequestMapping(value = "/displaySelectedTopicPage",method = RequestMethod.GET)
     public ModelAndView redirectToSelectedTopic(@RequestParam ("SelectedItem") String selectedItem)
     {
-        ModelAndView modelAndView = new ModelAndView("TopicView");
+        ModelAndView modelAndView = new ModelAndView("TopicShow");
 
+        int stringLength = selectedItem.length();
         int indexOfComma = selectedItem.lastIndexOf(',');
         String topicName = selectedItem.substring(0,indexOfComma);
-        modelAndView.addObject("TopicName",topicName);
+        String username = selectedItem.substring(indexOfComma+1,stringLength);
+
+        modelAndView.addObject("topic",databaseConnectionServiceInterface.fetchObject("Topic","topicName",topicName,"username",username));
+
+        modelAndView.addObject("topicSubscriptionCount",databaseConnectionServiceInterface.topicSubscriptionCount(topicName,username));
+        modelAndView.addObject("topicPostCount",databaseConnectionServiceInterface.topicPostCount(topicName,username));
+
+
+        modelAndView.addObject("maxPosts",databaseConnectionServiceInterface.fetchMaxPostCountForTopicShow(topicName));
 
      List<Resource> ResourceList =  databaseConnectionServiceInterface.fetchResourceList(topicName,0+""); // 0 is the starting index of ajaxified pagination
       // System.out.println(ResourceList);
@@ -81,6 +95,8 @@ public class DashboardTopicController {
 
       return modelAndView;
     }
+
+
 
     @RequestMapping(value = "/ajaxifiedPaginationTopic",method = RequestMethod.POST)
     public @ResponseBody List<Resource> ajaxifiedPaginationTopic(@RequestParam("topicName") String topicName, @RequestParam("index") String index)
