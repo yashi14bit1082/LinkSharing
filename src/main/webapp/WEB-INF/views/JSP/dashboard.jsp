@@ -25,29 +25,11 @@
 <body>
 <div class="container-fluid">
 
-    <div class=" row y_header ">
-        <img class="y_heading_img" src="\resources\ttn.png" style="">
-        <h2 class="y_header_heading">TO THE NEW</h2>
-        <ul class="y_header_ul">
-            <li class="y_header_li">QUICK HELP</li>
-            <li class="y_header_li">HOME</li>
-        </ul>
 
-    </div>
+      <div class="row">
 
+          <%@include file="header.jsp"%>
 
-    <%@include file="header.jsp"%>
-
-</div>
-
-
-
-
-
-
-
-<div class="container-fluid">
-<div class="row">
 <div class="col-md-5">
 
     <div class="col-md-12" style="margin-bottom: 10px">
@@ -364,7 +346,7 @@
                                 <img src="/fetchImage?username=${item.resource.user.username}" width="120" height="120">
                             </div>
                             <div class="media-body">
-                                <h4 class="media-heading">${item.resource.user.firstname}   ${item.resource.user.lastname}  <small><i>@${item.resource.user.username} </i></small><a href="" style="float:right; font-size:12px">${item.resource.topic.topicName}</a></h4>
+                                <h4 class="media-heading">${item.resource.user.firstname}   ${item.resource.user.lastname}  <small><i>@${item.resource.user.username} </i></small><a href="/displaySelectedTopicPage?SelectedItem=${item.resource.topic.topicName},${item.resource.user.username}" style="float:right; font-size:12px">${item.resource.topic.topicName}</a></h4>
                                 <p>${item.resource.description}</p>
                                 <div class="pgd">
                                     <div class="soc">
@@ -404,9 +386,8 @@
 
 
 
-
-
 </div>
+
 </div>
 
 
@@ -419,254 +400,11 @@
 <script src="${jqueryJs}"></script>
 <script src="${coreJs}"></script>
 --%>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.1/jquery.form.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
 
     <script>
         $(function () {
-            var uniqueness = true;
 
             callListener();
-
-            $("#topicName").on('focusout',function () {
-                $.ajax({
-                    url: "checkTopicUniqueness",
-                    type: "post",
-                    data: {
-                        topicName: $("#topicName").val()
-                    },
-                    success: function (result) {
-                        if (result == "true") {
-                            uniqueness = false;
-                            alert("Topic Already Existed..!!!");
-                        }
-                        else
-                            uniqueness = true;
-
-                    },
-                    error: function (result) {
-                        console.log(result);
-                    }
-                });
-
-            });
-
-
-            $("#addTopic").on('click',function () {
-
-                if ($("#topicName").val()!="" && uniqueness == true) {
-
-                    $.ajax({
-                        url: "addTopic",
-                        type: "post",
-                        data: {
-                            topicName: $("#topicName").val(),
-                            visibility: $("#visibility").val()
-                        },
-                        success: function (result) {
-
-                            if (result > 0) {
-                                $("#topicForm")[0].reset();
-                                $("#addTopicModal").modal('hide');
-                            }
-                            else {
-                                alert("Not Successfully Added");
-                            }
-                        },
-                        error: function (result) {
-                            console.log(result);
-                        }
-                    });
-                }
-
-            });
-
-
-            $('#searchTopic').autocomplete({
-                source: function( request, response ) {
-                    $.ajax({
-                        url:"fetchListSearch",
-                        type:"post",
-                        accept: "application/json",
-
-                        data:{
-                            searchString:$("#searchTopic").val()
-                        },
-                        success: function( data ) {
-                            response( $.map( data, function( item ) {
-                                return {
-                                    label: item,
-                                    value: item,
-                                    target:"/displaySelectedTopicPage?SelectedItem="+item
-                                }
-                            }));
-                        }
-                    });
-                },
-
-                autoFocus: true,
-                minLength: 1
-            });
-
-            $("#searchTopic").autocomplete({
-                select: function( event, ui ) {
-
-                    $("#searchTopic").val("");
-                    window.location.href=ui.item.target;
-
-                }
-            });
-
-
-
-            $('#topic_link').autocomplete({
-                source: function( request, response ) {
-                    $.ajax({
-                        url:"fetchSubscribedListSearch",
-                        type:"post",
-                        accept: "application/json",
-
-                        data:{
-                            searchString:$("#topic_link").val()
-                        },
-                        success: function( data ) {
-                            response( $.map( data, function( item ) {
-                                return {
-                                    label: item,
-                                    value: item
-                                }
-                            }));
-                        }
-                    });
-                },
-
-                autoFocus: true,
-                minLength: 1
-            });
-
-
-
-            $('#topic_docx').autocomplete({
-                source: function( request, response ) {
-                    $.ajax({
-                        url:"fetchSubscribedListSearch",
-                        type:"post",
-                        accept: "application/json",
-
-                        data:{
-                            searchString:$("#topic_docx").val()
-                        },
-                        success: function( data ) {
-                            response( $.map( data, function( item ) {
-                                return {
-                                    label: item,
-                                    value: item,
-                                }
-                            }));
-                        }
-                    });
-                },
-
-                autoFocus: true,
-                minLength: 1
-            });
-
-
-
-
-
-
-
-            $("#share_link").click(function () {
-                $.ajax({
-                    url:"shareLinkResource",
-                    type:"post",
-                    data:
-                        {
-                            link:$("#link").val(),
-                            description:$("#link_desc").val(),
-                            topic:$("#topic_link").val()
-                        },
-                        success:function (result) {
-                            $("#share_link")[0].reset();
-                            $("#addLinkModal").modal('hide');
-                            alert(result);
-                        },
-                    error:function (result) {
-                        console.log(result);
-                    }
-
-                });
-            });
-
-            $('#topicInvite').autocomplete({
-                source: function( request, response ) {
-                    $.ajax({
-                        url:"fetchSubscribedListSearch",
-                        type:"post",
-                        accept: "application/json",
-
-                        data:{
-                            searchString:$("#topicInvite").val()
-                        },
-                        success: function( data ) {
-                            response( $.map( data, function( item ) {
-                                return {
-                                    label: item,
-                                    value: item,
-                                }
-                            }));
-                        }
-                    });
-                },
-
-                autoFocus: true,
-                minLength: 1
-            });
-
-
-            $('#uploadDocxFile').ajaxForm({
-                success: function(msg) {
-                    $("#addDocumentModal").modal('hide');
-                    $("#uploadDocxFile")[0].reset();
-                    alert(msg);
-                },
-                error: function(msg) {
-                    console.log(msg);
-                }
-            });
-
-            $('#sendInvitation').ajaxForm({
-                success: function(msg) {
-                    $("#sendInviteModal").modal('hide');
-                    $("#sendInvitation")[0].reset();
-                    alert(msg);
-                },
-                error: function(msg) {
-                    console.log(msg);
-                }
-            });
-
-            $("#cancel").click(function () {
-
-            });
-
-
-            $("#logOut").click(function(){
-
-                window.location.replace("logOut");
-            });
-
-
-
-
-
-
-
 
             var index = 0;
             var maxSize="${maxPosts}";

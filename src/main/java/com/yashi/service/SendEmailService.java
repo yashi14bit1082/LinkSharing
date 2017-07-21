@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.io.UnsupportedEncodingException;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -25,7 +26,7 @@ public class SendEmailService implements SendEmailServiceInterface {
     DatabaseConnectionDaoInterface databaseConnectionDaoInterface;
 
     @Override
-    public Integer sendEmail(String... a) {
+    public Integer sendEmail(String... a) throws UnsupportedEncodingException {
 
         Integer response = 0;
 
@@ -38,19 +39,25 @@ public class SendEmailService implements SendEmailServiceInterface {
             String fromAddr = "yashi.gupta@tothenew.com";
             String subject = "Reset Password";
             String body = "Your OTP for password reset is " + randomNum;
-            emailHandler.ReadyToSendEmail(toAddr, fromAddr, subject, body);
+
+            EmailHandler.send(toAddr,subject,body);
+
 
             response = sendEmailDaoInterface.sendEmail(a[0], randomNum + "");
 
         }
-        else if(a[1].equals("TopicSubscriptionMail"))
+        else if(a[3].equals("TopicSubscriptionMail"))
         {
+
             String toAddr = a[0];
+            String topicInvite = a[1];
+            String sender = a[2];
+
             String fromAddr = "yashi.gupta@tothenew.com";
             String subject = "Topic Subscription Invitation";
-            String body = "Click here for subscribing";
+            String body = "<html><body><p>An invitation has been send from "+toAddr+" for "+topicInvite+".<a href='http://10.1.12.49:8080/subscribeToInvite?name="+topicInvite+"'>Click here</a> for subscribing.</p></body></html>";
 
-            emailHandler.ReadyToSendEmail(toAddr, fromAddr, subject, body);
+            EmailHandler.send(toAddr, subject, body);
             response = 1;
         }
         return response;

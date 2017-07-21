@@ -1,10 +1,7 @@
 package com.yashi.service;
 
 import com.yashi.dao.DatabaseConnectionDaoInterface;
-import com.yashi.model.ReadingItem;
-import com.yashi.model.Resource;
-import com.yashi.model.Subscription;
-import com.yashi.model.Topic;
+import com.yashi.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -118,6 +115,13 @@ public class DatabaseConnectionService implements DatabaseConnectionServiceInter
     public Long topicPostCount(String topicName,String username) {
 
         Long response = databaseConnectionDaoInterface.topicPostCount(topicName,username);
+        return response;
+    }
+
+    @Override
+    public Integer updateProfile(User user,String username) {
+
+        Integer response = databaseConnectionDaoInterface.updateProfile(user,username);
         return response;
     }
 }

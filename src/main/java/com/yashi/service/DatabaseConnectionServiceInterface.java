@@ -1,9 +1,6 @@
 package com.yashi.service;
 
-import com.yashi.model.ReadingItem;
-import com.yashi.model.Resource;
-import com.yashi.model.Subscription;
-import com.yashi.model.Topic;
+import com.yashi.model.*;
 
 import java.util.List;
 
@@ -75,6 +72,10 @@ public interface DatabaseConnectionServiceInterface {
     }
 
     default Long topicPostCount(String topicName,String username)
+    {
+        return null;
+    }
+    default Integer updateProfile(User user,String username)
     {
         return null;
     }

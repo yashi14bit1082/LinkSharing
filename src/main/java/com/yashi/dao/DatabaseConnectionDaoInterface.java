@@ -96,4 +96,9 @@ public interface DatabaseConnectionDaoInterface {
     {
         return null;
     }
+
+    default Integer updateProfile(User user,String username)
+    {
+        return null;
+    }
 }

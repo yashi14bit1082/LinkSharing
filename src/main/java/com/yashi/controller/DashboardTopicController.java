@@ -6,13 +6,16 @@ import com.yashi.service.DatabaseConnectionServiceInterface;
 import com.yashi.service.SendEmailServiceInterface;
 import com.yashi.service.TopicServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +47,7 @@ public class DashboardTopicController {
     @RequestMapping(value = "/checkTopicUniqueness",method = RequestMethod.POST)
     public @ResponseBody String checkTopicUniqueness(@RequestParam ("topicName") String topicName,HttpServletRequest request)
     {
+        System.out.println("topicName"+topicName);
         HttpSession session = request.getSession();
         String currentUser = (String)session.getAttribute("username");
         Boolean response = checkUniquenessInterface.checkTopicUniqueness(topicName,currentUser);
@@ -68,6 +72,14 @@ public class DashboardTopicController {
         return fetched_list;
     }
 
+
+
+    @RequestMapping(value = "/subscribeToInvite",method = RequestMethod.GET)
+    public String subscribeToInvite(@RequestParam("name") String topicName, HttpServletRequest request)
+    {
+            return "redirect:/displaySelectedTopicPage?SelectedItem="+topicName+"&index=0";
+
+    }
 
 
 
@@ -107,10 +119,11 @@ public class DashboardTopicController {
 
 
     @RequestMapping(value = "/sendSubscriptionInvitation",method = RequestMethod.POST)
-    public @ResponseBody String sendSubscriptionInvitation(@RequestParam ("email") String email, @RequestParam ("topicInvite") String topicInvite)
-    {
+    public @ResponseBody String sendSubscriptionInvitation(@RequestParam ("email") String email, @RequestParam ("topicInvite") String topicInvite, HttpServletRequest request) throws UnsupportedEncodingException {
         System.out.println(email+"aaya  "+topicInvite);
-        Integer response = sendEmailServiceInterface.sendEmail(email,"TopicSubscriptionMail");
+
+        String sender = request.getParameter("username");
+        Integer response = sendEmailServiceInterface.sendEmail(email,topicInvite,sender,"TopicSubscriptionMail");
         System.out.println(email+"aaya  "+topicInvite);
         System.out.println(response);
         if(response==1) {

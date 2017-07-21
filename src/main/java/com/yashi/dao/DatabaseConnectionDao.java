@@ -300,5 +300,26 @@ public class DatabaseConnectionDao implements DatabaseConnectionDaoInterface,sta
         stopsession(session);
         return maxPostCount;
     }
+
+
+    @Override
+    public Integer updateProfile(User user,String username) {
+
+        Session session = startsession();
+        String queryString = "select id from User where username = :username";
+        Query query = session.createQuery(queryString);
+        query.setString("username",username);
+        Integer user_id = (Integer)query.uniqueResult();
+
+
+        queryString = "update User set firstname = :firstname where id = :id";
+        query = session.createQuery(queryString);
+        query.setString("firstname",user.getFirstname());
+        query.setInteger("id",user_id);
+        Integer response = (Integer)query.executeUpdate();
+        stopsession(session);
+        System.out.println("dao "+response);
+        return response;
+    }
 }
 

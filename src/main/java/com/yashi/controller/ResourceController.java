@@ -68,7 +68,7 @@ String saveDocxResource(@RequestParam ("docx") MultipartFile file, @RequestParam
         if(result==1)
             return "You successfully saved link";
         else
-            return "Link is not successfullt saved";
+            return "Link is not successfully saved";
 
     }
 

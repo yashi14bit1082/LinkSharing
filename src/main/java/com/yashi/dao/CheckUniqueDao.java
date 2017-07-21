@@ -18,7 +18,7 @@ public class CheckUniqueDao implements CheckUniqueDaoInterface,startSession,stop
     public Boolean checkUniqueTopic(String topicName, String currentUser) {
 
         Session session = startsession();
-        String queryString = "from Topic where topicName = :topicName AND createdBy IN (select id from User where username = :currentUser)";
+        String queryString = "from Topic where topicName = :topicName AND createdBy.username = :currentUser";
 
         Query query = session.createQuery(queryString);
         query.setString("topicName", topicName);

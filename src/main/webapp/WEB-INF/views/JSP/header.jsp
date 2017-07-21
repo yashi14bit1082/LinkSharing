@@ -12,6 +12,18 @@
 </head>
 <body>
 
+<div class=" row y_header ">
+    <img class="y_heading_img" src="\resources\ttn.png" style="">
+    <h2 class="y_header_heading">TO THE NEW</h2>
+    <ul class="y_header_ul">
+        <li class="y_header_li">QUICK HELP</li>
+        <li class="y_header_li"><a href="/">HOME</a></li>
+    </ul>
+
+</div>
+
+
+<%if(session.getAttribute("username")!=null){%>
 
 <nav class="navbar head-color">
     <div class="container-fluid">
@@ -40,7 +52,7 @@
                     <p class="pull-left " style="font-size:15px;margin: 0px 5px;"><%=session.getAttribute("username")%></p>
                     <span class="caret pull-left" style="margin:10px 0 0 0;"></span></button>
                 <ul class="dropdown-menu ui-front">
-                    <li><a href="#">Profile</a></li>
+                    <li id="profile"><a href="updateProfileView">Profile</a></li>
                     <li id="logOut"><a href="#">LogOut</a></li>
 
                 </ul>
@@ -79,7 +91,7 @@
                         <form method="post" action="javascript:void(0)"  id="topicForm">
                             <div class="form-group">
                                 <label for="topicName">Topic Name*</label>
-                                <input type="text" class="form-control"  name="topicName" id="topicName" placeholder="Enter Topic Name" required="required">
+                                <input type="text" class="form-control"  name="topicName" id="topicName" placeholder="Enter Topic Name" required="true">
                             </div>
                             <div class="form-group">
                                 <label for="visibility">Visibility*</label>
@@ -133,11 +145,11 @@
                         <form method="post" action="sendSubscriptionInvitation"  id="sendInvitation">
                             <div class="form-group">
                                 <label for="email">Email Id*</label>
-                                <input type="email" class="form-control"  id="email" name="email" placeholder="Enter Email" required>
+                                <input type="email" class="form-control"  id="email" name="email" placeholder="Enter Email" required="true">
                             </div>
                             <div class="form-group">
                                 <label for="topicInvite">Topic*</label>
-                                <input type="text" class="form-control "  id="topicInvite" name="topicInvite" placeholder="Enter Topic Name" required>
+                                <input type="text" class="form-control "  id="topicInvite" name="topicInvite" placeholder="Enter Topic Name" required="true">
                             </div>
 
                             <button type="submit" id="inviteButton" class="btn btn-primary" data-dismiss="#sendInviteModal" style="margin-left: 83%;">Send Invite</button>
@@ -174,15 +186,15 @@
                         <form method="post" action="javascript:void(0)"  id="share_link">
                             <div class="form-group">
                                 <label for="link">Link*</label>
-                                <input type="url" class="form-control"  id="link" name="link" placeholder="Enter Link" required>
+                                <input type="url" class="form-control"  id="link" name="link" placeholder="Enter Link" required="true">
                             </div>
                             <div class="form-group">
                                 <label for="link_desc">Description*</label>
-                                <textarea class="form-control"  id="link_desc" name="link_desc"  required></textarea>
+                                <textarea class="form-control"  id="link_desc" name="link_desc"  required="true"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="topic_link">Topic*</label>
-                                <input type="text" class="form-control "  id="topic_link" name="topic" placeholder="Enter Topic Name" required>
+                                <input type="text" class="form-control "  id="topic_link" name="topic" placeholder="Enter Topic Name" required="true">
                             </div>
 
                             <button type="submit" id="addingLink" class="btn btn-primary" data-dismiss="#addLinkModal" style="margin-left: 83%;">Add Link</button>
@@ -218,15 +230,15 @@
                         <form method="post" action="/share_docx" enctype="multipart/form-data" id="uploadDocxFile">
                             <div class="form-group">
                                 <label for="docx">Document*</label>
-                                <input type="file" class="form-control"  id="docx" name="docx" placeholder="Browse" required>
+                                <input type="file" class="form-control"  id="docx" name="docx" placeholder="Browse" required="true">
                             </div>
                             <div class="form-group">
                                 <label for="docx_desc">Description*</label>
-                                <textarea class="form-control"  id="docx_desc" name="docx_desc"  required></textarea>
+                                <textarea class="form-control"  id="docx_desc" name="docx_desc"  required="true"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="topic_docx">Topic*</label>
-                                <input type="text" class="form-control "  id="topic_docx" name="topic_docx" placeholder="Enter Topic Name" required>
+                                <input type="text" class="form-control "  id="topic_docx" name="topic_docx" placeholder="Enter Topic Name" required="true">
                             </div>
 
                             <input type="submit" id="addingDocument" class="btn btn-primary" data-dismiss="#addDocumentModal" style="margin-left: 83%;" value = "Add Document"/>
@@ -240,8 +252,9 @@
 
     </div>
 </div>
+<%}%>
 
-</div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -266,6 +279,7 @@
                 success: function (result) {
                     if (result == "true") {
                         uniqueness = false;
+                        $("#topicName").val("");
                         alert("Topic Already Existed..!!!");
                     }
                     else
@@ -457,9 +471,11 @@
 
         $('#sendInvitation').ajaxForm({
             success: function (msg) {
-                $("#sendInviteModal").modal('hide');
-                $("#sendInvitation")[0].reset();
+
+
                 alert(msg);
+                $("#sendInvitation")[0].reset();
+                $("#sendInviteModal").modal('hide');
             },
             error: function (msg) {
                 console.log(msg);
@@ -475,7 +491,10 @@
 
             window.location.replace("logOut");
         });
+
     });
+
+
 
 
 </script>

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.UnsupportedEncodingException;
+
 /**
  * Created by yashi on 14-07-2017.
  */
@@ -31,7 +33,7 @@ public class PasswordResetController {
 
     @RequestMapping(value = "/sendOtpMail", method = RequestMethod.POST)
     public @ResponseBody
-    String sendOtpMail(@RequestParam("email") String email) {
+    String sendOtpMail(@RequestParam("email") String email) throws UnsupportedEncodingException {
         Integer response = sendEmailServiceInterface.sendEmail(email, "OTPforPasswordReset");
 
         if (response == 1) {

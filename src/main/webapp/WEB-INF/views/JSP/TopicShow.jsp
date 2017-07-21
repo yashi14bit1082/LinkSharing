@@ -24,28 +24,16 @@
 <body>
 <div class="container-fluid">
 
-    <div class=" row y_header ">
-        <img class="y_heading_img" src="\resources\ttn.png" style="">
-        <h2 class="y_header_heading">TO THE NEW</h2>
-        <ul class="y_header_ul">
-            <li class="y_header_li">QUICK HELP</li>
-            <li class="y_header_li">HOME</li>
-        </ul>
+<div class="row y_header">
 
-    </div>
+    <%@include file="header.jsp"%>
 
-
-
-<%if(session.getAttribute("username")!=null){%>
-
-   <%@include file="header.jsp"%>
-<%}%>
 
 
 
 </div>
 
-
+</div>
 
 
 
