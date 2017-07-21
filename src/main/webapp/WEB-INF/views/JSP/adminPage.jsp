@@ -11,71 +11,133 @@
     <title>adminPage</title>
 </head>
 <body>
-<h1>Welcome Admin...</h1>
+
+<div class="container-fluid">
+    <div class="row">
+        <%@include file="header.jsp"%>
+
 <br>
-    <select id="selectUTP">
-        <option id="users" selected>Users</option>
-        <option id="topic">Topic</option>
-        <option id="posts">Posts</option>
-    </select>
 
     <select id="selectUTPOptions">
-        <option id="all_users" selected>All Users</option>
-        <option id="active">Active</option>
-        <option id="inactive">Inactive</option>
+
     </select>
 
+        <table class="table">
+            <thead class="thead-inverse">
+            <tr>
+                <th>#</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Username</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@twitter</td>
+            </tr>
+            </tbody>
+        </table>
 
+        <table class="table">
+            <thead class="thead-default">
+            <tr>
+                <th>#</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Username</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@twitter</td>
+            </tr>
+            </tbody>
+        </table>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </div>
+</div>
+
 <script>
         $(function () {
 
-            var utpSelected = $("#selectUTP").val();
+            var utpSelected = "${UTP}";
             var utpOptionSelected = $("#selectUTPOptions").val();
 
+            setUTPOptions(utpSelected);
             ajaxCall(utpSelected,utpOptionSelected);
+
 
             function addOption(option1,option2,option3) {
                 $("#selectUTPOptions").append(option1);
                 $("#selectUTPOptions").append(option2);
                 $("#selectUTPOptions").append(option3);
             }
-            
-            $("#selectUTP").change(function () {
 
-                $("#selectUTPOptions").empty();
                 var option1,option2,option3;
 
-                if($("#selectUTP").val()=="Users")
+           function setUTPOptions(utpSelected)
+            {
+                switch("${UTP}")
                 {
-                    option1 =  $('<option></option>').attr("id", "all_users").text("All Users");
-                    option2 = $('<option></option>').attr("id", "active").text("Active");
-                    option3 = $('<option></option>').attr("id", "inactive").text("Inactive");
+                    case "User":{
+                        option1 =  $('<option></option>').attr("id", "all_users").text("All Users");
+                        option2 = $('<option></option>').attr("id", "active").text("active");
+                        option3 = $('<option></option>').attr("id", "inactive").text("inactive");
+                        break;
+                    }
 
+                    case "Topic":{
+                        option1 =  $('<option></option>').attr("id", "all_topics").text("All Topics");
+                        option2 = $('<option></option>').attr("id", "public").text("Public");
+                        option3 = $('<option></option>').attr("id", "private").text("Private");
+                        break;
+                    }
 
-                }
-                else if($("#selectUTP").val()=="Topic")
-                {
-                    option1 =  $('<option></option>').attr("id", "all_topics").text("All Topics");
-                    option2 = $('<option></option>').attr("id", "public").text("Public");
-                    option3 = $('<option></option>').attr("id", "private").text("Private");
-
-                }
-                else if($("#selectUTP").val()=="Posts")
-                {
-                    option1 =  $('<option></option>').attr("id", "all_posts").text("All Posts");
-                    option2 = $('<option></option>').attr("id", "link").text("Link");
-                    option3 = $('<option></option>').attr("id", "docx").text("Document");
+                    case "Post":{
+                        option1 =  $('<option></option>').attr("id", "all_posts").text("All Posts");
+                        option2 = $('<option></option>').attr("id", "link").text("Link");
+                        option3 = $('<option></option>').attr("id", "docx").text("Document");
+                        break;
+                    }
                 }
 
                 addOption(option1,option2,option3);
-                ajaxCall($("#selectUTP").val(),$("#selectUTPOptions").val());
+                ajaxCall(utpSelected,$("#selectUTPOptions").val());
+            }
 
-            });
 
             $("#selectUTPOptions").change(function () {
-                ajaxCall($("#selectUTP").val(),$("#selectUTPOptions").val());
+                ajaxCall(utpSelected,$("#selectUTPOptions").val());
             });
 
             function ajaxCall(utpSelected,utpOtionSelected)
@@ -88,6 +150,7 @@
                       utpOptionSelected:utpOtionSelected
                   },
                   success:function (result) {
+
                     console.log(result);
                   },
                   error:function (result) {

@@ -23,14 +23,11 @@ public class Login implements LoginInterface{
         if(fetchedLoginResult!=null) {
 
             session.setAttribute("username",fetchedLoginResult.getUsername());
-            if(fetchedLoginResult.getAdmin())
-            {
-                return "adminPage";
-            }
-            else {
+            session.setAttribute("userDetails",fetchedLoginResult);
+
                 return "dashboard";
-            }
         }
+
         else
             return "home";
     }

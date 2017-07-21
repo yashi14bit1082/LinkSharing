@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.yashi.model.User" %><%--
   Created by IntelliJ IDEA.
   User: yashi
   Date: 20-07-2017
@@ -9,6 +9,14 @@
 <html>
 <head>
     <title>Title</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/resources/css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
 </head>
 <body>
 
@@ -22,6 +30,7 @@
 
 </div>
 
+<br>
 
 <%if(session.getAttribute("username")!=null){%>
 
@@ -52,8 +61,21 @@
                     <p class="pull-left " style="font-size:15px;margin: 0px 5px;"><%=session.getAttribute("username")%></p>
                     <span class="caret pull-left" style="margin:10px 0 0 0;"></span></button>
                 <ul class="dropdown-menu ui-front">
-                    <li id="profile"><a href="updateProfileView">Profile</a></li>
-                    <li id="logOut"><a href="#">LogOut</a></li>
+
+                    <li><a href="updateProfileView">Profile</a></li>
+
+                    <%
+                        User user = (User)session.getAttribute("userDetails");
+                        if(user.getAdmin())
+                        {
+                    %>
+
+                    <li><a href="users">Users</a></li>
+                    <li><a href="topics">Topics</a></li>
+                    <li><a href="posts">Posts</a></li>
+
+                    <%}%>
+                    <li><a href="/logOut">LogOut</a></li>
 
                 </ul>
             </div>
@@ -487,10 +509,7 @@
         });
 
 
-        $("#logOut").click(function () {
 
-            window.location.replace("logOut");
-        });
 
     });
 

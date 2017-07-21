@@ -174,7 +174,7 @@
                         <div class="form-group">
                             <label for="photo">Photo*</label>
                             <div class="input-group add-on">
-                                <form:input type="file" class="form-control"  path="photo" name="photo" placeholder="browse"/>
+                                <form:input type="file" class="form-control"  path="photo" name="photo" placeholder="browse" accept="image/*"/>
 
                             </div>
                         </div>

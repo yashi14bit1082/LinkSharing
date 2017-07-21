@@ -23,6 +23,7 @@ public class Register implements RegisterInterface {
 
         if(response) {
             session.setAttribute("username",user.getUsername());
+            session.setAttribute("userDetails",user);
             return "dashboard";
         }
             else

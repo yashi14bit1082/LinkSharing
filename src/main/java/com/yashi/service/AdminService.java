@@ -19,10 +19,10 @@ public class AdminService implements AdminServiceInterface {
     public List<Object> fetchList(String... a) {
 
 List<Object> resultList = null;
-int b = 0;
+boolean b = false;
         switch(a[0])
         {
-            case "Users":{
+            case "User":{
                 if(a[1].equals("All Users"))
                 {
                     resultList = databaseConnectionDaoInterface.fetchList("User");
@@ -32,11 +32,11 @@ int b = 0;
                 {
                     if(a[1].equals("active"))
                     {
-                        b=1;
+                        b=true;
                     }
                     else
                     {
-                        b=0;
+                        b=false;
                     }
                     resultList = databaseConnectionDaoInterface.fetchList("User","active",b+"");
                 }
@@ -53,7 +53,7 @@ int b = 0;
                 }
                 break;
             }
-            case "Posts":{
+            case "Post":{
                 if(a[1].equals("All Posts"))
                 {
                     resultList = databaseConnectionDaoInterface.fetchList("Resource");
