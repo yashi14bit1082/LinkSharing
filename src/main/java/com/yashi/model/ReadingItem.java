@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 public class ReadingItem {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     @ManyToOne
     Resource resource;

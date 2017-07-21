@@ -104,9 +104,16 @@ public class UserController {
     }
 
     @RequestMapping(value = "/CheckUniqueUsername",method = RequestMethod.POST)
-    public @ResponseBody String checkUniqueness(@RequestParam("credential") String credential)
+    public @ResponseBody String checkUniquenessUsername(@RequestParam("username") String username)
     {
-        boolean result = registerInterface.validateUsername(credential);
+        boolean result = registerInterface.validateUsername(username);
+        return result+"";
+    }
+
+    @RequestMapping(value = "/CheckUniqueEmail",method = RequestMethod.POST)
+    public @ResponseBody String checkUniquenessEmail(@RequestParam("email") String email)
+    {
+        boolean result = registerInterface.validateUsername(email);
         return result+"";
     }
 

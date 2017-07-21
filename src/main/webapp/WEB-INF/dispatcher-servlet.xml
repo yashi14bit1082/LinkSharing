@@ -72,4 +72,6 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
 
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 
+    <bean id="bootstrapService" class="com.yashi.bootStrap.BootstrapServlet"/>
+
 </beans>

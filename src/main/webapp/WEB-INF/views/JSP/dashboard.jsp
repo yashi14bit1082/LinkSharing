@@ -466,7 +466,7 @@
                                     "<img src='fetchImage?username=" + v.resource.user.username + "' width='120' height='120'></div>" +
                                     " <div class='media-body'>" +
                                     " <h4 class='media-heading'>" + v.resource.user.firstname + "  " + v.resource.user.lastname + " <small><i>@" + v.resource.user.username +
-                                    " </i></small><a href='' style='float:right; font-size:12px'>" + v.resource.topic.topicName + "</a></h4>" +
+                                    " </i></small><a href='/displaySelectedTopicPage?SelectedItem="+v.resource.topic.topicName+","+v.resource.user.username+"' style='float:right; font-size:12px'>" + v.resource.topic.topicName + "</a></h4>" +
                                     "<p>" + v.resource.description + "</p>" +
                                     "<div class='pgd'>" +
                                     "<div class='soc'>" +

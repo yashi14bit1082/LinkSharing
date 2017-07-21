@@ -9,7 +9,7 @@ import java.util.Date;
 @Entity
 public class Subscription {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private int id;
     @ManyToOne
    private Topic topic;

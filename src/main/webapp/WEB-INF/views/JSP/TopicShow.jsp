@@ -24,7 +24,7 @@
 <body>
 <div class="container-fluid">
 
-<div class="row y_header">
+<div class="row">
 
     <%@include file="header.jsp"%>
 

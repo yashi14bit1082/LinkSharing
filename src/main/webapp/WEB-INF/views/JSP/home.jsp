@@ -70,7 +70,7 @@
                                 <img src="fetchImage?username=${item.user.username}" width="120" height="120">
                             </div>
                             <div class="media-body">
-                                <h4 class="media-heading">${item.user.firstname} ${item.user.lastname} <small><i>@${item.user.username}</i></small><a href="" style="float:right;font-size:12px">${item.topic.topicName}</a></h4>
+                                <h4 class="media-heading">${item.user.firstname} ${item.user.lastname} <small><i>@${item.user.username}</i></small><a href="/displaySelectedTopicPage?SelectedItem=${item.topic.topicName},${item.user.username}" style="float:right;font-size:12px">${item.topic.topicName}</a></h4>
                                 <p>${item.description}</p>
                                 <div class="pgd">
                                     <div class="soc">
@@ -127,14 +127,14 @@
             <ul class="list-group">
                 <li class="list-group-item navbar-color">Login</li>
                 <li class="list-group-item">
-                    <form action="loginUser" method="post">
+                    <form action="loginUser" method="post" id="loginForm">
                         <div class="form-group">
                             <label for="email">Email/Username*</label>
-                            <input type="text" class="form-control" name="credential" placeholder="Enter email/Username" required>
+                            <input type="text" class="form-control" name="credential" placeholder="Enter email/Username" required="true">
                         </div>
                         <div class="form-group">
                             <label for="password">Password*</label>
-                            <input type="password" class="form-control" name="password" placeholder="Enter password" required>
+                            <input type="password" class="form-control" name="password" placeholder="Enter password" required="true">
                         </div>
                         <div class="checkbox">
                             <a id="forgotPassword" href="resetPassword">Forgot password</a>
@@ -149,23 +149,23 @@
                     <form:form action="registerUser" method="post" modelAttribute="userRegisterForm" enctype="multipart/form-data" id="RegisterForm">
                         <div class="form-group">
                             <label for="firstname">First name*</label>
-                            <form:input class="form-control" path="firstname" placeholder="FIRST NAME" required="required"/>
+                            <form:input class="form-control" path="firstname" name="firstname" placeholder="FIRST NAME" required="required"/>
                         </div>
                         <div class="form-group">
                             <label for="lastname">Last name*</label>
-                            <form:input class="form-control" path="lastname" placeholder="LAST NAME" required="required"/>
+                            <form:input class="form-control" path="lastname" name="lastname" placeholder="LAST NAME" required="required"/>
                         </div>
                         <div class="form-group">
                             <label for="email">Email*</label>
-                            <form:input type="email" class="form-control" path="email" id="email" placeholder="Enter email" required="required"/>
+                            <form:input type="email" class="form-control" path="email" name="email" id="email" placeholder="Enter email" required="required"/>
                         </div>
                         <div class="form-group">
                             <label for="username">User name</label>
-                            <form:input class="form-control" id="username" path="username" placeholder="USER NAME" required="required"/>
+                            <form:input class="form-control" id="username" path="username" name="username" placeholder="USER NAME" required="required"/>
                         </div>
                         <div class="form-group">
                             <label for="password">Password*</label>
-                            <form:password class="form-control" id="password" path="password" placeholder="Enter password" required="required"/>
+                            <form:password class="form-control" id="password" path="password" name="password" placeholder="Enter password" required="required"/>
                         </div>
                         <div class="form-group">
                             <label for="confirmPassword">Confirm password*</label>
@@ -195,11 +195,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.1/jquery.form.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
 
 
 <script>
         $(function () {
-            var usernameCorrect = 1;
+/*            var usernameCorrect = 1;
             var emailCorrect = 1;
             var confirmPassword = 1;
 
@@ -212,10 +213,10 @@
 
                 else
                     confirmPassword = 1;
-            });
+            });*/
 
 
-        $("#username").focusout(function () {
+/*        $("#username").focusout(function () {
                ajaxCall($("#username").val(),"username");
            }) ;
 
@@ -254,8 +255,9 @@
                error:function (e) {
 
                 }});
-        }
+        }*/
 
+/*
             $("#register").on('click', function(e) {
                 if(usernameCorrect==0 || emailCorrect==0 || confirmPassword==0) {
                     e.preventDefault();
@@ -263,6 +265,7 @@
 
                 // mandatorily close the model after user click register button
             });
+*/
 
 
             $('#searchTopic').autocomplete({
@@ -299,7 +302,65 @@
 
 
 
+            $("#RegisterForm").validate({
+                rules: {
+                    firstname:{
+                        required: true
+                    },
+                    lastname:{
+                        required: true
+                    },
+                    email: {
+                        required: true,
+                        email: true,
+                        remote:'/CheckUniqueEmail'
+
+                    },
+                    username: {
+                        required: true,
+                        remote:'/CheckUniqueUsername'
+                    },
+                    password: {
+                        required: true,
+                        password:true
+                    },
+                    c_password: {
+                        required: true,
+                        password:true,
+                        equalTo: "#password"
+                    }
+
+                },
+                messages: {
+                    firstname:{
+                        required: "Firstname Required"
+                    },
+                    lastname:{
+                        required:"Last Required"
+                    },
+                    username: {
+                        required: " Username Required",
+                        remote:"Username already exists"
+// maxlength:$.validator.format("You have exceeded the maxlength {0}")
+                    },
+                    email:
+                        {
+                            required: "Email Required",
+                            remote:"Email already exist"
+                        },
+                    password:{
+                        required:"Password Required"
+                    },
+                    c_password: {
+                        required: "Confirmation Required",
+                        equalTo: "Password Not match"
+                    }
+                }
+            });
         });
+
+
+
 
 
 </script>

@@ -11,7 +11,7 @@ import java.util.Date;
 public class Resource {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
     String description;
     @ManyToOne

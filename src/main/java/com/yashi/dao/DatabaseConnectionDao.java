@@ -155,7 +155,13 @@ public class DatabaseConnectionDao implements DatabaseConnectionDaoInterface,sta
         {
             queryString = "from "+a[0]+" where "+a[1]+" = :fieldData";
             query = session.createQuery(queryString);
-            query.setString("fieldData",a[2]);
+            if(a[2].equalsIgnoreCase("true") || a[2].equalsIgnoreCase("false"))
+            {
+                query.setBoolean("fieldData",Boolean.parseBoolean(a[2]));
+            }
+            else {
+                query.setString("fieldData", a[2]);
+            }
             response = query.list();
         }
         stopsession(session);
@@ -320,6 +326,17 @@ public class DatabaseConnectionDao implements DatabaseConnectionDaoInterface,sta
         stopsession(session);
         System.out.println("dao "+response);
         return response;
+    }
+
+
+
+    @Override
+    public void saveAdmin(User user) {
+
+        Session session = startsession();
+        session.save(user);
+        stopsession(session);
+
     }
 }
 

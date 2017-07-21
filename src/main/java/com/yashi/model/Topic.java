@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 public class Topic {
     @Id
-    @GeneratedValue (strategy = GenerationType.TABLE)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
    private int id;
    private String topicName;
     @ManyToOne

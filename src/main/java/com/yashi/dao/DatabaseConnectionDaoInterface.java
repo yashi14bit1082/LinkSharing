@@ -101,4 +101,9 @@ public interface DatabaseConnectionDaoInterface {
     {
         return null;
     }
+
+    default void saveAdmin(User user)
+    {
+
+    }
 }
