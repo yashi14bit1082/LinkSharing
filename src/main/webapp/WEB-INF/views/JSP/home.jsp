@@ -103,7 +103,7 @@
                     </div>
                 </li>
                 <li class="list-group-item">
-                    <div class="media" style="padding-top:10">
+                    <div class="media" style="padding-top:10px">
                         <div class="media-left">
                             <img src="resources/unknown_icon.png" width="120" height="120">
                         </div>
@@ -146,42 +146,42 @@
             <ul class="list-group">
                 <li class="list-group-item navbar-color">Register</li>
                 <li class="list-group-item">
-                    <form:form action="registerUser" method="post" modelAttribute="userRegisterForm" enctype="multipart/form-data" id="RegisterForm">
+                    <form action="registerUser" method="post"  enctype="multipart/form-data" id="RegisterForm">
                         <div class="form-group">
                             <label for="firstname">First name*</label>
-                            <form:input class="form-control" path="firstname" name="firstname" placeholder="FIRST NAME" required="required"/>
+                            <input class="form-control" id="firstname" name="firstname" placeholder="FIRST NAME" required="required"/>
                         </div>
                         <div class="form-group">
                             <label for="lastname">Last name*</label>
-                            <form:input class="form-control" path="lastname" name="lastname" placeholder="LAST NAME" required="required"/>
+                            <input class="form-control" id="lastname" name="lastname" placeholder="LAST NAME"/>
                         </div>
                         <div class="form-group">
                             <label for="email">Email*</label>
-                            <form:input type="email" class="form-control" path="email" name="email" id="email" placeholder="Enter email" required="required"/>
+                            <input type="email" class="form-control"  name="email" id="email" placeholder="Enter email" />
                         </div>
                         <div class="form-group">
                             <label for="username">User name</label>
-                            <form:input class="form-control" id="username" path="username" name="username" placeholder="USER NAME" required="required"/>
+                            <input class="form-control" id="username"  name="username" placeholder="USER NAME" />
                         </div>
                         <div class="form-group">
                             <label for="password">Password*</label>
-                            <form:password class="form-control" id="password" path="password" name="password" placeholder="Enter password" required="required"/>
+                            <input class="form-control" id="password"  name="password" placeholder="Enter password" />
                         </div>
                         <div class="form-group">
                             <label for="confirmPassword">Confirm password*</label>
-                            <input type="password" name="" class="form-control" name="c_password" id="confirmPassword" placeholder="Enter password" required="required">
+                            <input type="password"  class="form-control" name="c_password" id="confirmPassword" placeholder="Enter password" >
                         </div>
                         <div class="form-group">
                             <label for="photo">Photo*</label>
                             <div class="input-group add-on">
-                                <form:input type="file" class="form-control"  path="photo" name="photo" placeholder="browse" accept="image/*"/>
+                                <input type="file" class="form-control"  id="photo" name="photo" placeholder="browse" accept="image/*"/>
 
                             </div>
                         </div>
                         <div class="checkbox">
                             <button type="submit" id="register" class="btn btn-primary" style="margin-left:300px">Register</button>
                         </div>
-                    </form:form>
+                    </form>
                 </li>
             </ul>
         </div>
@@ -194,8 +194,9 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.1/jquery.form.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 
 
 <script>
@@ -333,27 +334,27 @@
                 },
                 messages: {
                     firstname:{
-                        required: "Firstname Required"
+                        required:"<font face='Times New Roman' color='red'><i>* Firstname Required</i></font>"
                     },
                     lastname:{
-                        required:"Last Required"
+                        required:"<font face='Times New Roman' color='red'><i>* Lastname Required</i></font>"
                     },
                     username: {
-                        required: " Username Required",
-                        remote:"Username already exists"
+                        required: "<font face='Times New Roman' color='red'><i>* Username Required</i></font>",
+                        remote:"<font face='Times New Roman' color='red'><i>* Username Already Exists</i></font>"
 // maxlength:$.validator.format("You have exceeded the maxlength {0}")
                     },
                     email:
                         {
-                            required: "Email Required",
-                            remote:"Email already exist"
+                            required: "<font face='Times New Roman' color='red'><i>* Email Required</i></font>",
+                            remote:"<font face='Times New Roman' color='red'><i>* Email Already Exists</i></font>"
                         },
                     password:{
-                        required:"Password Required"
+                        required:"<font face='Times New Roman' color='red'><i>* Password Required</i></font>"
                     },
                     c_password: {
-                        required: "Confirmation Required",
-                        equalTo: "Password Not match"
+                        required: "<font face='Times New Roman' color='red'><i>* Confirmation Required</i></font>",
+                        equalTo: "<font face='Times New Roman' color='red'><i>* Password Didn't Match</i></font>"
                     }
                 }
             });

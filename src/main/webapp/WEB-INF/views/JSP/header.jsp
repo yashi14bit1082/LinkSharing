@@ -110,7 +110,7 @@
                 <ul class="list-group">
 
                     <li class="list-group-item">
-                        <form method="post" action="javascript:void(0)"  id="topicForm">
+                        <form method="post" action="addTopic"  id="topicForm">
                             <div class="form-group">
                                 <label for="topicName">Topic Name*</label>
                                 <input type="text" class="form-control"  name="topicName" id="topicName" placeholder="Enter Topic Name" required="true">
@@ -122,12 +122,12 @@
                                     <option value="Private">Private</option>
                                 </select>
                             </div>
+                            <button type="submit" id="addTopic" class="btn btn-primary" data-dismiss="#addTopicModal" style="margin-left: 83%;">Add Topic</button>
 
                         </form>
                     </li>
                 </ul>
-                <button type="submit" id="addTopic" class="btn btn-primary" data-dismiss="#addTopicModal" style="margin-left: 83%;">Add Topic</button>
-            </div>
+               </div>
 
 
 
@@ -282,12 +282,13 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.1/jquery.form.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 
 <script>
     $(function () {
-        var uniqueness = true;
+        /*var uniqueness = true;
 
         // callListener();
 
@@ -314,9 +315,39 @@
             });
 
         });
+*/
+
+        $("#topicForm").validate({
+            rules: {
+                topicName:{
+                    required: true,
+                    remote:'/checkTopicUniqueness'
+                }
+
+            },
+            messages: {
+
+                topicName: {
+                    required: "<font face='Times New Roman' color='red'><i>* Topic Required</i></font>",
+                    remote:"<font face='Times New Roman' color='red'><i>* Topic Already Exists</i></font>"
+
+                }
+            }
+        });
+
+        $('#topicForm').ajaxForm({
+            success: function (msg) {
+                $("#addTopicModal").modal('hide');
+                $("#topicForm")[0].reset();
+                alert("Added Successfully");
+            },
+            error: function (msg) {
+                alert("Not Successfully Added");
+            }
+        });
 
 
-        $("#addTopic").on('click', function () {
+       /* $("#addTopic").on('click', function () {
 
             if ($("#topicName").val() != "" && uniqueness == true) {
 
@@ -330,8 +361,7 @@
                     success: function (result) {
 
                         if (result > 0) {
-                            $("#topicForm")[0].reset();
-                            $("#addTopicModal").modal('hide');
+
                         }
                         else {
                             alert("Not Successfully Added");
@@ -344,7 +374,7 @@
             }
 
         });
-
+*/
 
         $('#searchTopic').autocomplete({
             source: function (request, response) {

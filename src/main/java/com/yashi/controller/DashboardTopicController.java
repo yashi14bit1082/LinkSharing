@@ -44,14 +44,14 @@ public class DashboardTopicController {
         return topicAddedResultVal+"";
     }
 
-    @RequestMapping(value = "/checkTopicUniqueness",method = RequestMethod.POST)
+    @RequestMapping(value = "/checkTopicUniqueness",method = RequestMethod.GET)
     public @ResponseBody String checkTopicUniqueness(@RequestParam ("topicName") String topicName,HttpServletRequest request)
     {
         System.out.println("topicName"+topicName);
         HttpSession session = request.getSession();
         String currentUser = (String)session.getAttribute("username");
         Boolean response = checkUniquenessInterface.checkTopicUniqueness(topicName,currentUser);
-        return response+"";
+        return (!response)+"";
     }
 
     @RequestMapping(value = "/fetchListSearch",method = RequestMethod.POST)

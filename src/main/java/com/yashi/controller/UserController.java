@@ -71,7 +71,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
-    public ModelAndView registerUser(@ModelAttribute("userRegisterForm") User user,
+    public ModelAndView registerUser(@ModelAttribute User user,
                                      BindingResult result, ModelMap model, @RequestParam("photo") MultipartFile file, HttpServletRequest request) throws IOException {
             if(!file.isEmpty())
             {
@@ -103,18 +103,18 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/CheckUniqueUsername",method = RequestMethod.POST)
+    @RequestMapping(value = "/CheckUniqueUsername",method = RequestMethod.GET)
     public @ResponseBody String checkUniquenessUsername(@RequestParam("username") String username)
     {
         boolean result = registerInterface.validateUsername(username);
-        return result+"";
+        return (!result)+"";
     }
 
-    @RequestMapping(value = "/CheckUniqueEmail",method = RequestMethod.POST)
+    @RequestMapping(value = "/CheckUniqueEmail",method = RequestMethod.GET)
     public @ResponseBody String checkUniquenessEmail(@RequestParam("email") String email)
     {
         boolean result = registerInterface.validateUsername(email);
-        return result+"";
+        return (!result)+"";
     }
 
     @RequestMapping(value = "/logOut",method = RequestMethod.GET)
