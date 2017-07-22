@@ -106,4 +106,9 @@ public interface DatabaseConnectionDaoInterface {
     {
 
     }
+
+    default Integer updatePassword(String password, String username)
+    {
+        return null;
+    }
 }

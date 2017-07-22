@@ -31,7 +31,7 @@ public class PasswordResetController {
         return response + "";
     }
 
-    @RequestMapping(value = "/sendOtpMail", method = RequestMethod.POST)
+    @RequestMapping(value = "/sendOtpMail")
     public @ResponseBody
     String sendOtpMail(@RequestParam("email") String email) throws UnsupportedEncodingException {
         Integer response = sendEmailServiceInterface.sendEmail(email, "OTPforPasswordReset");
@@ -39,7 +39,7 @@ public class PasswordResetController {
         if (response == 1) {
             return "OTP sent to your Mail...";
         } else {
-            //   System.out.println("svghjdskam");
+
             return "Problem while sending OTP!!!";
         }
     }

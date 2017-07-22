@@ -5,12 +5,14 @@ import com.yashi.service.DatabaseConnectionService;
 import com.yashi.service.DatabaseConnectionServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * Created by yashi on 21-07-2017.
@@ -31,13 +33,31 @@ public class ProfileUpdateController {
     }
 
     @RequestMapping(value = "/updateProfile",method = RequestMethod.POST)
-    public @ResponseBody String updateProfile(String firstname, String lastname, HttpServletRequest request)
+    public @ResponseBody String updateProfile(@ModelAttribute User user, HttpServletRequest request) throws IOException {
+        String username = request.getSession().getAttribute("username").toString();
+
+        user.setFirstname(user.getFirstname());
+        user.setLastname(user.getLastname());
+        user.setUsername(user.getUsername());
+
+
+        Integer response = databaseConnectionServiceInterface.updateProfile(user,username);
+
+        if(response>0)
+        {return "updated...";}
+        else
+        {
+            return "not updated...";
+        }
+    }
+
+
+    @RequestMapping(value = "/updatePasswordForm",method = RequestMethod.POST)
+    public @ResponseBody String updatePassword(@RequestParam("password") String password, HttpServletRequest request)
     {
         String username = request.getSession().getAttribute("username").toString();
-        User user = new User();
-        user.setFirstname(firstname);
-        user.setLastname(lastname);
-        Integer response = databaseConnectionServiceInterface.updateProfile(user,username);
+
+        Integer response = databaseConnectionServiceInterface.updatePassword(password,username);
 
         if(response>0)
         {return "updated...";}

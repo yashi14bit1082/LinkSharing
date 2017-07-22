@@ -55,7 +55,7 @@ public class SendEmailService implements SendEmailServiceInterface {
 
             String fromAddr = "yashi.gupta@tothenew.com";
             String subject = "Topic Subscription Invitation";
-            String body = "<html><body><p>An invitation has been send from "+toAddr+" for "+topicInvite+".<a href='http://10.1.12.49:8080/subscribeToInvite?name="+topicInvite+"'>Click here</a> for subscribing.</p></body></html>";
+            String body = "<html><body><p>An invitation has been send from "+toAddr+" for "+topicInvite+".<a href='http://10.1.12.24:8080/subscribeToInvite?name="+topicInvite+"'>Click here</a> for subscribing.</p></body></html>";
 
             EmailHandler.send(toAddr, subject, body);
             response = 1;

@@ -19,24 +19,28 @@ public class SendEmailDao implements SendEmailDaoInterface,startSession,stopSess
     public Integer sendEmail(String... a) {
 
         Integer response = 0;
-        Session session = startsession();
+        Session session ;
         EmailOTP emailOTP = new EmailOTP();
 
         boolean dataExist = databaseConnectionDaoInterface.checkDataExistence("EmailOTP","emailSendTo",a[0]);
-
+        System.out.println(dataExist);
         if(dataExist==false)
         {
+            session = startsession();
             emailOTP.setEmailSendTo(a[0]);
             emailOTP.setOtp(a[1]);
             response = (Integer)session.save(emailOTP);
+            stopsession(session);
 
         }
-        else
+       else
         {
+            session = startsession();
             response = databaseConnectionDaoInterface.updateTable("EmailOTP","Otp",a[1],"emailSendTo",a[0]);
+            stopsession(session);
 
         }
-        stopsession(session);
+
         return response;
 
 

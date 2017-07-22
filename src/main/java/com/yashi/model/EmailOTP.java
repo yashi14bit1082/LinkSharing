@@ -10,10 +10,18 @@ import javax.persistence.Id;
  */
 @Entity
 public class EmailOTP {
-    @Id
-            @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Integer id;
     String emailSendTo;
     String Otp;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getEmailSendTo() {
         return emailSendTo;

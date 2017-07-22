@@ -318,9 +318,11 @@ public class DatabaseConnectionDao implements DatabaseConnectionDaoInterface,sta
         Integer user_id = (Integer)query.uniqueResult();
 
 
-        queryString = "update User set firstname = :firstname where id = :id";
+        queryString = "update User set firstname = :firstname, lastname = :lastname, username = :username where id = :id";
         query = session.createQuery(queryString);
         query.setString("firstname",user.getFirstname());
+        query.setString("lastname",user.getLastname());
+        query.setString("username",user.getUsername());
         query.setInteger("id",user_id);
         Integer response = (Integer)query.executeUpdate();
         stopsession(session);
@@ -337,6 +339,25 @@ public class DatabaseConnectionDao implements DatabaseConnectionDaoInterface,sta
         session.save(user);
         stopsession(session);
 
+    }
+
+
+    @Override
+    public Integer updatePassword(String password, String username) {
+
+
+        Session session = startsession();
+        String queryString = "select id from User where username = :username";
+        Query query = session.createQuery(queryString);
+        query.setString("username",username);
+        Integer user_id = (Integer)query.uniqueResult();
+
+      queryString = "update User set password = :password where id = :id";
+      query = session.createQuery(queryString);
+       query.setString("password",password);
+       Integer response = (Integer)query.executeUpdate();
+        stopsession(session);
+        return response;
     }
 }
 

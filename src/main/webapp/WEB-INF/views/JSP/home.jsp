@@ -1,3 +1,5 @@
+
+
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
@@ -168,8 +170,8 @@
                             <input class="form-control" id="password"  name="password" placeholder="Enter password" />
                         </div>
                         <div class="form-group">
-                            <label for="confirmPassword">Confirm password*</label>
-                            <input type="password"  class="form-control" name="c_password" id="confirmPassword" placeholder="Enter password" >
+                            <label for="c_password">Confirm password*</label>
+                            <input type="password"  class="form-control" name="c_password" id="c_password" placeholder="Enter password" >
                         </div>
                         <div class="form-group">
                             <label for="photo">Photo*</label>
@@ -201,72 +203,7 @@
 
 <script>
         $(function () {
-/*            var usernameCorrect = 1;
-            var emailCorrect = 1;
-            var confirmPassword = 1;
 
-            $("#confirmPassword").focusout(function () {
-                if($("#confirmPassword").val()!=$("#password").val())
-                {
-                    alert("Password not matching");
-                    confirmPassword = 0;
-                }
-
-                else
-                    confirmPassword = 1;
-            });*/
-
-
-/*        $("#username").focusout(function () {
-               ajaxCall($("#username").val(),"username");
-           }) ;
-
-
-        $("#email").focusout(function () {
-                ajaxCall($("#email").val(),"email")
-            }) ;
-
-
-        function ajaxCall(credential,field)
-        {
-            $.ajax({
-                url:"CheckUniqueUsername",
-                data:{
-                    credential:credential
-                },
-                type: "post",
-                success:function (r) {
-
-                     if(r==="true") {
-                        alert(field + " already Exist");
-                        if(field=="username")
-                            usernameCorrect=0;
-                        else if(field=="email")
-                            emailCorrect=0;
-                     }
-                     else
-                     {
-                         if(field=="username")
-                             usernameCorrect=1;
-                         else
-                             emailCorrect=1;
-                     }
-
-                },
-               error:function (e) {
-
-                }});
-        }*/
-
-/*
-            $("#register").on('click', function(e) {
-                if(usernameCorrect==0 || emailCorrect==0 || confirmPassword==0) {
-                    e.preventDefault();
-                }
-
-                // mandatorily close the model after user click register button
-            });
-*/
 
 
             $('#searchTopic').autocomplete({

@@ -79,4 +79,9 @@ public interface DatabaseConnectionServiceInterface {
     {
         return null;
     }
+
+    default Integer updatePassword(String password,String username)
+    {
+        return null;
+    }
 }

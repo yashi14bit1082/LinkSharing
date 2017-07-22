@@ -33,11 +33,15 @@ public class BootstrapServlet extends HttpServlet {
 */
 
 
+import com.yashi.Handlers.startSession;
+import com.yashi.Handlers.stopSession;
 import com.yashi.dao.DatabaseConnectionDaoInterface;
 import com.yashi.model.User;
+import org.hibernate.Session;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -45,7 +49,7 @@ import java.nio.file.Paths;
 import java.util.Date;
 
 @Service
-public class BootstrapServlet implements InitializingBean {
+public class BootstrapServlet implements InitializingBean,startSession,stopSession {
 
     @Autowired
     DatabaseConnectionDaoInterface databaseConnectionDaoInterface;
@@ -57,6 +61,7 @@ public class BootstrapServlet implements InitializingBean {
 
         if(!result)
         {
+            Session session = startsession();
             User user = new User();
             user.setFirstname("admin");
             user.setLastname("admin");
@@ -71,6 +76,7 @@ public class BootstrapServlet implements InitializingBean {
             user.setPhoto(Files.readAllBytes(path));
 
             databaseConnectionDaoInterface.saveAdmin(user);
+            stopsession(session);
         }
 
     }

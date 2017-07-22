@@ -124,4 +124,13 @@ public class DatabaseConnectionService implements DatabaseConnectionServiceInter
         Integer response = databaseConnectionDaoInterface.updateProfile(user,username);
         return response;
     }
+
+
+    @Override
+    public Integer updatePassword(String password, String username) {
+
+        Integer response = databaseConnectionDaoInterface.updatePassword(password,username);
+
+        return response;
+    }
 }
